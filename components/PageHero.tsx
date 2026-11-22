@@ -48,6 +48,7 @@ export default function PageHero({
           <img
             src={image}
             alt=""
+            fetchPriority="high"
             className="kenburns"
             style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: position }}
           />

@@ -1,104 +1,103 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { ArrowRight, HardHat, Leaf, Users, GraduationCap, Droplets, Recycle } from 'lucide-react';
+import { ArrowRight, Check } from 'lucide-react';
 import PageHero from '@/components/PageHero';
 import Reveal from '@/components/Reveal';
+import { safetyIntro, safetyAims, caresIntro, caresPoints } from '@/lib/lkmd';
 import { brand } from '@/lib/brand';
 
 export const metadata: Metadata = {
-  title: 'Safety & Sustainability',
+  title: 'Safety & LKMD Cares',
   description:
-    'Zero-harm safety practice, local content and skills transfer, water stewardship and rehabilitation across our construction operations.',
+    'Health and safety standards that exceed UK legislative requirements, and a commitment to the communities we work in — training, local employment, partnerships and sustainable construction.',
 };
 
-const safety = [
-  {
-    Icon: HardHat,
-    title: 'Induction before access',
-    body: 'Nobody passes the gate without a site-specific induction, current medicals and the PPE the hazard assessment calls for. No exceptions for visitors, clients or directors.',
-  },
-  {
-    Icon: Users,
-    title: 'Stop-work authority',
-    body: 'Every person on site can stop work they believe is unsafe, and nothing happens to them for using it. A stop-work that turns out to be unnecessary is still a good outcome.',
-  },
-  {
-    Icon: GraduationCap,
-    title: 'Competence, not attendance',
-    body: 'Lifting, confined space, working at height and energised work are task-authorised against assessed competence — not against a certificate someone once sat.',
-  },
-];
-
-const sustainability = [
-  {
-    Icon: Users,
-    title: 'Local content that outlasts us',
-    body: 'We target local hire and local supply on every contract, and we measure it where it counts: how many crews and suppliers are still trading two years after demobilisation.',
-  },
-  {
-    Icon: Droplets,
-    title: 'Water stewardship',
-    body: 'In an arid region, construction water is a shared resource. We plan dust suppression, concrete curing and testing around measured abstraction limits, and report usage against them.',
-  },
-  {
-    Icon: Leaf,
-    title: 'Rehabilitation as scope, not afterthought',
-    body: 'Borrow pits, laydowns and haul routes are rehabilitated to an agreed standard as part of the works programme, priced at tender rather than negotiated at close-out.',
-  },
-  {
-    Icon: Recycle,
-    title: 'Material reuse',
-    body: 'Cut material, demolition arisings and surplus aggregate are re-profiled on site wherever specification allows. Hauling spoil off a remote site is cost and carbon doing the same damage twice.',
-  },
-];
-
-export default function SustainabilityPage() {
+export default function SafetyPage() {
   return (
     <>
       <PageHero
-        eyebrow="Safety & sustainability"
-        title="Everybody goes home. Everything gets put back."
-        lede="Two commitments that cost money at tender stage and save it everywhere else."
-        image="/site-access-ppe.jpg"
-        position="center 26%"
+        eyebrow="Safety & security"
+        title="Our people are our greatest resource."
+        lede="LKMD believes the human element is paramount in all projects we undertake."
+        image="/lkmd/helmet.jpg"
+        video="/video/safety.mp4"
+        poster="/posters/safety.jpg"
+        position="center 50%"
       />
 
-      {/* ── Safety ────────────────────────────────────────── */}
+      {/* ── Safety statement ──────────────────────────────── */}
       <section className="section">
         <div className="container">
+          <div
+            className="split"
+            style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: 72, alignItems: 'start' }}
+          >
+            <Reveal>
+              <p className="eyebrow" style={{ marginBottom: 22 }}>Health &amp; safety</p>
+              <h2 className="display-sm">
+                Standards that
+                <br />
+                exceed what the
+                <br />
+                law requires.
+              </h2>
+            </Reveal>
+            <Reveal delay={120}>
+              <p className="rule-left" style={{ marginBottom: 26 }}>{safetyIntro[0]}</p>
+              <p className="lede">{safetyIntro[1]}</p>
+            </Reveal>
+          </div>
+        </div>
+        <style>{`@media (max-width: 900px) { .split { grid-template-columns: 1fr !important; gap: 36px !important; } }`}</style>
+      </section>
+
+      {/* ── The eight aims ────────────────────────────────── */}
+      <section
+        style={{
+          position: 'relative', overflow: 'hidden',
+          background: brand.color.navy900, color: '#fff', padding: '112px 0',
+        }}
+      >
+        <div
+          aria-hidden
+          style={{
+            position: 'absolute', inset: 0,
+            backgroundImage: 'url(/lkmd/hivis.jpg)',
+            backgroundSize: 'cover', backgroundPosition: 'center',
+            opacity: 0.16,
+          }}
+        />
+        <div className="container" style={{ position: 'relative', zIndex: 1 }}>
           <Reveal>
-            <div
-              className="split"
-              style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: 72, alignItems: 'start', marginBottom: 60 }}
-            >
-              <div>
-                <p className="eyebrow" style={{ marginBottom: 22 }}>Safety</p>
-                <h2 className="display-sm">Zero harm, stated plainly.</h2>
-              </div>
-              <div>
-                <p className="rule-left" style={{ marginBottom: 24 }}>
-                  No programme, no margin and no client is worth an injury.
-                </p>
-                <p className="lede">
-                  Zero harm is not a slogan here because we do not report it like one.
-                  We publish our incident data to clients in full, including near
-                  misses, because a number people are afraid to report is a number
-                  that cannot be managed.
-                </p>
-              </div>
-            </div>
+            <p className="eyebrow eyebrow-light" style={{ marginBottom: 22 }}>
+              Our management system
+            </p>
+            <h2 className="display-sm" style={{ color: '#fff', maxWidth: 620, marginBottom: 52 }}>
+              Eight things our health and safety system is built to do.
+            </h2>
           </Reveal>
 
           <div
-            className="three-grid"
-            style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 4 }}
+            className="aims-grid"
+            style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 4 }}
           >
-            {safety.map((s, i) => (
-              <Reveal key={s.title} delay={i * 110}>
-                <div style={{ background: brand.color.concrete, padding: '40px 34px', height: '100%' }}>
-                  <s.Icon size={26} strokeWidth={1.6} color={brand.color.red} />
-                  <h3 style={{ fontSize: '1.1rem', margin: '20px 0 12px' }}>{s.title}</h3>
-                  <p style={{ fontSize: '0.92rem', color: '#5C6B7A', lineHeight: 1.85 }}>{s.body}</p>
+            {safetyAims.map((a, i) => (
+              <Reveal key={a} delay={(i % 4) * 80}>
+                <div
+                  className="card-dark"
+                  style={{ height: '100%', padding: '28px 26px', borderTop: `3px solid ${brand.color.red}` }}
+                >
+                  <p
+                    style={{
+                      fontFamily: 'var(--font-heading), system-ui, sans-serif',
+                      fontSize: '1.2rem', fontWeight: 800,
+                      color: 'transparent', WebkitTextStroke: `1.2px ${brand.color.redSoft}`,
+                      marginBottom: 14,
+                    }}
+                  >
+                    {String(i + 1).padStart(2, '0')}
+                  </p>
+                  <p style={{ fontSize: '0.89rem', color: '#C7D6E4', lineHeight: 1.8 }}>{a}</p>
                 </div>
               </Reveal>
             ))}
@@ -106,54 +105,86 @@ export default function SustainabilityPage() {
         </div>
 
         <style>{`
-          @media (max-width: 900px) {
-            .split      { grid-template-columns: 1fr !important; gap: 36px !important; }
-            .three-grid { grid-template-columns: 1fr !important; }
-          }
+          @media (max-width: 1100px) { .aims-grid { grid-template-columns: 1fr 1fr !important; } }
+          @media (max-width: 600px)  { .aims-grid { grid-template-columns: 1fr !important; } }
         `}</style>
       </section>
 
-      {/* ── Sustainability ────────────────────────────────── */}
-      <section style={{ background: brand.color.navy900, color: '#fff', padding: '110px 0' }}>
+      {/* ── LKMD Cares ────────────────────────────────────── */}
+      <section className="section">
         <div className="container">
           <Reveal>
-            <p className="eyebrow eyebrow-light" style={{ marginBottom: 22 }}>Sustainability</p>
-            <h2 className="display-sm" style={{ color: '#fff', maxWidth: 660, marginBottom: 20 }}>
-              The part of the contract that is still there in ten years.
+            <p className="eyebrow" style={{ marginBottom: 22 }}>LKMD Cares</p>
+            <h2 className="display-sm" style={{ maxWidth: 640, marginBottom: 20 }}>
+              Empowering communities and promoting sustainability.
             </h2>
-            <p className="lede-dark" style={{ maxWidth: 620, marginBottom: 56 }}>
-              National policy across the region now sets explicit targets for local
-              equity, local content and beneficiation. We treat those as scope, not
-              compliance paperwork.
-            </p>
+            <p className="lede" style={{ maxWidth: 640, marginBottom: 52 }}>{caresIntro}</p>
           </Reveal>
 
           <div
-            className="sus-grid"
-            style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 4 }}
+            className="cares-grid"
+            style={{ display: 'grid', gridTemplateColumns: '1.1fr 1fr', gap: 4, alignItems: 'stretch' }}
           >
-            {sustainability.map((s, i) => (
-              <Reveal key={s.title} delay={(i % 2) * 110}>
-                <div className="card-dark" style={{ height: '100%', padding: '36px 34px' }}>
-                  <s.Icon size={24} strokeWidth={1.6} color={brand.color.redSoft} />
-                  <h3 style={{ fontSize: '1.08rem', color: '#fff', margin: '18px 0 12px' }}>{s.title}</h3>
-                  <p style={{ fontSize: '0.89rem', color: '#8EA3B8', lineHeight: 1.85 }}>{s.body}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
+            <Reveal>
+              <div style={{ position: 'relative', height: '100%', minHeight: 380, overflow: 'hidden' }}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  loading="lazy"
+                  decoding="async"
+                  src="/lkmd/community.jpg"
+                  alt="Children in a community where LKMD works"
+                  style={{
+                    position: 'absolute', inset: 0,
+                    width: '100%', height: '100%', objectFit: 'cover',
+                  }}
+                />
+                <span
+                  aria-hidden
+                  style={{ position: 'absolute', left: 0, bottom: 0, width: 80, height: 5, background: brand.color.red }}
+                />
+              </div>
+            </Reveal>
 
-          <Reveal>
-            <div style={{ marginTop: 52 }}>
-              <Link href="/contact" className="btn btn-primary">
-                Ask for our HSE pack
-                <ArrowRight size={14} strokeWidth={2.4} />
-              </Link>
-            </div>
-          </Reveal>
+            <Reveal delay={120}>
+              <div style={{ background: brand.color.concrete, padding: '44px 40px', height: '100%' }}>
+                {caresPoints.map((c, i) => (
+                  <div
+                    key={c}
+                    style={{
+                      display: 'flex', gap: 14, alignItems: 'flex-start',
+                      padding: '20px 0',
+                      borderTop: i === 0 ? 'none' : '1px solid var(--line)',
+                    }}
+                  >
+                    <Check size={18} strokeWidth={2.6} color={brand.color.red} style={{ marginTop: 3, flexShrink: 0 }} />
+                    <p style={{ fontSize: '0.98rem', color: '#2A3B4C', lineHeight: 1.75 }}>{c}</p>
+                  </div>
+                ))}
+              </div>
+            </Reveal>
+          </div>
         </div>
 
-        <style>{`@media (max-width: 820px) { .sus-grid { grid-template-columns: 1fr !important; } }`}</style>
+        <style>{`@media (max-width: 900px) { .cares-grid { grid-template-columns: 1fr !important; } }`}</style>
+      </section>
+
+      {/* ── CTA ───────────────────────────────────────────── */}
+      <section style={{ background: brand.color.navy800, color: '#fff', padding: '96px 0' }}>
+        <div className="container-tight" style={{ textAlign: 'center' }}>
+          <Reveal>
+            <h2 className="display-sm" style={{ color: '#fff', marginBottom: 22 }}>
+              Need our health and safety pack?
+            </h2>
+            <p className="lede-dark" style={{ maxWidth: 520, margin: '0 auto 36px' }}>
+              Policies, method statements, risk assessments and training records —
+              ask and we will send the current pack.
+            </p>
+            <Link href="/contact" className="btn btn-primary">
+              Request the pack
+              <ArrowRight size={14} strokeWidth={2.4} />
+            </Link>
+          </Reveal>
+        </div>
       </section>
     </>
   );

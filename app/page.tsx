@@ -227,7 +227,7 @@ export default function HomePage() {
               <Reveal key={s.slug} delay={(i % 3) * 110}>
                 <Link href="/services" className="tile" style={{ height: '100%' }}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={s.image} alt={s.title} />
+                  <img src={s.image} alt={s.title} loading="lazy" decoding="async" />
                   <span className="tile-body">
                     <span className="tile-rule" style={{ display: 'block' }} />
                     <span className="tile-title" style={{ display: 'block' }}>{s.title}</span>
@@ -412,7 +412,7 @@ export default function HomePage() {
               <Reveal key={p.name} delay={i * 130}>
                 <Link href="/projects" className="tile" style={{ aspectRatio: '16 / 11' }}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={p.image} alt={p.name} />
+                  <img src={p.image} alt={p.name} loading="lazy" decoding="async" />
                   <span className="tile-body">
                     <span
                       style={{

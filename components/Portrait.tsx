@@ -29,6 +29,8 @@ export default function Portrait({
       <div style={{ aspectRatio: ratio, overflow: 'hidden', background: brand.color.navy900 }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
+          loading="lazy"
+          decoding="async"
           src={photo}
           alt={name}
           style={{

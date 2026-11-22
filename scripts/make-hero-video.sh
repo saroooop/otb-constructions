@@ -20,8 +20,8 @@ mkdir -p "$OUT"
 DUR=7            # seconds per plate
 XF=1.2           # cross-dissolve
 FPS=25
-W=1920
-H=1080
+W=1600
+H=900
 
 # plate | start-y | end-y   (y is the top of the 1080 window inside the 2560-tall scaled plate)
 # tower wide  — drift UP the structure, finishing on the headgear

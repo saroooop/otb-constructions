@@ -94,6 +94,7 @@ export default function Footer() {
               <Link
                 key={l.label}
                 href={l.href}
+                prefetch={false}
                 style={{
                   display: 'block', fontSize: '0.85rem', color: '#8198AE',
                   textDecoration: 'none', marginBottom: 11, lineHeight: 1.5,
@@ -173,7 +174,7 @@ export default function Footer() {
               ['Terms of Use',   '/terms'],
               ['Cookie Policy',  '/cookie-policy'],
             ].map(([label, href]) => (
-              <Link key={href} href={href} style={{ color: '#60788E', textDecoration: 'none' }}>
+              <Link key={href} href={href} prefetch={false} style={{ color: '#60788E', textDecoration: 'none' }}>
                 {label}
               </Link>
             ))}

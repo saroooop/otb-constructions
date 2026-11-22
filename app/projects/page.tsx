@@ -20,6 +20,8 @@ export default function ProjectsPage() {
         title="Work that had to run while the site stayed live."
         lede="Most of what we build sits inside an operating asset. The constraint is rarely the engineering — it is doing it without stopping production."
         image="/sectors/hero-projects.jpg"
+        video="/video/projects.mp4"
+        poster="/posters/projects.jpg"
         position="center 32%"
       />
 
@@ -39,6 +41,8 @@ export default function ProjectsPage() {
                   <div style={{ position: 'relative', minHeight: 320, overflow: 'hidden' }}>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
+                      loading="lazy"
+                      decoding="async"
                       src={p.image}
                       alt={p.name}
                       style={{

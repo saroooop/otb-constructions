@@ -41,6 +41,8 @@ export default function InsightsPage() {
               <div style={{ position: 'relative', minHeight: 420, overflow: 'hidden' }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
+                  loading="lazy"
+                  decoding="async"
                   src="/disciplines/processing-beneficiation.jpg"
                   alt=""
                   style={{

@@ -64,6 +64,8 @@ export default function SectorsPage() {
                   <div style={{ position: 'relative', aspectRatio: '16 / 9', overflow: 'hidden' }}>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
+                      loading="lazy"
+                      decoding="async"
                       src={s.image}
                       alt={s.title}
                       style={{

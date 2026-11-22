@@ -4,21 +4,26 @@ import { ArrowRight } from 'lucide-react';
 import PageHero from '@/components/PageHero';
 import Reveal from '@/components/Reveal';
 import { brand } from '@/lib/brand';
+import { headcount } from '@/lib/lkmd';
 
 export const metadata: Metadata = {
   title: 'Careers',
   description:
-    'Site engineers, foremen, plant operators, quantity surveyors and HSE officers — open applications across Southern Africa and the UK.',
+    'Quantity surveyors, engineers, architects, project and construction managers, SHE officers, site managers and foremen — plus an intern intake, across the UK and Africa.',
 };
 
-// TODO: replace with live vacancies before launch. See CONTENT-TODO.md.
+// Role titles taken from the company organogram, so the careers page and the
+// structure page describe the same organisation.
+// TODO: confirm which are actually open, and add locations.
 const roles = [
-  { title: 'Site Engineer — Civils',        location: 'Erongo Region, Namibia', type: 'Full time' },
-  { title: 'Foreman — Bulk Earthworks',     location: 'Namibia',                type: 'Full time' },
-  { title: 'Quantity Surveyor',             location: 'Windhoek / remote',      type: 'Full time' },
-  { title: 'HSE Officer',                   location: 'Site based',             type: 'Full time' },
-  { title: 'Plant Operator — Excavator',    location: 'Site based',             type: 'Contract' },
-  { title: 'Graduate Engineer Programme',   location: 'Southern Africa',        type: 'Graduate' },
+  { title: 'Quantity Surveyor',            location: 'United Kingdom', type: 'Full time' },
+  { title: 'Civil / Structural Engineer',  location: 'UK / Africa',    type: 'Full time' },
+  { title: 'Architect',                    location: 'United Kingdom', type: 'Full time' },
+  { title: 'Project Manager',              location: 'UK / Africa',    type: 'Full time' },
+  { title: 'Construction Manager',         location: 'Site based',     type: 'Full time' },
+  { title: 'Site Manager / Site Supervisor', location: 'Site based',   type: 'Full time' },
+  { title: 'SHE Officer',                  location: 'Site based',     type: 'Full time' },
+  { title: 'Intern Programme',             location: 'UK / Africa',    type: 'Internship' },
 ];
 
 export default function CareersPage() {
@@ -26,9 +31,11 @@ export default function CareersPage() {
     <>
       <PageHero
         eyebrow="Careers"
-        title="We would rather train someone local than fly someone in."
-        lede="That is a commercial position as much as a social one. Crews that live near the site turn up, stay, and know the ground."
-        image="/site-access-ppe-2.jpg"
+        title="We train the next intake rather than only hiring it."
+        lede="Of the people in this company, a quarter are interns. That is not a gesture — it is how the trades and professions get replaced."
+        image="/lkmd/engineer-orange.jpg"
+        video="/video/careers.mp4"
+        poster="/posters/careers.jpg"
         position="center 30%"
       />
 
@@ -47,12 +54,18 @@ export default function CareersPage() {
                 Hard sites, proper kit, and a supervisor who will back you when you
                 stop the job.
               </p>
+              <p className="lede" style={{ marginBottom: 20 }}>
+                Construction is demanding work, often in difficult conditions. We do not
+                pretend otherwise. What we commit to is competent supervision,
+                maintained plant, PPE that fits, and health and safety standards that
+                exceed what UK legislation requires.
+              </p>
               <p className="lede">
-                Construction in this region is demanding work in difficult conditions.
-                We do not pretend otherwise. What we commit to is competent
-                supervision, maintained plant, PPE that fits, accommodation that is
-                habitable, and a training route that takes people from general worker
-                to ticketed operator to supervisor — on our payroll, not a promise.
+                We employ {headcount.total} people across {headcount.departments} 
+                departments, {headcount.interns} of them interns. Team members are
+                assigned to projects on the specific expertise the task needs, so you
+                work on what you are good at and learn the rest alongside someone who
+                already is.
               </p>
             </Reveal>
           </div>

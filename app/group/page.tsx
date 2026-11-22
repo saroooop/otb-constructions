@@ -22,8 +22,8 @@ export default function StructurePage() {
         title="A transparent organogram, not a mystery."
         lede="The departments and key personnel that collaborate to ensure seamless operations and successful project execution."
         image="/lkmd/skybridge.jpg"
-        video="/video/cinematic.mp4"
-        poster="/cinematic-poster.jpg"
+        video="/video/structure.mp4"
+        poster="/posters/structure.jpg"
         position="center 50%"
       />
 

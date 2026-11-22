@@ -8,7 +8,7 @@ set -e
 SRC=/c/Users/babso/Desktop/dareweb/public/lkmd
 OUT=/c/Users/babso/Desktop/dareweb/public/video
 mkdir -p "$OUT"
-DUR=6; XF=1.0; FPS=25; W=1920; H=1080
+DUR=6; XF=1.0; FPS=25; W=1600; H=900
 
 clip () {
   local idx=$1 y0=$2 y1=$3
@@ -32,7 +32,7 @@ ffmpeg -y -loglevel error \
   -loop 1 -t $DUR -i "$SRC/crane-sunset.jpg" \
   -loop 1 -t $DUR -i "$SRC/skybridge.jpg" \
   -filter_complex "$F" -map "[vout]" \
-  -an -c:v libx264 -profile:v high -preset slower -crf 29 \
+  -an -c:v libx264 -profile:v high -preset slower -crf 27 \
   -pix_fmt yuv420p -movflags +faststart -g 50 "$OUT/lkmd.mp4"
 
 ffmpeg -y -loglevel error -i "$OUT/lkmd.mp4" -frames:v 1 -q:v 3 \
