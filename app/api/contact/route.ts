@@ -1,24 +1,23 @@
 import { NextResponse } from 'next/server';
+import { deliver, hashIp, clientIp, type Enquiry } from '@/lib/enquiries';
 
 /**
  * Contact endpoint.
  *
- * Validates and logs the enquiry. Delivery is deliberately pluggable: set
- * RESEND_API_KEY and CONTACT_TO and it emails; leave them unset and it still
- * returns 200 so the form works in development and on a preview deploy
- * without leaking a key into the client bundle.
+ * Validates, drops bots on a honeypot, then hands the enquiry to lib/enquiries
+ * which writes it to Supabase and emails it via Resend. Both sinks are optional
+ * — with neither configured the enquiry is logged and this still returns 200,
+ * so the form works on a preview deploy before any account exists.
  */
 
 const MAX = { name: 120, company: 160, email: 180, phone: 40, type: 60, message: 4000 };
-
-type Payload = Record<string, unknown>;
 
 function str(v: unknown, max: number): string {
   return typeof v === 'string' ? v.trim().slice(0, max) : '';
 }
 
 export async function POST(req: Request) {
-  let body: Payload;
+  let body: Record<string, unknown>;
 
   try {
     body = await req.json();
@@ -31,7 +30,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: true });
   }
 
-  const enquiry = {
+  const enquiry: Enquiry = {
     name:    str(body.name, MAX.name),
     company: str(body.company, MAX.company),
     email:   str(body.email, MAX.email),
@@ -51,55 +50,31 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: 'That email address does not look right.' }, { status: 400 });
   }
 
-  const apiKey = process.env.RESEND_API_KEY;
-  const to     = process.env.CONTACT_TO;
-  const from   = process.env.CONTACT_FROM || 'enquiries@otbconstructions.com';
-
-  if (!apiKey || !to) {
-    // No mail transport configured yet — record it and succeed.
-    console.info('[contact] enquiry received (no transport configured)', {
-      ...enquiry,
-      message: `${enquiry.message.slice(0, 160)}…`,
-    });
-    return NextResponse.json({ ok: true, delivered: false });
-  }
-
   try {
-    const res = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        from,
-        to: [to],
-        reply_to: enquiry.email,
-        subject: `Website enquiry — ${enquiry.type || 'General'} — ${enquiry.name}`,
-        text: [
-          `Name:    ${enquiry.name}`,
-          `Company: ${enquiry.company || '—'}`,
-          `Email:   ${enquiry.email}`,
-          `Phone:   ${enquiry.phone || '—'}`,
-          `Type:    ${enquiry.type || '—'}`,
-          '',
-          enquiry.message,
-        ].join('\n'),
-      }),
+    const result = await deliver(enquiry, {
+      userAgent: req.headers.get('user-agent'),
+      ipHash: hashIp(clientIp(req)),
     });
 
-    if (!res.ok) {
-      const detail = await res.text().catch(() => '');
-      console.error('[contact] transport rejected the message', res.status, detail);
+    // Supabase is the system of record. If it is configured but rejected the
+    // write, and email did not get through either, the enquiry only exists in
+    // a log line — tell the sender to reach us another way rather than letting
+    // them believe it landed.
+    const supabaseConfigured =
+      Boolean(process.env.SUPABASE_URL && process.env.SUPABASE_SERVICE_ROLE_KEY);
+    const emailConfigured =
+      Boolean(process.env.RESEND_API_KEY && process.env.CONTACT_TO);
+
+    if ((supabaseConfigured || emailConfigured) && !result.stored && !result.emailed) {
       return NextResponse.json(
         { error: 'We could not send that just now. Please email us directly.' },
         { status: 502 },
       );
     }
 
-    return NextResponse.json({ ok: true, delivered: true });
+    return NextResponse.json({ ok: true, ...result });
   } catch (err) {
-    console.error('[contact] transport error', err);
+    console.error('[contact] unexpected failure', err);
     return NextResponse.json(
       { error: 'We could not send that just now. Please email us directly.' },
       { status: 502 },
