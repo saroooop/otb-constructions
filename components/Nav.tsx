@@ -10,8 +10,9 @@ import { brand } from '@/lib/brand';
 const links = [
   { href: '/services',       label: 'What We Do' },
   { href: '/sectors',        label: 'Sectors' },
+  { href: '/market',         label: 'The Market' },
   { href: '/projects',       label: 'Projects' },
-  { href: '/sustainability', label: 'Safety & Sustainability' },
+  { href: '/sustainability', label: 'Safety' },
   { href: '/insights',       label: 'Insights' },
   { href: '/about',          label: 'About' },
 ];
@@ -82,6 +83,7 @@ export default function Nav() {
                   letterSpacing: '0.04em',
                   textTransform: 'uppercase',
                   textDecoration: 'none',
+                  whiteSpace: 'nowrap',
                   color: solid ? (active ? 'var(--ink)' : '#56687A') : 'rgba(255,255,255,0.88)',
                   transition: 'color .2s var(--ease)',
                 }}
@@ -165,7 +167,7 @@ export default function Nav() {
       )}
 
       <style>{`
-        @media (max-width: 1180px) {
+        @media (max-width: 1150px) {
           .desktop-nav   { display: none !important; }
           .mobile-toggle { display: block !important; }
         }

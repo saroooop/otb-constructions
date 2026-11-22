@@ -14,6 +14,7 @@ const columns = [
     links: [
       { label: 'About',                   href: '/about' },
       { label: 'Sectors',                 href: '/sectors' },
+      { label: 'The Market',              href: '/market' },
       { label: 'Projects',                href: '/projects' },
       { label: 'Safety & Sustainability', href: '/sustainability' },
       { label: 'Careers',                 href: '/careers' },
