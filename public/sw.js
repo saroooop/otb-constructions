@@ -16,7 +16,7 @@
  * Bump CACHE_VERSION to invalidate everything on the next deploy.
  */
 
-const CACHE_VERSION = 'v1';
+const CACHE_VERSION = 'v2';  // bumped: range-request guard added
 const CACHE = `otb-${CACHE_VERSION}`;
 
 // Deliberately small. The app shell plus the offline page — not the site.
@@ -84,6 +84,12 @@ self.addEventListener('fetch', event => {
 
   // Only GET is cacheable. POSTs to /api/contact fall straight through.
   if (request.method !== 'GET') return;
+
+  // Range requests must not be answered from the Cache API. caches.match()
+  // ignores the Range header and hands back the whole 200 body, but the
+  // browser asked for 206 Partial Content — Safari in particular refuses to
+  // play a video served that way. Let the network handle seeking.
+  if (request.headers.has('range')) return;
 
   const url = new URL(request.url);
 

@@ -40,12 +40,32 @@ export default function HeroMedia({
     return () => window.clearInterval(id);
   }, [images.length, interval, videoReady]);
 
-  // Autoplay is blocked on some devices even when muted; treat a rejected
-  // play() the same as a missing file and stay on the stills.
   useEffect(() => {
     const el = videoRef.current;
     if (!el) return;
-    el.play().catch(() => setVideoReady(false));
+
+    const markReady = () => setVideoReady(true);
+
+    // `canplay` often fires before React has attached its onCanPlay handler
+    // during hydration. The event is then gone for good, and the film plays
+    // at opacity 0 behind the stills — playing perfectly, visible to nobody.
+    // Reading readyState directly recovers the state the missed event carried.
+    if (el.readyState >= HTMLMediaElement.HAVE_FUTURE_DATA) markReady();
+
+    el.addEventListener('canplay', markReady);
+    el.addEventListener('playing', markReady);
+
+    // Autoplay can still be refused — iOS Low Power Mode, data saver, a
+    // per-site setting. Only fall back to the stills if it actually is not
+    // playing: a rejected promise does not always mean stopped.
+    el.play().catch(() => {
+      if (el.paused) setVideoReady(false);
+    });
+
+    return () => {
+      el.removeEventListener('canplay', markReady);
+      el.removeEventListener('playing', markReady);
+    };
   }, [video]);
 
   return (
@@ -75,12 +95,14 @@ export default function HeroMedia({
       {video && (
         <video
           ref={videoRef}
+          autoPlay
           muted
           loop
           playsInline
           preload="metadata"
           poster={poster}
           onCanPlay={() => setVideoReady(true)}
+          onPlaying={() => setVideoReady(true)}
           onError={() => setVideoReady(false)}
           style={{
             position: 'absolute', inset: 0,
