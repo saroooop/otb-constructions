@@ -1,20 +1,40 @@
 # Content to confirm before this goes to a client
 
-## 0. The group structure
+## Status after the company profile landed
 
-The site presents OTB as a group of three divisions — mining/engineering/energy,
-design and engineering, and construction delivery — described by role only.
+Most of this file is now obsolete in a good way. The 30-page LKMD company
+profile replaced the invented content with the company's own words:
 
-The operating companies behind those divisions are **deliberately not named**
-anywhere on the site or in this repository. That is a client decision, and it
-also keeps the site clear of a real risk: accreditations such as a B-BBEE
-level, a CIDB grading or an ISO certificate belong to the legal entity that
-earned them. Presenting one company's grading as the group's would be a
-misrepresentation in a tender, so no accreditation is claimed on the site at
-all until someone confirms which ones the group itself holds.
+| Was invented | Now real, from the profile |
+|---|---|
+| Brand name, contact, address | LKMD Construction, 80 Baddow Road, Chelmsford, Essex CM2 7PJ, company no. 10502352, 0800 046 0223, info@lkmd.co.uk |
+| Services | Construction, Construction Management, Engineering, Property Development Support, Refurbishment & Renovation, Design Management & D&C |
+| Values / vision / mission | Verbatim from the profile |
+| Why choose us | Verbatim |
+| Org structure and headcount | The real organogram: 7 departments, 95 people, 27 interns — figures derived from the chart in code so they cannot drift from it |
+| Safety policy | The company's own eight health-and-safety aims |
+| Clients | The five client types listed in the profile |
+| Photography | LKMD's own 12 brand images now carry About, Services and the structure page |
 
-If accreditations are to be shown, add them to `accreditations` in
-`lib/content.ts` and say plainly which entity holds each.
+## Still outstanding
+
+1. **Project references.** The profile's own projects page reads "TO BE
+   INCLUDED ONCE PROVIDED". Until real references arrive, `/projects` is
+   still running placeholder entries — replace or remove them.
+2. **Affiliations and certifications.** The profile says "LKMD to list their
+   specific industry affiliations, memberships (e.g. CIOB, ICE) and
+   certifications (e.g. ISO standards, CHAS, Constructionline)". Nothing is
+   claimed on the site until these are confirmed. See `affiliationsTodo` in
+   `lib/lkmd.ts`.
+3. **Board names, roles and photographs.** `directors` in `lib/group.ts` is
+   still placeholder names with generated portraits. Replace the name and the
+   photo together — a generated face beside a real person's name
+   misrepresents them.
+4. **A WhatsApp number**, if one is wanted. Currently inherited from the old
+   placeholder.
+5. **Mining content.** `/market` and the mining-sector material came from the
+   Namibia NamPPF deck and sit alongside LKMD's building and civils offering.
+   Confirm this is still the intended positioning, or cut it.
 
 ## 1. Brand — swaps in one file
 

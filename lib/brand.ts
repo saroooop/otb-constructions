@@ -8,28 +8,32 @@
 
 export const brand = {
   /* ── Identity ─────────────────────────────────────────── */
-  name:      'OTB',
-  nameBold:  'CONSTRUCTIONS',
-  full:      'OTB Constructions',
-  legal:     'OTB Constructions Ltd',
-  tagline:   'Building the infrastructure that moves a continent',
-  /** Sits under the wordmark, and is what the globe-and-Africa mark says. */
-  motto:     'A World of Africa',
-  strapline: 'Civil Engineering · Mining Infrastructure · Earthworks',
+  name:      'LKMD',
+  nameBold:  'CONSTRUCTION',
+  full:      'LKMD Construction',
+  legal:     'LKMD Construction',
+  companyNo: '10502352',
+  tagline:   'Innovating Tomorrow, Engineering Today',
+  /** Sits under the wordmark. */
+  motto:     'Innovating Tomorrow, Engineering Today',
+  strapline: 'Building · Civil Engineering · Construction Management',
 
   /* ── Contact ──────────────────────────────────────────── */
-  email:     'enquiries@otbconstructions.com',
-  phone:     '+44 7405 746302',
-  whatsapp:  '447405746302',
+  email:     'info@lkmd.co.uk',
+  phone:     '0800 046 0223',
+  whatsapp:  '447405746302',          // TODO: confirm a WhatsApp number for LKMD
+  website:   'https://www.lkmd.co.uk',
   addresses: [
-    { label: 'United Kingdom',  lines: ['London', 'United Kingdom'] },
-    { label: 'Southern Africa', lines: ['Windhoek', 'Namibia'] },
+    {
+      label: 'Registered office',
+      lines: ['80 Baddow Road', 'Chelmsford, Essex CM2 7PJ', 'United Kingdom'],
+    },
   ],
 
   /* ── Palette ──────────────────────────────────────────────
-     WBHO's marine blue and signal red, deepened and cooled to
-     sit alongside the restrained neutrals a UK tier-one
-     contractor uses. Red is structural, never decorative.      */
+     Unchanged. The marine blue and signal red already sit with
+     LKMD's own brand photography, which runs blue-steel and
+     hi-vis orange-red.                                          */
   color: {
     ink:      '#0A1724',
     navy900:  '#06182B',

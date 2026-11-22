@@ -1,210 +1,179 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { ArrowRight, Check } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import PageHero from '@/components/PageHero';
 import Reveal from '@/components/Reveal';
 import Portrait from '@/components/Portrait';
-import { divisions, groupChain, directors, staff } from '@/lib/group';
+import { orgDepartments, orgLeadership, headcount, approachPoints } from '@/lib/lkmd';
+import { directors } from '@/lib/group';
 import { brand } from '@/lib/brand';
 
 export const metadata: Metadata = {
-  title: 'The Group',
+  title: 'Our Structure',
   description:
-    'Three divisions under one group — mining, engineering and energy; design and engineering; construction delivery — covering a project from evaluation through to hand-over.',
+    'The departments, divisions and key personnel behind LKMD — a transparent organogram covering office administration, tender, quality control, logistics, project management, SHE and site management.',
 };
 
-export default function GroupPage() {
-  const byDivision = divisions.map(d => ({
-    division: d.title,
-    people: staff.filter(s => s.division === d.title),
-  }));
-
+export default function StructurePage() {
   return (
     <>
       <PageHero
-        eyebrow="The group"
-        title="Three divisions. One chain, from evaluation to hand-over."
-        lede="Most clients have to assemble this themselves — a technical consultant, a design team, a contractor, an energy supplier. Here they already work together."
-        image="/sectors/hero-3-plant.jpg"
+        eyebrow="Our structure"
+        title="A transparent organogram, not a mystery."
+        lede="The departments and key personnel that collaborate to ensure seamless operations and successful project execution."
+        image="/lkmd/skybridge.jpg"
         video="/video/cinematic.mp4"
         poster="/cinematic-poster.jpg"
         position="center 50%"
       />
 
-      {/* ── Why the group exists ──────────────────────────── */}
-      <section className="section">
+      {/* ── Headline numbers, derived from the chart itself ─ */}
+      <section style={{ background: brand.color.navy900, color: '#fff', padding: '88px 0' }}>
         <div className="container">
-          <div
-            className="split"
-            style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: 72, alignItems: 'start', marginBottom: 72 }}
-          >
-            <Reveal>
-              <h2 className="display-sm">
-                The interfaces are
-                <br />
-                where projects fail.
-              </h2>
-            </Reveal>
-            <Reveal delay={120}>
-              <p className="rule-left" style={{ marginBottom: 24 }}>
-                A programme rarely fails inside a discipline. It fails between them.
-              </p>
-              <p className="lede">
-                The design is late to the contractor. The quantity surveyor prices
-                something the engineer has already changed. The power scope is let six
-                months after the plant it feeds. Every one of those is an interface,
-                and every interface is a commercial argument waiting to happen.
-              </p>
-            </Reveal>
-          </div>
-
-          <div
-            className="chain-grid"
-            style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 4 }}
-          >
-            {groupChain.map((c, i) => (
-              <Reveal key={c.n} delay={i * 90}>
-                <div
-                  style={{
-                    background: brand.color.concrete, padding: '34px 30px', height: '100%',
-                    borderTop: `3px solid ${brand.color.red}`,
-                  }}
-                >
-                  <p
-                    style={{
-                      fontFamily: 'var(--font-heading), system-ui, sans-serif',
-                      fontSize: '1.5rem', fontWeight: 800,
-                      color: 'transparent', WebkitTextStroke: `1.3px ${brand.color.red}`,
-                      marginBottom: 16,
-                    }}
-                  >
-                    {c.n}
-                  </p>
-                  <h3 style={{ fontSize: '1.05rem', marginBottom: 6 }}>{c.stage}</h3>
-                  <p
-                    style={{
-                      fontSize: '0.7rem', fontWeight: 700, textTransform: 'uppercase',
-                      letterSpacing: '0.12em', color: brand.color.navy700, marginBottom: 12,
-                    }}
-                  >
-                    {c.division}
-                  </p>
-                  <p style={{ fontSize: '0.87rem', color: '#5C6B7A', lineHeight: 1.8 }}>{c.desc}</p>
+          <div className="stat-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 36 }}>
+            {[
+              { v: String(headcount.total), l: 'People', s: 'Across the organisation' },
+              { v: String(headcount.departments), l: 'Departments', s: 'Each with a named lead' },
+              { v: String(headcount.interns), l: 'Interns', s: 'Training the next intake, not only hiring it' },
+              { v: '2', l: 'Continents', s: 'United Kingdom and Africa' },
+            ].map((s, i) => (
+              <Reveal key={s.l} delay={i * 90}>
+                <div style={{ borderTop: `2px solid ${brand.color.red}`, paddingTop: 22 }}>
+                  <div className="stat-value">{s.v}</div>
+                  <div className="stat-label">{s.l}</div>
+                  <div className="stat-sub">{s.s}</div>
                 </div>
               </Reveal>
             ))}
           </div>
         </div>
-
         <style>{`
-          @media (max-width: 1024px) { .chain-grid { grid-template-columns: 1fr 1fr !important; } }
-          @media (max-width: 620px)  { .chain-grid { grid-template-columns: 1fr !important; } }
-          @media (max-width: 900px)  { .split { grid-template-columns: 1fr !important; gap: 36px !important; } }
+          @media (max-width: 1024px) { .stat-grid { grid-template-columns: 1fr 1fr !important; } }
+          @media (max-width: 560px)  { .stat-grid { grid-template-columns: 1fr !important; } }
         `}</style>
       </section>
 
-      {/* ── The divisions ─────────────────────────────────── */}
-      <section style={{ background: brand.color.concrete, padding: '112px 0' }}>
+      {/* ── Why we publish it ─────────────────────────────── */}
+      <section className="section-sm">
+        <div className="container">
+          <div
+            className="split"
+            style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: 72, alignItems: 'start' }}
+          >
+            <Reveal>
+              <h2 className="display-sm">
+                Teamwork and
+                <br />
+                efficient decisions.
+              </h2>
+            </Reveal>
+            <Reveal delay={120}>
+              <p className="rule-left" style={{ marginBottom: 24 }}>
+                Our transparent organogram reflects our commitment to effective
+                communication, teamwork and efficient decision-making.
+              </p>
+              <p className="lede">
+                Team members are assigned to projects based on the specific knowledge
+                and expertise relevant to the task at hand, so functional expertise and
+                extensive experience are leveraged for the best project outcome. If you
+                want to know who will be making a decision on your job, it is on this
+                page.
+              </p>
+            </Reveal>
+          </div>
+        </div>
+        <style>{`@media (max-width: 900px) { .split { grid-template-columns: 1fr !important; gap: 36px !important; } }`}</style>
+      </section>
+
+      {/* ── Leadership line ───────────────────────────────── */}
+      <section style={{ paddingBottom: 90 }}>
         <div className="container">
           <Reveal>
-            <p className="eyebrow" style={{ marginBottom: 22 }}>Divisions</p>
-            <h2 className="display-sm" style={{ maxWidth: 600, marginBottom: 54 }}>
-              What each part of the group is accountable for.
-            </h2>
+            <div
+              className="lead-line"
+              style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 4, marginBottom: 4 }}
+            >
+              {orgLeadership.map((l, i) => (
+                <div
+                  key={l}
+                  style={{
+                    background: i === 0 ? brand.color.navy800 : brand.color.navy700,
+                    color: '#fff', padding: '26px 24px', textAlign: 'center',
+                    borderTop: `3px solid ${brand.color.red}`,
+                  }}
+                >
+                  <div style={{ fontSize: '0.92rem', fontWeight: 700, lineHeight: 1.35 }}>{l}</div>
+                </div>
+              ))}
+            </div>
           </Reveal>
 
-          {divisions.map((d, i) => (
-            <Reveal key={d.slug} delay={i * 70}>
-              <article
-                id={d.slug}
-                className="co-row"
-                style={{
-                  display: 'grid', gridTemplateColumns: '1fr 1.25fr',
-                  background: '#fff', marginBottom: 4, scrollMarginTop: 110,
-                }}
-              >
-                <div style={{ position: 'relative', minHeight: 320, overflow: 'hidden' }}>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={d.image}
-                    alt={d.title}
+          {/* ── Departments ─────────────────────────────── */}
+          <div
+            className="dept-grid"
+            style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 4 }}
+          >
+            {orgDepartments.map((d, i) => {
+              const total = d.roles.reduce((s, r) => s + r.n, 0);
+              return (
+                <Reveal key={d.name} delay={(i % 4) * 80}>
+                  <div
                     style={{
-                      position: 'absolute', inset: 0,
-                      width: '100%', height: '100%', objectFit: 'cover',
-                      filter: 'saturate(0.82) contrast(1.05)',
-                    }}
-                  />
-                  <span
-                    aria-hidden
-                    style={{ position: 'absolute', left: 0, top: 0, width: 5, height: 72, background: brand.color.red }}
-                  />
-                </div>
-
-                <div style={{ padding: '46px 46px 50px' }}>
-                  <p
-                    style={{
-                      fontSize: '0.68rem', fontWeight: 700, textTransform: 'uppercase',
-                      letterSpacing: '0.14em', color: brand.color.red, marginBottom: 14,
+                      background: brand.color.concrete, padding: '28px 24px 30px',
+                      height: '100%', borderTop: '3px solid var(--line)',
                     }}
                   >
-                    {d.role}
-                  </p>
-
-                  <h3 style={{ fontSize: 'clamp(1.4rem, 2.1vw, 1.9rem)', marginBottom: 10 }}>
-                    {d.title}
-                  </h3>
-
-                  <p
-                    style={{
-                      fontSize: '0.95rem', color: '#2A3B4C', fontWeight: 500,
-                      lineHeight: 1.7, marginBottom: 18,
-                    }}
-                  >
-                    {d.strapline}
-                  </p>
-
-                  <p style={{ fontSize: '0.93rem', color: '#5C6B7A', lineHeight: 1.85, marginBottom: 24 }}>
-                    {d.summary}
-                  </p>
-
-                  <ul
-                    className="cap-list"
-                    style={{
-                      listStyle: 'none', display: 'grid', gridTemplateColumns: '1fr 1fr',
-                      gap: '8px 20px', paddingTop: 22, borderTop: '1px solid var(--line)',
-                    }}
-                  >
-                    {d.capabilities.map(cap => (
-                      <li
-                        key={cap}
+                    <div
+                      style={{
+                        display: 'flex', alignItems: 'baseline', justifyContent: 'space-between',
+                        gap: 10, marginBottom: 18,
+                      }}
+                    >
+                      <h3 style={{ fontSize: '0.98rem', lineHeight: 1.3 }}>{d.name}</h3>
+                      <span
                         style={{
-                          display: 'flex', gap: 9, alignItems: 'flex-start',
-                          fontSize: '0.85rem', color: '#44576A', lineHeight: 1.55,
+                          fontFamily: 'var(--font-heading), system-ui, sans-serif',
+                          fontSize: '1.15rem', fontWeight: 800, color: brand.color.red,
                         }}
                       >
-                        <Check size={14} strokeWidth={2.6} color={brand.color.red} style={{ marginTop: 4, flexShrink: 0 }} />
-                        {cap}
-                      </li>
+                        {total}
+                      </span>
+                    </div>
+
+                    {d.roles.map(r => (
+                      <div
+                        key={r.role}
+                        style={{
+                          display: 'flex', justifyContent: 'space-between', gap: 10,
+                          fontSize: '0.84rem', color: '#5C6B7A',
+                          padding: '7px 0', borderTop: '1px solid rgba(0,0,0,0.055)',
+                        }}
+                      >
+                        <span>{r.role}</span>
+                        <span style={{ color: '#2A3B4C', fontWeight: 600 }}>{r.n}</span>
+                      </div>
                     ))}
-                  </ul>
-                </div>
-              </article>
-            </Reveal>
-          ))}
+                  </div>
+                </Reveal>
+              );
+            })}
+          </div>
         </div>
 
         <style>{`
-          @media (max-width: 960px) {
-            .co-row { grid-template-columns: 1fr !important; }
-            .co-row > div:first-child { min-height: 230px !important; }
-            .co-row > div:last-child  { padding: 34px 28px 38px !important; }
-            .cap-list { grid-template-columns: 1fr !important; }
+          @media (max-width: 1100px) {
+            .lead-line { grid-template-columns: 1fr 1fr !important; }
+            .dept-grid { grid-template-columns: 1fr 1fr !important; }
+          }
+          @media (max-width: 600px) {
+            .lead-line { grid-template-columns: 1fr !important; }
+            .dept-grid { grid-template-columns: 1fr !important; }
           }
         `}</style>
       </section>
 
       {/* ── Board ─────────────────────────────────────────── */}
-      <section className="section">
+      <section style={{ background: brand.color.concrete, padding: '104px 0' }}>
         <div className="container">
           <Reveal>
             <p className="eyebrow" style={{ marginBottom: 22 }}>Leadership</p>
@@ -212,7 +181,7 @@ export default function GroupPage() {
               The board.
             </h2>
             <p className="lede" style={{ maxWidth: 580, marginBottom: 48 }}>
-              The people accountable for what the group commits to.
+              The people accountable for what the company commits to.
             </p>
           </Reveal>
 
@@ -222,7 +191,7 @@ export default function GroupPage() {
           >
             {directors.map((d, i) => (
               <Reveal key={`${d.role}-${i}`} delay={(i % 4) * 90}>
-                <article style={{ background: brand.color.concrete, height: '100%' }}>
+                <article style={{ background: '#fff', height: '100%' }}>
                   <Portrait name={d.name} photo={d.photo} ratio="4 / 5" />
                   <div style={{ padding: '26px 24px 30px' }}>
                     <h3 style={{ fontSize: '1.05rem', marginBottom: 4 }}>{d.name}</h3>
@@ -248,72 +217,44 @@ export default function GroupPage() {
         `}</style>
       </section>
 
-      {/* ── Staff ─────────────────────────────────────────── */}
+      {/* ── How we work ───────────────────────────────────── */}
       <section style={{ background: brand.color.navy900, color: '#fff', padding: '104px 0' }}>
         <div className="container">
           <Reveal>
-            <p className="eyebrow eyebrow-light" style={{ marginBottom: 22 }}>Our dedicated group</p>
-            <h2 className="display-sm" style={{ color: '#fff', maxWidth: 620, marginBottom: 20 }}>
-              The people you will actually be working with.
+            <p className="eyebrow eyebrow-light" style={{ marginBottom: 22 }}>How we work</p>
+            <h2 className="display-sm" style={{ color: '#fff', maxWidth: 620, marginBottom: 52 }}>
+              What the structure is for.
             </h2>
-            <p className="lede-dark" style={{ maxWidth: 580, marginBottom: 52 }}>
-              The named people on a project, by division — not an org chart you
-              never meet.
-            </p>
           </Reveal>
 
-          {byDivision.map((group, gi) => (
-            <Reveal key={group.division} delay={gi * 80}>
-              <div style={{ marginBottom: 44 }}>
-                <p
-                  style={{
-                    fontSize: '0.72rem', fontWeight: 700, textTransform: 'uppercase',
-                    letterSpacing: '0.14em', color: brand.color.redSoft,
-                    paddingBottom: 14, marginBottom: 22,
-                    borderBottom: '1px solid rgba(255,255,255,0.14)',
-                  }}
-                >
-                  {group.division}
-                </p>
-
-                <div
-                  className="staff-grid"
-                  style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 20 }}
-                >
-                  {group.people.map((s, i) => (
-                    <div key={`${s.role}-${i}`} style={{ display: 'flex', gap: 14, alignItems: 'center' }}>
-                      <div style={{ width: 56, flexShrink: 0 }}>
-                        <Portrait name={s.name} photo={s.photo} />
-                      </div>
-                      <div>
-                        <div style={{ fontSize: '0.92rem', fontWeight: 700, color: '#fff' }}>{s.name}</div>
-                        <div style={{ fontSize: '0.78rem', color: '#8EA3B8', marginTop: 3, lineHeight: 1.5 }}>
-                          {s.role}
-                        </div>
-                      </div>
-                    </div>
-                  ))}
+          <div
+            className="work-grid"
+            style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 4 }}
+          >
+            {approachPoints.map((a, i) => (
+              <Reveal key={a.title} delay={i * 90}>
+                <div className="card-dark" style={{ height: '100%', borderTop: `3px solid ${brand.color.red}` }}>
+                  <h3 style={{ fontSize: '1.02rem', color: '#fff', marginBottom: 12 }}>{a.title}</h3>
+                  <p style={{ fontSize: '0.86rem', color: '#8EA3B8', lineHeight: 1.8 }}>{a.body}</p>
                 </div>
-              </div>
-            </Reveal>
-          ))}
+              </Reveal>
+            ))}
+          </div>
 
           <Reveal>
-            <div style={{ marginTop: 20, display: 'flex', gap: 14, flexWrap: 'wrap' }}>
+            <div style={{ marginTop: 52, display: 'flex', gap: 14, flexWrap: 'wrap' }}>
               <Link href="/careers" className="btn btn-primary">
                 Join the team
                 <ArrowRight size={14} strokeWidth={2.4} />
               </Link>
-              <Link href="/contact" className="btn btn-light">
-                Request references
-              </Link>
+              <Link href="/contact" className="btn btn-light">Get in touch</Link>
             </div>
           </Reveal>
         </div>
 
         <style>{`
-          @media (max-width: 1024px) { .staff-grid { grid-template-columns: 1fr 1fr !important; } }
-          @media (max-width: 560px)  { .staff-grid { grid-template-columns: 1fr !important; } }
+          @media (max-width: 1024px) { .work-grid { grid-template-columns: 1fr 1fr !important; } }
+          @media (max-width: 620px)  { .work-grid { grid-template-columns: 1fr !important; } }
         `}</style>
       </section>
     </>
