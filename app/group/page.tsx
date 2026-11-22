@@ -1,23 +1,29 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { ArrowRight, ExternalLink, MapPin, Check } from 'lucide-react';
+import { ArrowRight, Check } from 'lucide-react';
 import PageHero from '@/components/PageHero';
 import Reveal from '@/components/Reveal';
-import { groupCompanies, groupChain, groupProjects } from '@/lib/group';
+import Portrait from '@/components/Portrait';
+import { divisions, groupChain, directors, staff } from '@/lib/group';
 import { brand } from '@/lib/brand';
 
 export const metadata: Metadata = {
   title: 'The Group',
   description:
-    'Three operating companies under one group: Wonga Holdings for mining, engineering and energy; Za-Eng Consulting for multidisciplinary design; Kontinental for construction delivery.',
+    'Three divisions under one group — mining, engineering and energy; design and engineering; construction delivery — covering a project from evaluation through to hand-over.',
 };
 
 export default function GroupPage() {
+  const byDivision = divisions.map(d => ({
+    division: d.title,
+    people: staff.filter(s => s.division === d.title),
+  }));
+
   return (
     <>
       <PageHero
         eyebrow="The group"
-        title="Three companies. One chain, from evaluation to hand-over."
+        title="Three divisions. One chain, from evaluation to hand-over."
         lede="Most clients have to assemble this themselves — a technical consultant, a design team, a contractor, an energy supplier. Here they already work together."
         image="/sectors/hero-3-plant.jpg"
         video="/video/cinematic.mp4"
@@ -81,7 +87,7 @@ export default function GroupPage() {
                       letterSpacing: '0.12em', color: brand.color.navy700, marginBottom: 12,
                     }}
                   >
-                    {c.company}
+                    {c.division}
                   </p>
                   <p style={{ fontSize: '0.87rem', color: '#5C6B7A', lineHeight: 1.8 }}>{c.desc}</p>
                 </div>
@@ -97,31 +103,31 @@ export default function GroupPage() {
         `}</style>
       </section>
 
-      {/* ── The companies ─────────────────────────────────── */}
+      {/* ── The divisions ─────────────────────────────────── */}
       <section style={{ background: brand.color.concrete, padding: '112px 0' }}>
         <div className="container">
           <Reveal>
-            <p className="eyebrow" style={{ marginBottom: 22 }}>Operating companies</p>
-            <h2 className="display-sm" style={{ maxWidth: 560, marginBottom: 54 }}>
-              Each one trades in its own right.
+            <p className="eyebrow" style={{ marginBottom: 22 }}>Divisions</p>
+            <h2 className="display-sm" style={{ maxWidth: 600, marginBottom: 54 }}>
+              What each part of the group is accountable for.
             </h2>
           </Reveal>
 
-          {groupCompanies.map((c, i) => (
-            <Reveal key={c.slug} delay={i * 70}>
+          {divisions.map((d, i) => (
+            <Reveal key={d.slug} delay={i * 70}>
               <article
-                id={c.slug}
+                id={d.slug}
                 className="co-row"
                 style={{
                   display: 'grid', gridTemplateColumns: '1fr 1.25fr',
                   background: '#fff', marginBottom: 4, scrollMarginTop: 110,
                 }}
               >
-                <div style={{ position: 'relative', minHeight: 340, overflow: 'hidden' }}>
+                <div style={{ position: 'relative', minHeight: 320, overflow: 'hidden' }}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    src={c.image}
-                    alt={c.name}
+                    src={d.image}
+                    alt={d.title}
                     style={{
                       position: 'absolute', inset: 0,
                       width: '100%', height: '100%', objectFit: 'cover',
@@ -141,31 +147,34 @@ export default function GroupPage() {
                       letterSpacing: '0.14em', color: brand.color.red, marginBottom: 14,
                     }}
                   >
-                    {c.role}
+                    {d.role}
                   </p>
 
                   <h3 style={{ fontSize: 'clamp(1.4rem, 2.1vw, 1.9rem)', marginBottom: 10 }}>
-                    {c.name}
+                    {d.title}
                   </h3>
 
                   <p
                     style={{
                       fontSize: '0.95rem', color: '#2A3B4C', fontWeight: 500,
-                      lineHeight: 1.7, marginBottom: 18, fontStyle: 'italic',
+                      lineHeight: 1.7, marginBottom: 18,
                     }}
                   >
-                    {c.strapline}
+                    {d.strapline}
                   </p>
 
                   <p style={{ fontSize: '0.93rem', color: '#5C6B7A', lineHeight: 1.85, marginBottom: 24 }}>
-                    {c.summary}
+                    {d.summary}
                   </p>
 
                   <ul
                     className="cap-list"
-                    style={{ listStyle: 'none', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px 20px', marginBottom: 24 }}
+                    style={{
+                      listStyle: 'none', display: 'grid', gridTemplateColumns: '1fr 1fr',
+                      gap: '8px 20px', paddingTop: 22, borderTop: '1px solid var(--line)',
+                    }}
                   >
-                    {c.capabilities.map(cap => (
+                    {d.capabilities.map(cap => (
                       <li
                         key={cap}
                         style={{
@@ -178,59 +187,6 @@ export default function GroupPage() {
                       </li>
                     ))}
                   </ul>
-
-                  {c.credentials && (
-                    <div
-                      style={{
-                        display: 'flex', flexWrap: 'wrap', gap: 8,
-                        paddingTop: 20, borderTop: '1px solid var(--line)', marginBottom: 20,
-                      }}
-                    >
-                      {c.credentials.map(cr => (
-                        <span
-                          key={cr.label}
-                          style={{
-                            fontSize: '0.72rem', padding: '6px 12px',
-                            background: brand.color.concrete,
-                            border: '1px solid var(--line)',
-                            color: '#44576A',
-                          }}
-                        >
-                          <strong style={{ color: 'var(--ink)' }}>{cr.label}</strong>{' '}
-                          {cr.value}
-                        </span>
-                      ))}
-                    </div>
-                  )}
-
-                  <div
-                    style={{
-                      display: 'flex', gap: 24, flexWrap: 'wrap', alignItems: 'center',
-                      paddingTop: c.credentials ? 0 : 20,
-                      borderTop: c.credentials ? 'none' : '1px solid var(--line)',
-                    }}
-                  >
-                    <div style={{ display: 'flex', gap: 8, alignItems: 'flex-start', flex: 1, minWidth: 220 }}>
-                      <MapPin size={14} strokeWidth={1.8} color="#8A99A8" style={{ marginTop: 3, flexShrink: 0 }} />
-                      <span style={{ fontSize: '0.8rem', color: '#8A99A8', lineHeight: 1.6 }}>
-                        {c.offices.join(' · ')}
-                      </span>
-                    </div>
-                    <a
-                      href={c.website}
-                      target="_blank"
-                      rel="noreferrer"
-                      style={{
-                        display: 'inline-flex', alignItems: 'center', gap: 8,
-                        fontSize: '0.74rem', fontWeight: 700, textTransform: 'uppercase',
-                        letterSpacing: '0.12em', color: brand.color.red, textDecoration: 'none',
-                        whiteSpace: 'nowrap',
-                      }}
-                    >
-                      Visit site
-                      <ExternalLink size={13} strokeWidth={2.2} />
-                    </a>
-                  </div>
                 </div>
               </article>
             </Reveal>
@@ -240,74 +196,124 @@ export default function GroupPage() {
         <style>{`
           @media (max-width: 960px) {
             .co-row { grid-template-columns: 1fr !important; }
-            .co-row > div:first-child { min-height: 240px !important; }
+            .co-row > div:first-child { min-height: 230px !important; }
             .co-row > div:last-child  { padding: 34px 28px 38px !important; }
             .cap-list { grid-template-columns: 1fr !important; }
           }
         `}</style>
       </section>
 
-      {/* ── Delivered work ────────────────────────────────── */}
+      {/* ── Board ─────────────────────────────────────────── */}
       <section className="section">
         <div className="container">
           <Reveal>
-            <p className="eyebrow" style={{ marginBottom: 22 }}>Delivered</p>
-            <h2 className="display-sm" style={{ maxWidth: 600, marginBottom: 20 }}>
-              Work already completed inside the group.
+            <p className="eyebrow" style={{ marginBottom: 22 }}>Leadership</p>
+            <h2 className="display-sm" style={{ maxWidth: 560, marginBottom: 20 }}>
+              The board.
             </h2>
-            <p className="lede" style={{ maxWidth: 600, marginBottom: 48 }}>
-              A sample of references from Kontinental. Ask and we will arrange a
-              reference conversation on any of them directly.
+            <p className="lede" style={{ maxWidth: 580, marginBottom: 48 }}>
+              The people accountable for what the group commits to.
             </p>
           </Reveal>
 
-          <div style={{ borderTop: '1px solid var(--line)' }}>
-            {groupProjects.map((p, i) => (
-              <Reveal key={p.name} delay={i * 70}>
-                <div
-                  className="gp-row"
-                  style={{
-                    display: 'grid', gridTemplateColumns: '1.3fr 1fr 0.9fr',
-                    gap: 28, alignItems: 'center',
-                    padding: '28px 0', borderBottom: '1px solid var(--line)',
-                  }}
-                >
-                  <h3 style={{ fontSize: '1.08rem', fontWeight: 700 }}>{p.name}</h3>
-                  <p style={{ fontSize: '0.89rem', color: '#5C6B7A', lineHeight: 1.7 }}>{p.scope}</p>
-                  <div style={{ display: 'flex', gap: 10, alignItems: 'center', flexWrap: 'wrap' }}>
-                    <span
+          <div
+            className="board-grid"
+            style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 4 }}
+          >
+            {directors.map((d, i) => (
+              <Reveal key={`${d.role}-${i}`} delay={(i % 4) * 90}>
+                <article style={{ background: brand.color.concrete, height: '100%' }}>
+                  <Portrait name={d.name} photo={d.photo} ratio="4 / 5" />
+                  <div style={{ padding: '26px 24px 30px' }}>
+                    <h3 style={{ fontSize: '1.05rem', marginBottom: 4 }}>{d.name}</h3>
+                    <p
                       style={{
-                        fontSize: '0.66rem', fontWeight: 700, textTransform: 'uppercase',
-                        letterSpacing: '0.12em', color: '#fff',
-                        background: brand.color.navy700, padding: '5px 10px',
+                        fontSize: '0.7rem', fontWeight: 700, textTransform: 'uppercase',
+                        letterSpacing: '0.12em', color: brand.color.red, marginBottom: 14,
                       }}
                     >
-                      {p.company}
-                    </span>
-                    <span style={{ fontSize: '0.8rem', color: '#8A99A8' }}>{p.discipline}</span>
+                      {d.role}
+                    </p>
+                    <p style={{ fontSize: '0.85rem', color: '#5C6B7A', lineHeight: 1.8 }}>{d.bio}</p>
                   </div>
-                </div>
+                </article>
               </Reveal>
             ))}
           </div>
+        </div>
+
+        <style>{`
+          @media (max-width: 1024px) { .board-grid { grid-template-columns: 1fr 1fr !important; } }
+          @media (max-width: 560px)  { .board-grid { grid-template-columns: 1fr !important; } }
+        `}</style>
+      </section>
+
+      {/* ── Staff ─────────────────────────────────────────── */}
+      <section style={{ background: brand.color.navy900, color: '#fff', padding: '104px 0' }}>
+        <div className="container">
+          <Reveal>
+            <p className="eyebrow eyebrow-light" style={{ marginBottom: 22 }}>Our people</p>
+            <h2 className="display-sm" style={{ color: '#fff', maxWidth: 620, marginBottom: 20 }}>
+              Who you will actually be working with.
+            </h2>
+            <p className="lede-dark" style={{ maxWidth: 580, marginBottom: 52 }}>
+              The named people on a project, by division — not an org chart you
+              never meet.
+            </p>
+          </Reveal>
+
+          {byDivision.map((group, gi) => (
+            <Reveal key={group.division} delay={gi * 80}>
+              <div style={{ marginBottom: 44 }}>
+                <p
+                  style={{
+                    fontSize: '0.72rem', fontWeight: 700, textTransform: 'uppercase',
+                    letterSpacing: '0.14em', color: brand.color.redSoft,
+                    paddingBottom: 14, marginBottom: 22,
+                    borderBottom: '1px solid rgba(255,255,255,0.14)',
+                  }}
+                >
+                  {group.division}
+                </p>
+
+                <div
+                  className="staff-grid"
+                  style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 20 }}
+                >
+                  {group.people.map((s, i) => (
+                    <div key={`${s.role}-${i}`} style={{ display: 'flex', gap: 14, alignItems: 'center' }}>
+                      <div style={{ width: 56, flexShrink: 0 }}>
+                        <Portrait name={s.name} photo={s.photo} />
+                      </div>
+                      <div>
+                        <div style={{ fontSize: '0.92rem', fontWeight: 700, color: '#fff' }}>{s.name}</div>
+                        <div style={{ fontSize: '0.78rem', color: '#8EA3B8', marginTop: 3, lineHeight: 1.5 }}>
+                          {s.role}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </Reveal>
+          ))}
 
           <Reveal>
-            <div style={{ marginTop: 44, display: 'flex', gap: 14, flexWrap: 'wrap' }}>
-              <Link href="/contact" className="btn btn-primary">
-                Request references
+            <div style={{ marginTop: 20, display: 'flex', gap: 14, flexWrap: 'wrap' }}>
+              <Link href="/careers" className="btn btn-primary">
+                Join the team
                 <ArrowRight size={14} strokeWidth={2.4} />
               </Link>
-              <Link href="/services" className="btn btn-outline">
-                What we do
+              <Link href="/contact" className="btn btn-light">
+                Request references
               </Link>
             </div>
           </Reveal>
         </div>
 
         <style>{`
-          @media (max-width: 860px) {
-            .gp-row { grid-template-columns: 1fr !important; gap: 10px !important; }
-          }
+          @media (max-width: 1024px) { .staff-grid { grid-template-columns: 1fr 1fr !important; } }
+          @media (max-width: 560px)  { .staff-grid { grid-template-columns: 1fr !important; } }
         `}</style>
       </section>
     </>

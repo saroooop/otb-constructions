@@ -1,45 +1,33 @@
 /**
- * The operating companies under OTB Constructions.
+ * The group's divisions and its board.
  *
- * ⚠ VERIFY BEFORE PUBLISHING. Everything here was read from each company's
- * own public website. Two things still need confirming by someone who knows
- * the corporate position:
+ * Divisions are described by ROLE only. The operating companies behind them
+ * are deliberately not named here or anywhere on the site — the group
+ * presents as one capability, not as a holding company listing subsidiaries.
+ * That also keeps us clear of claiming accreditations held by another legal
+ * entity, which would be a misrepresentation in a tender.
  *
- *   1. The ownership claim itself. Stating that OTB owns these three is a
- *      claim about company structure, not a design decision.
- *   2. Using their accreditations as the group's. A B-BBEE level, a CIDB
- *      grading and an ISO certificate belong to the legal entity that holds
- *      them. Presenting Za-Eng's CIDB 9GB as OTB's own would be a serious
- *      misrepresentation if the structure does not actually support it —
- *      which is why each credential below is attributed to its holder on
- *      the page rather than claimed by the group.
- *
- * Sources: zaeng.co.za, kontinental.co.za, wongaholdings.com (Nov 2026).
+ * `directors` is a PLACEHOLDER. See CONTENT-TODO.md.
  */
 
-export type GroupCompany = {
+export type Division = {
   slug: string;
-  name: string;
   role: string;
+  title: string;
   strapline: string;
   summary: string;
-  founded?: string;
-  offices: string[];
   capabilities: string[];
-  credentials?: { label: string; value: string }[];
-  website: string;
   image: string;
 };
 
-export const groupCompanies: GroupCompany[] = [
+export const divisions: Division[] = [
   {
-    slug: 'wonga-holdings',
-    name: 'Wonga Holdings',
-    role: 'Mining, engineering and energy',
-    strapline: 'Technical services and contract mining, from small-scale to mid-tier operations.',
+    slug: 'mining-energy',
+    role: 'Division one',
+    title: 'Mining, Engineering & Energy',
+    strapline: 'The work that happens before and after construction.',
     summary:
-      'A woman-owned South African business operating across mining, engineering and energy, with a footprint through the SADC region. Wonga carries the group’s mining technical capability — the work that happens before and around construction, from resource evaluation to closure and rehabilitation — together with an energy division delivering solar for mining and remote sites.',
-    offices: ['South Africa', 'SADC region'],
+      'Technical services and contract mining across a range of commodities, from small-scale operations through to mid-tier and developing mines — together with the energy capability that powers a remote site and the rehabilitation that closes it out. This is where a project is evaluated and sequenced before anyone commits capital to building it.',
     capabilities: [
       'Resource evaluation and geological modelling',
       'Mine planning and scheduling',
@@ -47,21 +35,18 @@ export const groupCompanies: GroupCompany[] = [
       'Mine closure and rehabilitation',
       'Productivity improvement strategies',
       'Mechanical and civil engineering',
-      'Solar for mining and remote energy systems',
+      'Solar and remote energy systems',
       'Solar plant de-risking and maintenance',
     ],
-    website: 'https://wongaholdings.com',
     image: '/disciplines/mining-infrastructure.jpg',
   },
   {
-    slug: 'za-eng',
-    name: 'Za-Eng Consulting',
-    role: 'Multidisciplinary design and engineering',
-    strapline: 'Helping build a better future.',
+    slug: 'design-engineering',
+    role: 'Division two',
+    title: 'Design & Engineering',
+    strapline: 'Eight disciplines under one appointment instead of eight.',
     summary:
-      'Founded in 2018 and headquartered in Pretoria, Za-Eng is a multidisciplinary consulting and construction engineering firm covering eight disciplines under one roof — architecture through to quantity surveying. It is where a project is designed, costed and co-ordinated before anyone breaks ground, and it carries the group’s formal engineering accreditations.',
-    founded: '2018',
-    offices: ['267 West Avenue, Centurion 0157, Pretoria'],
+      'A multidisciplinary consultancy covering architecture through to quantity surveying. A project is designed, costed, co-ordinated and planned here before it reaches site — which is the stage where buildability still changes the cost, and where most of the savings on a programme are actually available.',
     capabilities: [
       'Architecture',
       'Civil and structural engineering',
@@ -70,29 +55,17 @@ export const groupCompanies: GroupCompany[] = [
       'Town planning',
       'Project management',
       'Quantity surveying',
-      'Construction',
+      'Cost control and reporting',
     ],
-    credentials: [
-      { label: 'B-BBEE',  value: 'Level 1' },
-      { label: 'Quality', value: 'ISO 9001 certified' },
-      { label: 'CIDB',    value: '9GB, 9CE, 8ME, 8EP' },
-      { label: 'NHBRC',   value: 'Registered' },
-      { label: 'CESA',    value: 'Member' },
-    ],
-    website: 'https://www.zaeng.co.za',
     image: '/disciplines/building-civil-engineering.jpg',
   },
   {
-    slug: 'kontinental',
-    name: 'Kontinental',
-    role: 'Construction delivery',
-    strapline: 'One stop shop for planning, design and construction services.',
+    slug: 'construction',
+    role: 'Division three',
+    title: 'Construction Delivery',
+    strapline: 'Where the group self-performs.',
     summary:
-      'A multi-disciplinary construction company working throughout South Africa for government, commercial, industrial and residential clients. Kontinental is where the group self-performs: housing, schools and hospitals, industrial and factory buildings, refurbishment, roads and highways, and the civil engineering that sits under all of it.',
-    offices: [
-      'Woodmead Country Club Estate, 21 Woodlands Drive, Building 2, Woodmead 2191',
-      'East London',
-    ],
+      'Build capability across housing, schools, clinics and hospitals, industrial and factory buildings, refurbishment, roads and highways, and the civil engineering underneath all of it — for government, commercial, industrial and residential clients. The crews and the plant are ours, which is why the programme is ours to answer for.',
     capabilities: [
       'Public and private housing',
       'Schools, clinics and hospitals',
@@ -103,7 +76,6 @@ export const groupCompanies: GroupCompany[] = [
       'Roads, highways and maintenance programmes',
       'Construction management',
     ],
-    website: 'https://www.kontinental.co.za',
     image: '/sectors/sector-building.jpg',
   },
 ];
@@ -113,50 +85,88 @@ export const groupChain = [
   {
     n: '01',
     stage: 'Evaluate',
-    company: 'Wonga Holdings',
-    desc: 'Resource evaluation, geological modelling, mine planning and scheduling. The work that decides whether a project is worth building, and in what sequence.',
+    division: 'Mining, Engineering & Energy',
+    desc: 'Resource evaluation, geological modelling, mine planning and scheduling. The work that decides whether a project is worth building, and in what order.',
   },
   {
     n: '02',
     stage: 'Design and cost',
-    company: 'Za-Eng Consulting',
-    desc: 'Architecture, civil and structural, electrical, mechanical and fire, town planning and quantity surveying. Eight disciplines co-ordinated under one appointment instead of eight.',
+    division: 'Design & Engineering',
+    desc: 'Architecture, civil and structural, electrical, mechanical and fire, town planning and quantity surveying — co-ordinated under one appointment.',
   },
   {
     n: '03',
     stage: 'Build',
-    company: 'Kontinental',
-    desc: 'Self-performed construction across buildings, civils and roads, for government, commercial, industrial and residential clients throughout South Africa.',
+    division: 'Construction Delivery',
+    desc: 'Self-performed construction across buildings, civils and roads, with our own crews and our own plant on the critical path.',
   },
   {
     n: '04',
     stage: 'Power and close out',
-    company: 'Wonga Holdings',
-    desc: 'Solar and remote energy systems for mining sites, then closure and rehabilitation when the operation reaches the end of its life.',
+    division: 'Mining, Engineering & Energy',
+    desc: 'Solar and remote energy systems for the operating site, then closure and rehabilitation when it reaches the end of its life.',
   },
 ];
 
-/** Real references, delivered by Kontinental. Source: kontinental.co.za. */
-export const groupProjects = [
+/**
+ * PLACEHOLDER — the board.
+ *
+ * Nothing here is real. Names, roles and biographies all need replacing
+ * before this page is shown to anyone. Portraits render as an initial
+ * monogram until real photography exists, which is deliberate: a stock
+ * portrait standing in for a named director is worse than no portrait.
+ */
+export type Director = {
+  name: string;
+  role: string;
+  bio: string;
+  /** Optional path to a real portrait. Falls back to a monogram. */
+  photo?: string;
+};
+
+export const directors: Director[] = [
   {
-    name: 'All Saints 700 and Inkwenkwezi 300',
-    company: 'Kontinental',
-    discipline: 'Housing',
-    scope: 'Public housing construction across two developments.',
-    location: 'South Africa',
+    name: 'Director name',                                  // TODO
+    role: 'Chairman',                                       // TODO
+    bio: 'Short biography — sector background, years in the industry, and the part of the group this director is accountable for.',
   },
   {
-    name: 'Phola Park water reticulation, phases 1 and 2',
-    company: 'Kontinental',
-    discipline: 'Water & Bulk Services',
-    scope: 'Water reticulation network across two phases.',
-    location: 'South Africa',
+    name: 'Director name',                                  // TODO
+    role: 'Chief Executive Officer',                        // TODO
+    bio: 'Short biography — sector background, years in the industry, and the part of the group this director is accountable for.',
   },
   {
-    name: 'Paul Mosaka Primary School',
-    company: 'Kontinental',
-    discipline: 'Public & Social Infrastructure',
-    scope: 'Refurbishment of an operating primary school.',
-    location: 'South Africa',
+    name: 'Director name',                                  // TODO
+    role: 'Managing Director, Construction',                // TODO
+    bio: 'Short biography — sector background, years in the industry, and the part of the group this director is accountable for.',
   },
+  {
+    name: 'Director name',                                  // TODO
+    role: 'Director, Engineering',                          // TODO
+    bio: 'Short biography — sector background, years in the industry, and the part of the group this director is accountable for.',
+  },
+];
+
+/**
+ * PLACEHOLDER — key staff.
+ *
+ * Same rule as the board: no stock portraits standing in for named people.
+ * Group by division so the page reads as a structure rather than a list.
+ */
+export type StaffMember = {
+  name: string;
+  role: string;
+  division: string;
+  photo?: string;
+};
+
+export const staff: StaffMember[] = [
+  { name: 'Name', role: 'Mine Planning Manager',   division: 'Mining, Engineering & Energy' }, // TODO
+  { name: 'Name', role: 'Energy Lead',             division: 'Mining, Engineering & Energy' }, // TODO
+  { name: 'Name', role: 'Principal Engineer',      division: 'Design & Engineering' },         // TODO
+  { name: 'Name', role: 'Senior Quantity Surveyor', division: 'Design & Engineering' },        // TODO
+  { name: 'Name', role: 'Project Architect',       division: 'Design & Engineering' },         // TODO
+  { name: 'Name', role: 'Contracts Manager',       division: 'Construction Delivery' },        // TODO
+  { name: 'Name', role: 'Site Agent',              division: 'Construction Delivery' },        // TODO
+  { name: 'Name', role: 'HSE Manager',             division: 'Construction Delivery' },        // TODO
 ];
