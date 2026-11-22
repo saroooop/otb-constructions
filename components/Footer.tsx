@@ -13,6 +13,7 @@ const columns = [
     heading: 'Company',
     links: [
       { label: 'About',                   href: '/about' },
+      { label: 'The Group',               href: '/group' },
       { label: 'Sectors',                 href: '/sectors' },
       { label: 'The Market',              href: '/market' },
       { label: 'Projects',                href: '/projects' },

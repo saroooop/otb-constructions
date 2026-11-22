@@ -12,9 +12,9 @@ import {
 // three frames the film was built from, so the fallback is the film's own
 // opening composition rather than an unrelated photograph.
 const heroImages = [
-  { src: '/sectors/hero-1-pit.jpg',      alt: 'Open-pit mine and haul road network at golden hour' },
-  { src: '/sectors/hero-2-headgear.jpg', alt: 'Mine winding tower silhouetted at dusk' },
-  { src: '/sectors/hero-3-plant.jpg',    alt: 'Mineral processing plant lit at blue hour' },
+  { src: '/hero-headgear.jpg',   alt: 'Shaft headgear on an operating mine site' },
+  { src: '/team-site-visit.jpg', alt: 'Site team in full PPE at the shaft collar' },
+  { src: '/site-access-ppe.jpg', alt: 'Crew at site access control before shift' },
 ];
 
 export default function HomePage() {

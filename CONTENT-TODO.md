@@ -1,5 +1,27 @@
 # Content to confirm before this goes to a client
 
+## 0. THE GROUP STRUCTURE — confirm this first
+
+The site now states that OTB Constructions owns three operating companies:
+**Wonga Holdings**, **Za-Eng Consulting** and **Kontinental**. That came from
+the client, and everything on `/group` was read from each company's own public
+website. Two things need confirming by someone who knows the corporate
+position, because both are factual claims rather than design decisions:
+
+1. **The ownership itself.** These are real, trading companies. Publishing a
+   claim to own them is not a copy decision.
+2. **Whose accreditations these are.** Za-Eng holds B-BBEE Level 1, ISO 9001,
+   CIDB 9GB/9CE/8ME/8EP, NHBRC registration and CESA membership. A grading
+   belongs to the legal entity that earned it. On the page each credential is
+   attributed to Za-Eng by name rather than claimed by the group — keep it
+   that way unless the structure genuinely supports otherwise. Presenting
+   another entity's CIDB grading as your own would be a serious
+   misrepresentation in a tender.
+
+The Kontinental projects on `/group` (All Saints 700, Inkwenkwezi 300, Phola
+Park water reticulation, Paul Mosaka Primary School) are real references from
+their site. Confirm they may be cited under the group banner.
+
 Everything below is either a placeholder I invented to make the page work, or a
 real constraint worth knowing about. Nothing here is a verified fact about OTB
 Constructions. Search the codebase for `TODO` to find each one in place.

@@ -26,6 +26,8 @@ export default function MarketPage() {
         title="The constraints are published. So is the pipeline."
         lede="Namibia has set out what is limiting its mining sector and what it intends to build in four years. Both documents describe construction work."
         image="/sectors/sector-mining.jpg"
+        video="/video/cinematic.mp4"
+        poster="/cinematic-poster.jpg"
         position="center 45%"
       />
 

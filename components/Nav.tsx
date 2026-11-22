@@ -8,12 +8,12 @@ import Logo from './Logo';
 import { brand } from '@/lib/brand';
 
 const links = [
+  { href: '/group',          label: 'The Group' },
   { href: '/services',       label: 'What We Do' },
   { href: '/sectors',        label: 'Sectors' },
   { href: '/market',         label: 'The Market' },
   { href: '/projects',       label: 'Projects' },
   { href: '/sustainability', label: 'Safety' },
-  { href: '/insights',       label: 'Insights' },
   { href: '/about',          label: 'About' },
 ];
 

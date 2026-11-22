@@ -1,3 +1,4 @@
+import HeroMedia from '@/components/HeroMedia';
 import { brand } from '@/lib/brand';
 
 /**
@@ -11,12 +12,17 @@ export default function PageHero({
   lede,
   image = '/sectors/hero-2-headgear.jpg',
   position = 'center 40%',
+  video,
+  poster,
 }: {
   eyebrow: string;
   title: string;
   lede?: string;
   image?: string;
   position?: string;
+  /** Optional film behind the banner. Falls back to `image` if it cannot play. */
+  video?: string;
+  poster?: string;
 }) {
   return (
     <section
@@ -29,22 +35,31 @@ export default function PageHero({
         overflow: 'hidden',
       }}
     >
-      <div aria-hidden style={{ position: 'absolute', inset: 0 }}>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={image}
-          alt=""
-          className="kenburns"
-          style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: position }}
+      {video ? (
+        <HeroMedia
+          images={[{ src: image, alt: '' }]}
+          video={video}
+          poster={poster}
+          overlay="linear-gradient(100deg, rgba(6,24,43,0.92) 0%, rgba(6,24,43,0.70) 46%, rgba(6,24,43,0.40) 100%)"
         />
-        <div
-          style={{
-            position: 'absolute', inset: 0,
-            background:
-              'linear-gradient(100deg, rgba(6,24,43,0.94) 0%, rgba(6,24,43,0.74) 48%, rgba(6,24,43,0.46) 100%)',
-          }}
-        />
-      </div>
+      ) : (
+        <div aria-hidden style={{ position: 'absolute', inset: 0 }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={image}
+            alt=""
+            className="kenburns"
+            style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: position }}
+          />
+          <div
+            style={{
+              position: 'absolute', inset: 0,
+              background:
+                'linear-gradient(100deg, rgba(6,24,43,0.94) 0%, rgba(6,24,43,0.74) 48%, rgba(6,24,43,0.46) 100%)',
+            }}
+          />
+        </div>
+      )}
 
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         <p className="eyebrow eyebrow-light" style={{ marginBottom: 26 }}>{eyebrow}</p>
