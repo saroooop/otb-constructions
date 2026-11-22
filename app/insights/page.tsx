@@ -23,7 +23,7 @@ export default function InsightsPage() {
         eyebrow="Insights"
         title="How we read the market we are bidding into."
         lede="Short, specific pieces on where the regional programme actually gets built — and where it stalls. Each one is grounded in published assessment rather than opinion."
-        image="/sectors/hero-2-headgear.jpg"
+        image="/sectors/hero-insights.jpg"
         position="center 45%"
       />
 

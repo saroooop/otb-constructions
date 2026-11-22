@@ -13,6 +13,8 @@ export const brand = {
   full:      'OTB Constructions',
   legal:     'OTB Constructions Ltd',
   tagline:   'Building the infrastructure that moves a continent',
+  /** Sits under the wordmark, and is what the globe-and-Africa mark says. */
+  motto:     'A World of Africa',
   strapline: 'Civil Engineering · Mining Infrastructure · Earthworks',
 
   /* ── Contact ──────────────────────────────────────────── */

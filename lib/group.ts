@@ -112,9 +112,9 @@ export const groupChain = [
  * PLACEHOLDER — the board.
  *
  * Nothing here is real. Names, roles and biographies all need replacing
- * before this page is shown to anyone. Portraits render as an initial
- * monogram until real photography exists, which is deliberate: a stock
- * portrait standing in for a named director is worse than no portrait.
+ * before this page is shown to anyone, and the portraits are GENERATED
+ * people — attaching a generated face to a real director's name would
+ * misrepresent them, so swap both together.
  */
 export type Director = {
   name: string;
@@ -126,23 +126,27 @@ export type Director = {
 
 export const directors: Director[] = [
   {
-    name: 'Director name',                                  // TODO
-    role: 'Chairman',                                       // TODO
+    name: 'Director name',          // TODO
+    role: 'Chairman', // TODO
+    photo: '/people/dir-1.jpg',  // generated portrait — replace with the real person
     bio: 'Short biography — sector background, years in the industry, and the part of the group this director is accountable for.',
   },
   {
-    name: 'Director name',                                  // TODO
-    role: 'Chief Executive Officer',                        // TODO
+    name: 'Director name',          // TODO
+    role: 'Chief Executive Officer', // TODO
+    photo: '/people/dir-2.jpg',  // generated portrait — replace with the real person
     bio: 'Short biography — sector background, years in the industry, and the part of the group this director is accountable for.',
   },
   {
-    name: 'Director name',                                  // TODO
-    role: 'Managing Director, Construction',                // TODO
+    name: 'Director name',          // TODO
+    role: 'Managing Director, Construction', // TODO
+    photo: '/people/dir-3.jpg',  // generated portrait — replace with the real person
     bio: 'Short biography — sector background, years in the industry, and the part of the group this director is accountable for.',
   },
   {
-    name: 'Director name',                                  // TODO
-    role: 'Director, Engineering',                          // TODO
+    name: 'Director name',          // TODO
+    role: 'Director, Engineering', // TODO
+    photo: '/people/dir-4.jpg',  // generated portrait — replace with the real person
     bio: 'Short biography — sector background, years in the industry, and the part of the group this director is accountable for.',
   },
 ];
@@ -150,7 +154,9 @@ export const directors: Director[] = [
 /**
  * PLACEHOLDER — key staff.
  *
- * Same rule as the board: no stock portraits standing in for named people.
+ * Portraits are generated, not photographs of real employees. Fine while
+ * the names are placeholders; the moment a real person's name goes beside
+ * one of these faces it must be replaced with that person's own photo.
  * Group by division so the page reads as a structure rather than a list.
  */
 export type StaffMember = {
@@ -161,12 +167,12 @@ export type StaffMember = {
 };
 
 export const staff: StaffMember[] = [
-  { name: 'Name', role: 'Mine Planning Manager',   division: 'Mining, Engineering & Energy' }, // TODO
-  { name: 'Name', role: 'Energy Lead',             division: 'Mining, Engineering & Energy' }, // TODO
-  { name: 'Name', role: 'Principal Engineer',      division: 'Design & Engineering' },         // TODO
-  { name: 'Name', role: 'Senior Quantity Surveyor', division: 'Design & Engineering' },        // TODO
-  { name: 'Name', role: 'Project Architect',       division: 'Design & Engineering' },         // TODO
-  { name: 'Name', role: 'Contracts Manager',       division: 'Construction Delivery' },        // TODO
-  { name: 'Name', role: 'Site Agent',              division: 'Construction Delivery' },        // TODO
-  { name: 'Name', role: 'HSE Manager',             division: 'Construction Delivery' },        // TODO
+  { name: 'Name', role: 'Mine Planning Manager',   division: 'Mining, Engineering & Energy', photo: '/people/staff-1.jpg' }, // TODO
+  { name: 'Name', role: 'Energy Lead',             division: 'Mining, Engineering & Energy', photo: '/people/staff-2.jpg' }, // TODO
+  { name: 'Name', role: 'Principal Engineer',      division: 'Design & Engineering', photo: '/people/staff-3.jpg' },         // TODO
+  { name: 'Name', role: 'Senior Quantity Surveyor', division: 'Design & Engineering', photo: '/people/staff-4.jpg' },        // TODO
+  { name: 'Name', role: 'Project Architect',       division: 'Design & Engineering', photo: '/people/staff-5.jpg' },         // TODO
+  { name: 'Name', role: 'Contracts Manager',       division: 'Construction Delivery', photo: '/people/staff-6.jpg' },        // TODO
+  { name: 'Name', role: 'Site Agent',              division: 'Construction Delivery', photo: '/people/staff-7.jpg' },        // TODO
+  { name: 'Name', role: 'HSE Manager',             division: 'Construction Delivery', photo: '/people/staff-8.jpg' },        // TODO
 ];

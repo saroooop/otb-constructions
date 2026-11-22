@@ -252,9 +252,9 @@ export default function GroupPage() {
       <section style={{ background: brand.color.navy900, color: '#fff', padding: '104px 0' }}>
         <div className="container">
           <Reveal>
-            <p className="eyebrow eyebrow-light" style={{ marginBottom: 22 }}>Our people</p>
+            <p className="eyebrow eyebrow-light" style={{ marginBottom: 22 }}>Our dedicated group</p>
             <h2 className="display-sm" style={{ color: '#fff', maxWidth: 620, marginBottom: 20 }}>
-              Who you will actually be working with.
+              The people you will actually be working with.
             </h2>
             <p className="lede-dark" style={{ maxWidth: 580, marginBottom: 52 }}>
               The named people on a project, by division — not an org chart you

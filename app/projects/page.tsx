@@ -19,7 +19,7 @@ export default function ProjectsPage() {
         eyebrow="Projects"
         title="Work that had to run while the site stayed live."
         lede="Most of what we build sits inside an operating asset. The constraint is rarely the engineering — it is doing it without stopping production."
-        image="/disciplines/mining-infrastructure.jpg"
+        image="/sectors/hero-projects.jpg"
         position="center 32%"
       />
 
