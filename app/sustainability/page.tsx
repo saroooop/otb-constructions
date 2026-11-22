@@ -19,7 +19,7 @@ export default function SafetyPage() {
         eyebrow="Safety & security"
         title="Our people are our greatest resource."
         lede="LKMD believes the human element is paramount in all projects we undertake."
-        image="/lkmd/helmet.jpg"
+        image="/lkmd/team-lineup.jpg"
         video="/video/safety.mp4"
         poster="/posters/safety.jpg"
         position="center 50%"
@@ -126,18 +126,28 @@ export default function SafetyPage() {
             style={{ display: 'grid', gridTemplateColumns: '1.1fr 1fr', gap: 4, alignItems: 'stretch' }}
           >
             <Reveal>
-              <div style={{ position: 'relative', height: '100%', minHeight: 380, overflow: 'hidden' }}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  loading="lazy"
-                  decoding="async"
-                  src="/lkmd/community.jpg"
-                  alt="Children in a community where LKMD works"
+              <div style={{ position: 'relative', height: '100%', minHeight: 420, overflow: 'hidden', background: brand.color.navy900 }}>
+                {/*
+                  A film rather than a still here, because this section is about
+                  people rather than structures. poster carries the first frame
+                  so nothing is blank while it streams, and preload="none" keeps
+                  it off the critical path — it sits well below the fold.
+                */}
+                <video
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="none"
+                  poster="/posters/cares.jpg"
+                  aria-label="LKMD in the communities it works in"
                   style={{
                     position: 'absolute', inset: 0,
                     width: '100%', height: '100%', objectFit: 'cover',
                   }}
-                />
+                >
+                  <source src="/video/cares.mp4" type="video/mp4" />
+                </video>
                 <span
                   aria-hidden
                   style={{ position: 'absolute', left: 0, bottom: 0, width: 80, height: 5, background: brand.color.red }}

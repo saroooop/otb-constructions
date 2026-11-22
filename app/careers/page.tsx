@@ -39,8 +39,17 @@ export default function CareersPage() {
         position="center 30%"
       />
 
-      <section className="section">
-        <div className="container">
+      <section className="section" style={{ position: 'relative', overflow: 'hidden' }}>
+        <div
+          aria-hidden
+          style={{
+            position: 'absolute', inset: 0,
+            backgroundImage: 'url(/lkmd/community.jpg)',
+            backgroundSize: 'cover', backgroundPosition: 'center 40%',
+            opacity: 0.06,
+          }}
+        />
+        <div className="container" style={{ position: 'relative', zIndex: 1 }}>
           <div
             className="split"
             style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: 72, alignItems: 'start', marginBottom: 64 }}

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { ArrowRight, ArrowDown, HardHat, ShieldCheck, Users, FileText } from 'lucide-react';
+import { ArrowRight, ArrowDown, HardHat, ShieldCheck, Users, Globe2 } from 'lucide-react';
 import HeroMedia from '@/components/HeroMedia';
 import Reveal from '@/components/Reveal';
 import { brand } from '@/lib/brand';
@@ -7,6 +7,7 @@ import {
   services, sectors, projects, insights, approach,
   marketStats, marketSource,
 } from '@/lib/content';
+import { headcount } from '@/lib/lkmd';
 
 // The stills that carry the hero if the film cannot play. They are the same
 // three frames the film was built from, so the fallback is the film's own
@@ -50,12 +51,12 @@ export default function HomePage() {
             </p>
 
             <h1 className="display" style={{ color: '#fff', marginBottom: 32 }}>
-              We build the
+              High-quality building
               <br />
-              infrastructure that
+              and civil engineering,
               <br />
               <span style={{ color: '#fff', borderBottom: `6px solid ${brand.color.red}`, paddingBottom: 4 }}>
-                moves a continent
+                on time and on budget
               </span>
             </h1>
 
@@ -63,9 +64,9 @@ export default function HomePage() {
               className="lede-dark"
               style={{ maxWidth: 580, marginBottom: 42, color: '#C2D2E1', fontSize: '1.125rem' }}
             >
-              Civil engineering, mining infrastructure and earthworks delivered to
-              international standard — from the shaft collar and the haul road to the
-              processing plant and the water that feeds it.
+              A professional, multi-disciplinary construction company operating
+              throughout the United Kingdom and the African continent — for clients in
+              the government, commercial, industrial and residential markets.
             </p>
 
             <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
@@ -98,10 +99,10 @@ export default function HomePage() {
             }}
           >
             {[
-              { Icon: HardHat,     label: 'Civils & earthworks',   sub: 'Self-performed' },
-              { Icon: ShieldCheck, label: 'Zero-harm safety',      sub: 'Every site, every shift' },
-              { Icon: Users,       label: 'Local content',         sub: 'Crews trained, not hired in' },
-              { Icon: FileText,    label: 'Programme certainty',   sub: 'Measured against a fixed baseline' },
+              { Icon: HardHat,     label: 'One-stop shop',    sub: 'Planning, design and construction' },
+              { Icon: Globe2,      label: 'UK and Africa',    sub: 'Public and private sectors' },
+              { Icon: Users,       label: `${headcount.total} people`, sub: `${headcount.departments} departments, ${headcount.interns} interns` },
+              { Icon: ShieldCheck, label: 'Safety first',     sub: 'Exceeding UK legislative requirements' },
             ].map((c, i) => (
               <div
                 key={c.label}
@@ -177,10 +178,10 @@ export default function HomePage() {
                 size — from first survey peg to final hand-over.
               </p>
               <p className="lede" style={{ marginBottom: 20 }}>
-                {brand.full} delivers civil engineering, mining infrastructure and
-                earthworks across Southern Africa and the United Kingdom. We
-                self-perform the disciplines that decide a programme, which means the
-                people who priced the work are the people who build it.
+                {brand.full} delivers building and civil engineering contracts across
+                the United Kingdom and the African continent. Our extensive range of
+                skills means we are a one-stop shop — with a high level of technical
+                competence, local knowledge and excellent customer service.
               </p>
               <p className="lede" style={{ marginBottom: 34 }}>
                 The sites we work on are live industrial environments. The standard we
@@ -443,7 +444,16 @@ export default function HomePage() {
       </section>
 
       {/* ══ APPROACH ═══════════════════════════════════════ */}
-      <section className="section">
+      <section className="section" style={{ position: 'relative', overflow: 'hidden' }}>
+        <div
+          aria-hidden
+          style={{
+            position: 'absolute', inset: 0,
+            backgroundImage: 'url(/lkmd/drawings.jpg)',
+            backgroundSize: 'cover', backgroundPosition: 'center',
+            opacity: 0.06,
+          }}
+        />
         <div className="container">
           <div
             className="split"

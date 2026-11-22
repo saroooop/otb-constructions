@@ -21,7 +21,7 @@ export default function StructurePage() {
         eyebrow="Our structure"
         title="A transparent organogram, not a mystery."
         lede="The departments and key personnel that collaborate to ensure seamless operations and successful project execution."
-        image="/lkmd/skybridge.jpg"
+        image="/lkmd/turbines.jpg"
         video="/video/structure.mp4"
         poster="/posters/structure.jpg"
         position="center 50%"
@@ -173,8 +173,17 @@ export default function StructurePage() {
       </section>
 
       {/* ── Board ─────────────────────────────────────────── */}
-      <section style={{ background: brand.color.concrete, padding: '104px 0' }}>
-        <div className="container">
+      <section style={{ position: 'relative', overflow: 'hidden', background: brand.color.concrete, padding: '104px 0' }}>
+        <div
+          aria-hidden
+          style={{
+            position: 'absolute', inset: 0,
+            backgroundImage: 'url(/lkmd/team-lineup.jpg)',
+            backgroundSize: 'cover', backgroundPosition: 'center 30%',
+            opacity: 0.1,
+          }}
+        />
+        <div className="container" style={{ position: 'relative', zIndex: 1 }}>
           <Reveal>
             <p className="eyebrow" style={{ marginBottom: 22 }}>Leadership</p>
             <h2 className="display-sm" style={{ maxWidth: 560, marginBottom: 20 }}>

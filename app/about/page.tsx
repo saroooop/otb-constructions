@@ -120,7 +120,16 @@ export default function AboutPage() {
       </section>
 
       {/* ── Core values ───────────────────────────────────── */}
-      <section className="section">
+      <section className="section" style={{ position: 'relative', overflow: 'hidden' }}>
+        <div
+          aria-hidden
+          style={{
+            position: 'absolute', inset: 0,
+            backgroundImage: 'url(/lkmd/handshake.jpg)',
+            backgroundSize: 'cover', backgroundPosition: 'center 35%',
+            opacity: 0.07,
+          }}
+        />
         <div className="container">
           <Reveal>
             <p className="eyebrow" style={{ marginBottom: 22 }}>Core values</p>
