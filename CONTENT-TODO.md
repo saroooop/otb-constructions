@@ -55,22 +55,44 @@ in a real finding from the NamPPF deck. The articles themselves are not written
 — the page says "Full piece in preparation" rather than linking to nothing.
 Either write them or cut the section.
 
-## 6. Photography — the real limitation
+## 6. Photography and film — what is real and what is generated
 
-There are only **three** source photographs, all from the same site visit at one
-shaft headgear. `scripts/make-discipline-plates.sh` cuts six different crops so
-the grids do not repeat the same frame, and `scripts/make-hero-video.sh` cuts
-the hero film from the same three plates.
+This matters more than anything else on this page, because publishing generated
+imagery as if it were your own project photography is a false claim.
 
-What that means honestly: **no image on this site depicts a road, a pipeline, a
-processing plant or a desalination works.** The captions name those disciplines;
-the photographs show a mine headgear and a site crew. That gap closes one of
-two ways:
+**Real — three photographs from one site visit.** `hero-headgear.jpg`,
+`team-site-visit.jpg`, `site-access-ppe.jpg` and two near-duplicates. These are
+used ONLY where the content is about people: the About hero, the Careers hero,
+the Safety & Sustainability hero, and the safety band on the home page. That is
+deliberate. The human claims on this site are backed by real photographs.
 
-- a proper photo library (client's own project photography is best), or
-- generated imagery — the original brief mentioned using an OpenAI account for
-  this. No OpenAI key was reachable from this machine during the build
-  (`OTB_Pipeline/keys.env` is where one lives, and reading it was blocked).
+**Generated — thirteen images and one film.** Everything depicting
+infrastructure is generated:
+
+| Where | Files | Model |
+|---|---|---|
+| Six discipline plates | `public/disciplines/*.jpg` | OpenAI `gpt-image-2.6-sunburst` |
+| Four sector plates | `public/sectors/sector-*.jpg` | same |
+| Three hero stills | `public/sectors/hero-*.jpg` | same |
+| Hero film (13s) | `public/video/hero.mp4` | Runway `gen4_turbo`, image-to-video from the three hero stills |
+
+Prompts are in `scripts/` history and held one rule throughout: **no people in
+any generated frame.** Generated faces are where this kind of imagery stops
+being believable, and it would also have blurred the line above.
+
+What this means in practice:
+
+- These are *representative* images of mine haul roads, headgear, processing
+  plants, pipelines, substations, open pits, desalination works, highways and
+  industrial buildings. **They are not photographs of OTB projects.** Nothing on
+  the site claims they are, but nobody should later caption them as such.
+- Before launch, decide one of three things: (a) replace them with the client's
+  own project photography, (b) keep them and add a short credit line in the
+  footer noting that illustrative imagery is used, or (c) keep them silently,
+  which is the common practice for a pre-trading contractor but is the weakest
+  of the three.
+- Regenerate or extend with `scripts/` — `install-generated-media.sh` grades and
+  installs stills, `make-hero-film.sh` assembles the film.
 
 The portrait from the WhatsApp zip is deliberately **not used** — it is a
 personal photo of an identifiable person and needs their consent before it

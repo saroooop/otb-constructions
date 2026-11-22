@@ -19,7 +19,7 @@ export default function ServicesPage() {
         eyebrow="What we do"
         title="Six disciplines, self-performed, under one accountable contractor."
         lede="The people who price the work are the people who build it. That is the whole argument for self-performing the disciplines that decide a programme."
-        image="/team-site-visit.jpg"
+        image="/sectors/hero-3-plant.jpg"
       />
 
       {/* ── Discipline detail ──────────────────────────────── */}

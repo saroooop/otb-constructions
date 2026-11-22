@@ -47,33 +47,49 @@ lib/
   brand.ts            ← all branding. Change this file, not the pages.
   content.ts          ← all copy and data, with sourced/placeholder split
 scripts/
-  make-hero-video.sh        cuts public/video/hero.mp4 from the site photos
-  make-discipline-plates.sh cuts six distinct crops for the grids
+  install-generated-media.sh  grades and installs the generated stills
+  make-hero-film.sh           assembles public/video/hero.mp4 from the clips
+  make-hero-video.sh          SUPERSEDED — photo-derived hero cut
+  make-discipline-plates.sh   SUPERSEDED — photo-derived grid crops
 ```
 
 ## Media
 
-There is no stock photography here. Everything is cut from three photographs
-taken on one site visit.
+Two bodies of imagery, kept apart on purpose.
 
-`scripts/make-hero-video.sh` builds an 18.6s 1920×1080 H.264 hero film: each
-portrait plate is scaled to the full frame width and the camera drifts
-vertically through it (the move that suits a 40m tower), with a slow push, 1.2s
-cross-dissolves, and a single cool grade with a vignette. ~4.7MB, no audio,
-`+faststart`.
+**Real photography — people.** Three photographs from one site visit at a shaft
+headgear. They carry every page where the content is about people: About,
+Careers, Safety & Sustainability, and the safety band on the home page.
 
-`components/HeroMedia.tsx` plays it muted and looping over a crossfading
-Ken-Burns slideshow of the same stills. If the file is missing, slow, or
-autoplay is blocked, the video stays at opacity 0 and the stills carry the hero
-— nothing shifts and nothing goes black.
+**Generated imagery — infrastructure.** Thirteen stills from OpenAI
+`gpt-image-2.6-sunburst`, plus a hero film built from three of them with Runway
+`gen4_turbo` image-to-video. Every generated frame is documentary-realist, arid
+Southern African, and contains **no people** — generated faces are where this
+kind of imagery stops being believable.
 
-Re-run either script after replacing the source photographs.
+```
+scripts/install-generated-media.sh <gen-dir>   grade + install the stills
+scripts/make-hero-film.sh <clips-dir>          assemble public/video/hero.mp4
+scripts/make-hero-video.sh                     SUPERSEDED — photo-derived cut
+scripts/make-discipline-plates.sh              SUPERSEDED — photo-derived crops
+```
+
+The two superseded scripts overwrite generated media if run. They are kept as
+the fallback route if only the three site photographs ever remain.
+
+The hero film is 13s, 1920×1080, ~4.6MB, no audio, `+faststart`: an aerial over
+an open pit at golden hour, a headgear silhouetted at dusk, a processing plant
+at blue hour, cross-dissolved under one grade. `components/HeroMedia.tsx` plays
+it muted and looping over a crossfading Ken-Burns slideshow of its own three
+opening frames — so a missing file, a slow network or blocked autoplay degrades
+to stills rather than a black rectangle, and nothing shifts.
 
 ## Before launch
 
 Read `CONTENT-TODO.md`. The short version: the brand, the company statistics,
-the project references and the vacancies are all placeholders, and no photograph
-on the site actually depicts a road, a pipeline or a processing plant.
+the project references and the vacancies are all placeholders, and every image
+of infrastructure is generated and representative rather than a photograph of an
+OTB project. Section 6 sets out the three honest ways to handle that.
 
 ## Accessibility and motion
 

@@ -20,7 +20,7 @@ export default function InsightsPage() {
         eyebrow="Insights"
         title="How we read the market we are bidding into."
         lede="Short, specific pieces on where the regional programme actually gets built — and where it stalls."
-        image="/hero-headgear.jpg"
+        image="/sectors/hero-2-headgear.jpg"
         position="center 45%"
       />
 
@@ -38,7 +38,7 @@ export default function InsightsPage() {
               <div style={{ position: 'relative', minHeight: 360, overflow: 'hidden' }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/team-site-visit-2.jpg"
+                  src="/disciplines/processing-beneficiation.jpg"
                   alt=""
                   style={{
                     position: 'absolute', inset: 0,

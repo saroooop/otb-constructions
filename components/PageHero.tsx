@@ -9,7 +9,7 @@ export default function PageHero({
   eyebrow,
   title,
   lede,
-  image = '/hero-headgear.jpg',
+  image = '/sectors/hero-2-headgear.jpg',
   position = 'center 40%',
 }: {
   eyebrow: string;

@@ -1,4 +1,9 @@
 #!/usr/bin/env bash
+# SUPERSEDED by make-hero-film.sh, which assembles the hero from generated
+# motion clips. Running this script OVERWRITES public/video/hero.mp4 with the
+# photo-derived cut. Kept as the fallback route if the generated media is ever
+# dropped and only the three site photographs remain.
+#
 # Cuts the hero film from the real site photographs.
 #
 # The plates are portrait phone shots, so a centre crop to 16:9 would throw

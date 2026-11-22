@@ -19,7 +19,7 @@ export default function SectorsPage() {
         eyebrow="Sectors"
         title="Six markets. One set of standards."
         lede="A school and a shaft collar are built to the same quality regime here. The difference is the permit, not the care."
-        image="/site-access-ppe.jpg"
+        image="/sectors/hero-1-pit.jpg"
         position="center 30%"
       />
 

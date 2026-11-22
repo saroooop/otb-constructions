@@ -52,7 +52,7 @@ export const metadata: Metadata = {
     title: `${brand.full} | ${brand.tagline}`,
     description:
       'Civil engineering, mining infrastructure, roads and earthworks across Southern Africa and the UK.',
-    images: ['/hero-headgear.jpg'],
+    images: ['/hero-poster.jpg'],
   },
   robots: { index: true, follow: true },
 };

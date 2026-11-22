@@ -136,7 +136,7 @@ export const services = [
 export const sectors = [
   {
     title: 'Mining & Minerals',
-    image: '/disciplines/mining-infrastructure.jpg',
+    image: '/sectors/sector-mining.jpg',
     short: 'Surface and underground infrastructure across gold, uranium, zinc, copper and industrial minerals.',
     detail:
       'The sector we were built for. Shaft and decline infrastructure, processing civils, haul roads, tailings facilities and the surface works that hold an operation together — delivered under the safety regime an operating mine demands.',
@@ -150,28 +150,28 @@ export const sectors = [
   },
   {
     title: 'Water & Desalination',
-    image: '/disciplines/water-bulk-services.jpg',
+    image: '/sectors/sector-water.jpg',
     short: 'Bulk water infrastructure for mines, municipalities and coastal desalination schemes.',
     detail:
       'Desalination capacity on the coast is the enabler behind several of the region’s largest expansions. We deliver intake and outfall civils, bulk pipelines, pump stations and reservoirs — the works that move treated water inland to where it is consumed.',
   },
   {
     title: 'Transport Infrastructure',
-    image: '/disciplines/roads-earthworks.jpg',
+    image: '/sectors/sector-transport.jpg',
     short: 'Roads, rail formation, bridges and port-adjacent works.',
     detail:
       'Rail connectivity is one of the clearest infrastructure gaps between a mine and an export market. We build road and rail formation, structures, culverts and the heavy-haul surfacing that carries concentrate to port.',
   },
   {
     title: 'Industrial & Commercial Building',
-    image: '/disciplines/building-civil-engineering.jpg',
+    image: '/sectors/sector-building.jpg',
     short: 'Workshops, warehousing, offices and the built estate around an operation.',
     detail:
       'The buildings a site runs on: workshops, stores, laboratories, administration blocks, accommodation and the logistics warehousing that supplies them.',
   },
   {
     title: 'Public & Social Infrastructure',
-    image: '/disciplines/processing-beneficiation.jpg',
+    image: '/disciplines/building-civil-engineering.jpg',
     short: 'Schools, clinics and municipal works delivered with local labour and local suppliers.',
     detail:
       'Work that answers to a community rather than a balance sheet. Delivered to the same standard as our industrial projects, and used deliberately as the training ground where local crews build the record that qualifies them for the next mine contract.',

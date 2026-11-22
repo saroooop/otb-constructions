@@ -1,4 +1,9 @@
 #!/usr/bin/env bash
+# SUPERSEDED. The six discipline plates are now generated infrastructure
+# photography (see CONTENT-TODO.md). Running this script OVERWRITES them with
+# crops of the site photographs. Kept only as the record of how the grid was
+# filled before generated imagery was available.
+#
 # Six discipline plates cut from the same site shoot.
 #
 # There are only three source photographs, so the grid repeated itself badly.

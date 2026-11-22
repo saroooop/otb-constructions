@@ -16,7 +16,10 @@ export default function HeroMedia({
   video,
   poster,
   interval = 6500,
-  overlay = 'linear-gradient(100deg, rgba(6,24,43,0.94) 0%, rgba(6,24,43,0.78) 40%, rgba(6,24,43,0.42) 100%)',
+  // Tuned against the hero film, which is already dusk/golden hour and dark of
+  // its own accord. Heavy enough on the left to hold white display type, light
+  // enough on the right that the pit and the sky still read as photography.
+  overlay = 'linear-gradient(100deg, rgba(6,24,43,0.88) 0%, rgba(6,24,43,0.60) 38%, rgba(6,24,43,0.20) 100%)',
 }: {
   images: { src: string; alt: string }[];
   video?: string;
@@ -97,7 +100,7 @@ export default function HeroMedia({
       <div
         style={{
           position: 'absolute', left: 0, right: 0, bottom: 0, height: '38%',
-          background: 'linear-gradient(to top, rgba(6,24,43,0.72), rgba(6,24,43,0))',
+          background: 'linear-gradient(to top, rgba(6,24,43,0.62), rgba(6,24,43,0))',
           pointerEvents: 'none',
         }}
       />
