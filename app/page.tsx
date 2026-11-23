@@ -118,6 +118,46 @@ export default async function HomePage() {
           </div>
         </div>
 
+        {/* The brief's trust-bar line, published as written. The CIDB and
+            B-BBEE items stay hidden until lib/brand.ts carries them: the
+            brief says a [To be supplied] field is built and hidden, never
+            shown as placeholder text on the live site. */}
+        <div
+          style={{
+            position: 'relative', zIndex: 2,
+            borderTop: '1px solid rgba(255,255,255,0.12)',
+            background: 'rgba(11,23,48,0.58)',
+          }}
+        >
+          <div
+            className="container"
+            style={{
+              display: 'flex', flexWrap: 'wrap', justifyContent: 'center',
+              alignItems: 'center', gap: '8px 16px', padding: '13px 0',
+              fontSize: '0.72rem', fontWeight: 600, letterSpacing: '0.09em',
+              textTransform: 'uppercase', color: 'rgba(255,255,255,0.74)',
+              textAlign: 'center',
+            }}
+          >
+            {[
+              brand.registrations.cidb ? `CIDB grading ${brand.registrations.cidb}` : '',
+              brand.registrations.bbbee ? `B-BBEE ${brand.registrations.bbbee}` : '',
+              'Offices in Centurion, Cape Town, Durban and East London',
+            ]
+              .filter(Boolean)
+              .map((t, i, all) => (
+                <span key={t}>
+                  {t}
+                  {i < all.length - 1 && (
+                    <span aria-hidden style={{ color: brand.color.redSoft, margin: '0 14px' }}>
+                      |
+                    </span>
+                  )}
+                </span>
+              ))}
+          </div>
+        </div>
+
         <div
           aria-hidden
           className="scroll-cue"

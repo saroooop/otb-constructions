@@ -4,7 +4,7 @@ import { WifiOff, ArrowRight } from 'lucide-react';
 import { brand } from '@/lib/brand';
 
 export const metadata: Metadata = {
-  title: 'Offline',
+  title: 'Offline | LKMD Construction',
   description: 'You are offline.',
   robots: { index: false, follow: false },
 };

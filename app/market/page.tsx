@@ -7,7 +7,7 @@ import { constraints, pipeline, localContent, marketStats, marketSource, discipl
 import { brand } from '@/lib/brand';
 
 export const metadata: Metadata = {
-  title: 'The Market',
+  title: 'Market Insight | Namibia | LKMD Construction',
   description:
     'Namibia’s published mining pipeline, the four constraints named as limits on it, and the construction capability each one calls for.',
 };

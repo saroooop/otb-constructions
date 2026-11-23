@@ -72,7 +72,9 @@ export default function Footer() {
               marginTop: 22, maxWidth: 320,
             }}
           >
-            {brand.strapline}, with a branch in the United Kingdom.
+            {brand.strapline}. {brand.tagline}
+            <br />
+            <span style={{ color: '#6E8399' }}>With a branch in the United Kingdom.</span>
           </p>
         </div>
 

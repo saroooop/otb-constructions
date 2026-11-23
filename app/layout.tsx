@@ -29,10 +29,10 @@ const SITE_URL = 'https://lkmd.co.za';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: {
-    default: `${brand.full} | ${brand.tagline}`,
-    template: `%s | ${brand.full}`,
-  },
+  // No `template` here. The brief gives the exact title tag for every page
+  // and says to publish it as written; a template appended the brand a
+  // second time, so each page now supplies its own title in full.
+  title: `${brand.full} | ${brand.tagline}`,
   description:
     'LKMD Construction plans, designs and builds schools, housing, public buildings, industrial facilities and civil infrastructure for clients across South Africa.',
   keywords: [
