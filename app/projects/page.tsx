@@ -3,7 +3,7 @@ import Link from 'next/link';
 import PageHero from '@/components/PageHero';
 import Reveal from '@/components/Reveal';
 import CtaBand from '@/components/CtaBand';
-import { projects } from '@/lib/site';
+import { getProjects } from '@/lib/db';
 import { brand } from '@/lib/brand';
 
 export const metadata: Metadata = {
@@ -12,9 +12,13 @@ export const metadata: Metadata = {
     'Schools, housing, public buildings, refurbishment and industrial projects delivered by LKMD Construction in Gauteng and Mpumalanga.',
 };
 
-export default function ProjectsPage() {
+/** Re-reads at most once a minute, so an editor's change appears without a deploy. */
+export const revalidate = 60;
+
+export default async function ProjectsPage() {
+  const projects = await getProjects();
   // Grouped so a visitor can see at a glance what kind of work we do.
-  const sectors = Array.from(new Set(projects.map(p => p.sector)));
+  const sectors = Array.from(new Set(projects.map(p => p.sector).filter(Boolean)));
 
   return (
     <>

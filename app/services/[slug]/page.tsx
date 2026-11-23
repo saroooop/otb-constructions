@@ -5,7 +5,8 @@ import { ArrowRight, Check } from 'lucide-react';
 import PageHero from '@/components/PageHero';
 import Reveal from '@/components/Reveal';
 import CtaBand from '@/components/CtaBand';
-import { services, projects } from '@/lib/site';
+import { services } from '@/lib/site';
+import { getProjects } from '@/lib/db';
 import { brand } from '@/lib/brand';
 
 /** One page per service, generated from lib/site.ts so the six stay in step. */
@@ -29,7 +30,11 @@ export default async function ServicePage(
   const service = services.find(s => s.slug === slug);
   if (!service) notFound();
 
-  const related = projects.filter(p => service.relatedProjects.includes(p.slug));
+  const all = await getProjects();
+  // Prefer what the database says this service is tagged with; fall back to
+  // the launch list so a fresh install still shows related work.
+  const tagged = all.filter(p => p.serviceSlug === service.slug);
+  const related = tagged.length ? tagged : all.filter(p => service.relatedProjects.includes(p.slug));
 
   return (
     <>

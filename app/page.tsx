@@ -4,7 +4,8 @@ import { ArrowRight, ArrowDown, HardHat, ShieldCheck, Users, Building2 } from 'l
 import HeroMedia from '@/components/HeroMedia';
 import Reveal from '@/components/Reveal';
 import CtaBand from '@/components/CtaBand';
-import { home, services, projects, clients } from '@/lib/site';
+import { home, services, clients } from '@/lib/site';
+import { getProjects } from '@/lib/db';
 import { brand } from '@/lib/brand';
 
 export const metadata: Metadata = {
@@ -19,9 +20,11 @@ const heroImages = [
   { src: '/lkmd/crane-sunset.jpg', alt: 'Tower crane over an LKMD site at sunset' },
 ];
 
-const featured = projects.filter(p => p.onHome);
+export const revalidate = 60;
 
-export default function HomePage() {
+export default async function HomePage() {
+  const all = await getProjects();
+  const featured = all.filter(p => p.onHome);
   return (
     <>
       {/* ══ HERO ═══════════════════════════════════════════ */}

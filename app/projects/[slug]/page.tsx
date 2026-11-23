@@ -5,18 +5,22 @@ import { ArrowRight, MapPin } from 'lucide-react';
 import PageHero from '@/components/PageHero';
 import Reveal from '@/components/Reveal';
 import CtaBand from '@/components/CtaBand';
-import { projects, services } from '@/lib/site';
+import { services } from '@/lib/site';
+import { getProjects, getProject } from '@/lib/db';
 import { brand } from '@/lib/brand';
 
-export function generateStaticParams() {
-  return projects.map(p => ({ slug: p.slug }));
+export const revalidate = 60;
+
+export async function generateStaticParams() {
+  const all = await getProjects();
+  return all.map(p => ({ slug: p.slug }));
 }
 
 export async function generateMetadata(
   { params }: { params: Promise<{ slug: string }> },
 ): Promise<Metadata> {
   const { slug } = await params;
-  const p = projects.find(x => x.slug === slug);
+  const p = await getProject(slug);
   if (!p) return {};
   return {
     title: `${p.title} – ${p.town} | LKMD Construction`,
@@ -28,23 +32,24 @@ export default async function ProjectPage(
   { params }: { params: Promise<{ slug: string }> },
 ) {
   const { slug } = await params;
-  const project = projects.find(p => p.slug === slug);
+  const all = await getProjects();
+  const project = all.find(p => p.slug === slug);
   if (!project) notFound();
 
   const service = services.find(s => s.slug === project.serviceSlug);
-  const index = projects.findIndex(p => p.slug === slug);
-  const next = projects[(index + 1) % projects.length];
+  const index = all.findIndex(p => p.slug === slug);
+  const next = all[(index + 1) % all.length];
 
   /*
    * Only the facts LKMD has supplied are rendered. Client, our role, contract
    * value, year and status are all still to come, and the brief is explicit
    * that an empty field is hidden rather than filled with placeholder text.
    */
-  const facts: { k: string; v: string }[] = [
-    { k: 'Location', v: `${project.town}, ${project.province}` },
+  const facts = ([
+    { k: 'Location', v: [project.town, project.province].filter(Boolean).join(', ') },
     { k: 'Sector',   v: project.sector },
-    { k: 'Service',  v: project.service },
-  ];
+    { k: 'Service',  v: project.service || service?.title || '' },
+  ] as { k: string; v: string }[]).filter(f => f.v);
 
   return (
     <>
