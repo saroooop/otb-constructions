@@ -25,9 +25,11 @@ OVER=2240        # scale to this width so there is room to travel
 # $2 = 0 pans left-to-right, 1 pans right-to-left. Alternating them stops the
 # cut feeling like one long drag in a single direction.
 clip () {
-  local idx=$1 dir=$2
+  # $3 = vertical seat, 0 = top of plate, 0.5 = middle. Centring cut the
+  # tops off heads wherever people stand high, so faces anchor near the top.
+  local idx=$1 dir=$2 vy=${3:-0.5}
   echo "[${idx}:v]scale=${OVER}:${H}:force_original_aspect_ratio=increase,\
-crop=${W}:${H}:'(iw-${W})*(${dir}+(1-2*${dir})*t/${DUR})':(ih-${H})/2,\
+crop=${W}:${H}:'(iw-${W})*(${dir}+(1-2*${dir})*t/${DUR})':'(ih-${H})*${vy}',\
 fps=${FPS},setsar=1,format=yuv420p[v${idx}];"
 }
 
@@ -35,9 +37,9 @@ GRADE="eq=contrast=1.05:saturation=0.92:brightness=-0.01,\
 colorbalance=rs=-0.02:bs=0.035,vignette=angle=PI/5.6,unsharp=5:5:0.26:5:5:0.0"
 
 build () {
-  local name=$1 a=$2 b=$3 c=$4
+  local name=$1 a=$2 b=$3 c=$4 v1=${5:-0.5} v2=${6:-0.5} v3=${7:-0.5}
   local F
-  F="$(clip 0 0)$(clip 1 1)$(clip 2 0)"
+  F="$(clip 0 0 $v1)$(clip 1 1 $v2)$(clip 2 0 $v3)"
   F="${F}[v0][v1]xfade=transition=fade:duration=${XF}:offset=5[x1];"
   F="${F}[x1][v2]xfade=transition=fade:duration=${XF}:offset=10[x2];"
   F="${F}[x2]${GRADE}[vout]"
@@ -57,12 +59,14 @@ build () {
     "$(( $(stat -c%s "$POSTERS/$name.jpg") / 1024 ))"
 }
 
-#     name       plate A            plate B              plate C
-build services   site-team          engineers-laptop     skybridge
-build safety     helmet             team-lineup          hivis
-build careers    engineers-laptop   team-lineup          engineer-orange
-build structure  turbines           team-lineup          handshake
-build projects   tower              concrete             crane-sunset
-build cares      children           community-workshop   turbines
+#     name       plate A            plate B              plate C            vertical anchors
+#  People plates sit at 0.08-0.18 so no head is ever cropped; architecture
+#  and texture plates are free to sit mid-frame.
+build services   site-team          engineers-laptop     skybridge          0.08 0.10 0.40
+build safety     helmet             team-lineup          hivis              0.20 0.08 0.35
+build careers    engineers-laptop   team-lineup          engineer-orange    0.10 0.08 0.12
+build structure  turbines           team-lineup          handshake          0.18 0.08 0.15
+build projects   tower              concrete             crane-sunset       0.30 0.35 0.25
+build cares      children           community-workshop   turbines           0.10 0.12 0.18
 
 echo "done."
