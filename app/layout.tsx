@@ -4,6 +4,7 @@ import './globals.css';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import ServiceWorker from '@/components/ServiceWorker';
+import CookieBanner from '@/components/CookieBanner';
 import { brand } from '@/lib/brand';
 
 // Body — Inter's tall x-height holds up through the long technical
@@ -23,7 +24,7 @@ const fontHeading = Archivo({
   weight: ['500', '600', '700', '800'],
 });
 
-const SITE_URL = 'https://otbconstructions.com';
+const SITE_URL = 'https://lkmd.co.za';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -32,20 +33,18 @@ export const metadata: Metadata = {
     template: `%s | ${brand.full}`,
   },
   description:
-    'Civil engineering, mining infrastructure, roads and earthworks across Southern Africa and the UK. Shaft services, processing plants, bulk water and power infrastructure delivered to international standard.',
+    'LKMD Construction plans, designs and builds schools, housing, public buildings, industrial facilities and civil infrastructure for clients across South Africa.',
   keywords: [
+    'construction company South Africa',
+    'building contractor Gauteng',
     'civil engineering contractor',
-    'mining infrastructure contractor',
-    'roads and earthworks',
-    'shaft sinking services',
-    'mineral processing plant construction',
-    'bulk earthworks Namibia',
-    'construction company Southern Africa',
-    'desalination plant construction',
-    'tailings storage facility',
-    'beneficiation plant contractor',
-    'local content mining Namibia',
-    'OTB Constructions',
+    'school construction South Africa',
+    'housing construction contractor',
+    'refurbishment contractor',
+    'construction management South Africa',
+    'design and construct contractor',
+    'property development support',
+    'LKMD Construction',
   ],
   openGraph: {
     type: 'website',
@@ -53,7 +52,7 @@ export const metadata: Metadata = {
     title: `${brand.full} | ${brand.tagline}`,
     description:
       'Civil engineering, mining infrastructure, roads and earthworks across Southern Africa and the UK.',
-    images: ['/hero-poster.jpg'],
+    images: ['/lkmd-poster.jpg'],
   },
   robots: { index: true, follow: true },
 
@@ -108,6 +107,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Nav />
         <main id="main">{children}</main>
         <Footer />
+        <CookieBanner />
         <ServiceWorker />
       </body>
     </html>

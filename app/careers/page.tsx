@@ -1,29 +1,38 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Check } from 'lucide-react';
 import PageHero from '@/components/PageHero';
 import Reveal from '@/components/Reveal';
 import { brand } from '@/lib/brand';
-import { headcount } from '@/lib/lkmd';
 
 export const metadata: Metadata = {
-  title: 'Careers',
+  title: 'Careers & Internships | LKMD Construction',
   description:
-    'Quantity surveyors, engineers, architects, project and construction managers, SHE officers, site managers and foremen — plus an intern intake, across the UK and Africa.',
+    'Build a career in construction and engineering with LKMD Construction. See current vacancies and internships, and how to apply.',
 };
 
-// Role titles taken from the company organogram, so the careers page and the
-// structure page describe the same organisation.
-// TODO: confirm which are actually open, and add locations.
+const why = [
+  { title: 'Varied projects',               body: 'Schools, housing, public buildings, industrial facilities and infrastructure.' },
+  { title: 'Learn from experienced people', body: 'Work alongside our architects, engineers, quantity surveyors and construction managers.' },
+  { title: 'Safety first',                  body: 'Inductions, regular training and dedicated SHE officers on every site.' },
+  { title: 'Room to grow',                  body: 'Internships in every department, and on-the-job training as your career develops.' },
+];
+
+/**
+ * The brief lists the roles LKMD recruits but gives no live vacancies, and is
+ * explicit that no placeholder content may appear on the live site. So this
+ * is the roles list — not an invented vacancy table.
+ */
 const roles = [
-  { title: 'Quantity Surveyor',            location: 'United Kingdom', type: 'Full time' },
-  { title: 'Civil / Structural Engineer',  location: 'UK / Africa',    type: 'Full time' },
-  { title: 'Architect',                    location: 'United Kingdom', type: 'Full time' },
-  { title: 'Project Manager',              location: 'UK / Africa',    type: 'Full time' },
-  { title: 'Construction Manager',         location: 'Site based',     type: 'Full time' },
-  { title: 'Site Manager / Site Supervisor', location: 'Site based',   type: 'Full time' },
-  { title: 'SHE Officer',                  location: 'Site based',     type: 'Full time' },
-  { title: 'Intern Programme',             location: 'UK / Africa',    type: 'Internship' },
+  'Project and construction managers',
+  'Architects',
+  'Engineers',
+  'Quantity surveyors',
+  'Town planners',
+  'Site managers, supervisors and foremen',
+  'SHE officers and OHS trainers',
+  'Quality control and assurance officers',
+  'Procurement and logistics',
+  'Human resources and administration',
 ];
 
 export default function CareersPage() {
@@ -31,112 +40,159 @@ export default function CareersPage() {
     <>
       <PageHero
         eyebrow="Careers"
-        title="We train the next intake rather than only hiring it."
-        lede="Of the people in this company, a quarter are interns. That is not a gesture — it is how the trades and professions get replaced."
+        title="Build your career with LKMD"
+        lede="We are a multi-disciplinary construction company with projects and offices across South Africa. We are always interested in skilled people who take pride in their work and put safety first."
         image="/lkmd/engineer-orange.jpg"
         video="/video/careers.mp4"
         poster="/posters/careers.jpg"
         position="center 30%"
       />
 
-      <section className="section" style={{ position: 'relative', overflow: 'hidden' }}>
+      {/* ── Why work with us ──────────────────────────────── */}
+      <section className="section">
+        <div className="container">
+          <Reveal>
+            <p className="eyebrow" style={{ marginBottom: 22 }}>Why work with us</p>
+            <h2 className="display-sm" style={{ maxWidth: 560, marginBottom: 46 }}>
+              What you can expect here.
+            </h2>
+          </Reveal>
+
+          <div
+            className="why-grid"
+            style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 4 }}
+          >
+            {why.map((w, i) => (
+              <Reveal key={w.title} delay={i * 90}>
+                <div
+                  style={{
+                    background: brand.color.concrete, padding: '32px 28px', height: '100%',
+                    borderTop: `3px solid ${brand.color.red}`,
+                  }}
+                >
+                  <Check size={19} strokeWidth={2.5} color={brand.color.red} />
+                  <h3 style={{ fontSize: '1.02rem', margin: '16px 0 10px' }}>{w.title}</h3>
+                  <p style={{ fontSize: '0.87rem', color: '#5C6B7A', lineHeight: 1.8 }}>{w.body}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+
+        <style>{`
+          @media (max-width: 1024px) { .why-grid { grid-template-columns: 1fr 1fr !important; } }
+          @media (max-width: 620px)  { .why-grid { grid-template-columns: 1fr !important; } }
+        `}</style>
+      </section>
+
+      {/* ── The roles we recruit ──────────────────────────── */}
+      <section style={{ background: brand.color.concrete, padding: '96px 0' }}>
+        <div className="container">
+          <div
+            className="split"
+            style={{ display: 'grid', gridTemplateColumns: '1fr 1.3fr', gap: 72, alignItems: 'start' }}
+          >
+            <Reveal>
+              <p className="eyebrow" style={{ marginBottom: 22 }}>The roles we recruit</p>
+              <h2 className="display-sm">Across every department.</h2>
+            </Reveal>
+
+            <Reveal delay={120}>
+              <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+                {roles.map(r => (
+                  <span
+                    key={r}
+                    style={{
+                      fontSize: '0.86rem', padding: '10px 16px',
+                      background: '#fff', border: '1px solid var(--line)', color: '#44576A',
+                    }}
+                  >
+                    {r}
+                  </span>
+                ))}
+              </div>
+            </Reveal>
+          </div>
+        </div>
+        <style>{`@media (max-width: 900px) { .split { grid-template-columns: 1fr !important; gap: 36px !important; } }`}</style>
+      </section>
+
+      {/* ── Internships ───────────────────────────────────── */}
+      <section
+        style={{
+          position: 'relative', overflow: 'hidden',
+          background: brand.color.navy900, color: '#fff', padding: '96px 0',
+        }}
+      >
         <div
           aria-hidden
           style={{
             position: 'absolute', inset: 0,
-            backgroundImage: 'url(/lkmd/community.jpg)',
-            backgroundSize: 'cover', backgroundPosition: 'center 40%',
-            opacity: 0.06,
+            backgroundImage: 'url(/lkmd/engineers-laptop.jpg)',
+            backgroundSize: 'cover', backgroundPosition: 'center 35%',
+            opacity: 0.16,
           }}
         />
-        <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-          <div
-            className="split"
-            style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: 72, alignItems: 'start', marginBottom: 64 }}
-          >
-            <Reveal>
-              <p className="eyebrow" style={{ marginBottom: 22 }}>Working here</p>
-              <h2 className="display-sm">What you should expect.</h2>
-            </Reveal>
-            <Reveal delay={120}>
-              <p className="rule-left" style={{ marginBottom: 24 }}>
-                Hard sites, proper kit, and a supervisor who will back you when you
-                stop the job.
-              </p>
-              <p className="lede" style={{ marginBottom: 20 }}>
-                Construction is demanding work, often in difficult conditions. We do not
-                pretend otherwise. What we commit to is competent supervision,
-                maintained plant, PPE that fits, and health and safety standards that
-                exceed what UK legislation requires.
-              </p>
-              <p className="lede">
-                We employ {headcount.total} people across {headcount.departments} 
-                departments, {headcount.interns} of them interns. Team members are
-                assigned to projects on the specific expertise the task needs, so you
-                work on what you are good at and learn the rest alongside someone who
-                already is.
-              </p>
-            </Reveal>
-          </div>
-
+        <div className="container-tight" style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
           <Reveal>
-            <h3 style={{ fontSize: '1.25rem', marginBottom: 8 }}>Current openings</h3>
-            <p style={{ fontSize: '0.88rem', color: '#8A99A8', marginBottom: 28 }}>
-              Nothing listed that fits? Send a speculative application — we keep a live
-              register for mobilisation.
+            <p className="eyebrow eyebrow-light" style={{ marginBottom: 22, justifyContent: 'center' }}>
+              Internships
+            </p>
+            <h2 className="display-sm" style={{ color: '#fff', marginBottom: 20 }}>
+              Every department at LKMD takes on interns.
+            </h2>
+            <p className="lede-dark" style={{ maxWidth: 580, margin: '0 auto' }}>
+              Giving young people practical experience in construction, engineering,
+              safety, quality and administration.
             </p>
           </Reveal>
+        </div>
+      </section>
 
-          <div style={{ borderTop: '1px solid var(--line)' }}>
-            {roles.map((r, i) => (
-              <Reveal key={r.title} delay={i * 60}>
-                <Link
-                  href="/contact"
-                  className="role-row"
-                  style={{
-                    display: 'grid',
-                    gridTemplateColumns: '2fr 1.2fr 0.8fr 36px',
-                    gap: 24, alignItems: 'center',
-                    padding: '26px 0',
-                    borderBottom: '1px solid var(--line)',
-                    textDecoration: 'none',
-                  }}
-                >
-                  <h4 style={{ fontSize: '1.05rem', fontWeight: 700 }}>{r.title}</h4>
-                  <span style={{ fontSize: '0.88rem', color: '#5C6B7A' }}>{r.location}</span>
-                  <span
-                    style={{
-                      fontSize: '0.68rem', fontWeight: 700, textTransform: 'uppercase',
-                      letterSpacing: '0.12em', color: brand.color.red,
-                    }}
-                  >
-                    {r.type}
-                  </span>
-                  <ArrowRight size={18} strokeWidth={1.8} color="#A8B6C3" />
-                </Link>
-              </Reveal>
-            ))}
-          </div>
-
+      {/* ── How to apply ──────────────────────────────────── */}
+      <section className="section">
+        <div className="container-tight">
           <Reveal>
-            <div style={{ marginTop: 48 }}>
-              <Link href="/contact" className="btn btn-primary">
-                Apply or register interest
-                <ArrowRight size={14} strokeWidth={2.4} />
-              </Link>
+            <p className="eyebrow" style={{ marginBottom: 22 }}>How to apply</p>
+            <h2 className="display-sm" style={{ marginBottom: 26 }}>Send us your CV.</h2>
+
+            <p className="lede" style={{ marginBottom: 20 }}>
+              LKMD is routinely looking for new talent. Please email your CV and a
+              short covering letter to{' '}
+              <a href={`mailto:${brand.careersEmail}`} style={{ color: brand.color.red, fontWeight: 600 }}>
+                {brand.careersEmail}
+              </a>
+              , with the job title in the subject line.
+            </p>
+            <p className="lede" style={{ marginBottom: 34 }}>
+              We use CVs only for recruitment and keep them for no longer than 12
+              months. Only shortlisted candidates will be contacted.
+            </p>
+
+            <a href={`mailto:${brand.careersEmail}`} className="btn btn-primary">
+              Email your CV
+              <ArrowRight size={14} strokeWidth={2.4} />
+            </a>
+
+            {/* A warning that deserves prominence rather than burying. */}
+            <div
+              style={{
+                marginTop: 44, padding: '26px 30px',
+                border: `1px solid ${brand.color.line}`,
+                borderLeft: `4px solid ${brand.color.red}`,
+                background: brand.color.concrete,
+              }}
+            >
+              <p style={{ fontSize: '0.92rem', color: '#2A3B4C', lineHeight: 1.8 }}>
+                <strong>LKMD Construction never asks job applicants for money.</strong>{' '}
+                Please report any request for payment made in our name to{' '}
+                <a href={`mailto:${brand.email}`} style={{ color: brand.color.red, fontWeight: 600 }}>
+                  {brand.email}
+                </a>.
+              </p>
             </div>
           </Reveal>
         </div>
-
-        <style>{`
-          .role-row h4 { transition: color .25s var(--ease); }
-          .role-row:hover h4 { color: var(--red); }
-          @media (max-width: 900px) {
-            .split { grid-template-columns: 1fr !important; gap: 36px !important; }
-            .role-row { grid-template-columns: 1fr 28px !important; gap: 10px !important; }
-            .role-row span { display: none; }
-          }
-        `}</style>
       </section>
     </>
   );
