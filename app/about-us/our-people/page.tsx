@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import PageHero from '@/components/PageHero';
 import Reveal from '@/components/Reveal';
 import CtaBand from '@/components/CtaBand';
+import { orgDepartments, orgLeadership, headcount } from '@/lib/site';
 import { brand } from '@/lib/brand';
 
 export const metadata: Metadata = {
@@ -10,18 +11,6 @@ export const metadata: Metadata = {
     'Meet the teams behind LKMD Construction, from project and site management to quality, safety, tenders and logistics.',
 };
 
-/** The seven departments, in the order and wording the brief gives. */
-const departments = [
-  { name: 'Project Management',            body: 'Architects, project managers and construction managers who plan and lead each project.' },
-  { name: 'Site Management',               body: 'Site managers, site supervisors and foremen who run our sites day to day.' },
-  { name: 'Safety, Health & Environment',  body: 'SHE officers, first aid officers and OHS trainers who keep every site safe.' },
-  { name: 'Quality Control',               body: 'Quality control and quality assurance officers who check materials and workmanship at every stage.' },
-  { name: 'Tender Administration',         body: 'Quantity surveyors, engineers and town planners who price, plan and prepare our tenders.' },
-  { name: 'Logistics',                     body: 'Procurement officers, drivers and our marketing team, who keep materials, equipment and people moving.' },
-  { name: 'Office Administration',         body: 'Human resources, secretarial support and a social facilitator who works with the communities around our projects.' },
-];
-
-const leadership = ['Board of Directors', 'Managing Director', 'Deputy Managing Director', 'Deputy Managing Director'];
 
 export default function OurPeoplePage() {
   return (
@@ -35,6 +24,32 @@ export default function OurPeoplePage() {
         poster="/posters/structure.jpg"
         position="center 50%"
       />
+
+      {/* ── Headline numbers, derived from the organogram ── */}
+      <section style={{ background: brand.color.navy900, color: '#fff', padding: '84px 0' }}>
+        <div className="container">
+          <div className="stat-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 36 }}>
+            {[
+              { v: String(headcount.total),       l: 'People',      s: 'Across the organisation' },
+              { v: String(headcount.departments), l: 'Departments', s: 'Each with its own specialists' },
+              { v: String(headcount.interns),     l: 'Interns',     s: 'Trained in every department' },
+              { v: '5',                           l: 'Offices',     s: 'Four in South Africa, one in the UK' },
+            ].map((x, i) => (
+              <Reveal key={x.l} delay={i * 90}>
+                <div style={{ borderTop: `2px solid ${brand.color.red}`, paddingTop: 22 }}>
+                  <div className="stat-value">{x.v}</div>
+                  <div className="stat-label">{x.l}</div>
+                  <div className="stat-sub">{x.s}</div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+        <style>{`
+          @media (max-width: 1024px) { .stat-grid { grid-template-columns: 1fr 1fr !important; } }
+          @media (max-width: 560px)  { .stat-grid { grid-template-columns: 1fr !important; } }
+        `}</style>
+      </section>
 
       {/* ── How we are organised ──────────────────────────── */}
       <section className="section">
@@ -57,7 +72,7 @@ export default function OurPeoplePage() {
               className="lead-line"
               style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 4, marginBottom: 4 }}
             >
-              {leadership.map((l, i) => (
+              {orgLeadership.map((l, i) => (
                 <div
                   key={`${l}-${i}`}
                   style={{
@@ -77,7 +92,7 @@ export default function OurPeoplePage() {
             className="dept-grid"
             style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 4 }}
           >
-            {departments.map((d, i) => (
+            {orgDepartments.map((d, i) => (
               <Reveal key={d.name} delay={(i % 4) * 80}>
                 <div
                   style={{
@@ -94,8 +109,38 @@ export default function OurPeoplePage() {
                   >
                     {String(i + 1).padStart(2, '0')}
                   </p>
-                  <h3 style={{ fontSize: '1rem', marginBottom: 12, lineHeight: 1.3 }}>{d.name}</h3>
-                  <p style={{ fontSize: '0.86rem', color: '#5C6B7A', lineHeight: 1.8 }}>{d.body}</p>
+                  <div
+                    style={{
+                      display: 'flex', alignItems: 'baseline', justifyContent: 'space-between',
+                      gap: 10, marginBottom: 12,
+                    }}
+                  >
+                    <h3 style={{ fontSize: '1rem', lineHeight: 1.3 }}>{d.name}</h3>
+                    <span
+                      style={{
+                        fontFamily: 'var(--font-heading), system-ui, sans-serif',
+                        fontSize: '1.1rem', fontWeight: 800, color: brand.color.red,
+                      }}
+                    >
+                      {d.roles.reduce((t, r) => t + r.n, 0)}
+                    </span>
+                  </div>
+                  <p style={{ fontSize: '0.86rem', color: '#5C6B7A', lineHeight: 1.8, marginBottom: 16 }}>
+                    {d.body}
+                  </p>
+                  {d.roles.map(r => (
+                    <div
+                      key={r.role}
+                      style={{
+                        display: 'flex', justifyContent: 'space-between', gap: 10,
+                        fontSize: '0.82rem', color: '#5C6B7A',
+                        padding: '6px 0', borderTop: '1px solid rgba(0,0,0,0.055)',
+                      }}
+                    >
+                      <span>{r.role}</span>
+                      <span style={{ color: '#2A3B4C', fontWeight: 600 }}>{r.n}</span>
+                    </div>
+                  ))}
                 </div>
               </Reveal>
             ))}

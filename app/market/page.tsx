@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { ArrowRight, FileText } from 'lucide-react';
 import PageHero from '@/components/PageHero';
 import Reveal from '@/components/Reveal';
-import { constraints, pipeline, localContent, marketStats, marketSource } from '@/lib/content';
+import { constraints, pipeline, localContent, marketStats, marketSource, disciplines } from '@/lib/content';
 import { brand } from '@/lib/brand';
 
 export const metadata: Metadata = {
@@ -25,10 +25,10 @@ export default function MarketPage() {
         eyebrow="Market insight · Namibia"
         title="The constraints are published. So is the pipeline."
         lede="Namibia has set out what is limiting its mining sector and what it intends to build in four years. Both documents describe construction work."
-        image="/sectors/hero-market.jpg"
-        video="/video/cinematic.mp4"
-        poster="/cinematic-poster.jpg"
-        position="center 45%"
+        image="/disciplines/roads-earthworks.jpg"
+        video="/video/mining.mp4"
+        poster="/posters/mining.jpg"
+        position="center 55%"
       />
 
       {/* ── Headline numbers ──────────────────────────────── */}
@@ -178,6 +178,59 @@ export default function MarketPage() {
         </div>
 
         <style>{`@media (max-width: 820px) { .pipe-grid { grid-template-columns: 1fr !important; } }`}</style>
+      </section>
+
+
+      {/* ── What the pipeline asks for ────────────────────── */}
+      <section className="section">
+        <div className="container">
+          <Reveal>
+            <p className="eyebrow" style={{ marginBottom: 22 }}>What the pipeline asks for</p>
+            <h2 className="display-sm" style={{ maxWidth: 700, marginBottom: 20 }}>
+              Every item on that list is built before it produces.
+            </h2>
+            <p className="lede" style={{ maxWidth: 640, marginBottom: 48 }}>
+              A mine entering production is a construction programme first. These
+              are the five disciplines that programme is made of.
+            </p>
+          </Reveal>
+
+          <div
+            className="disc-grid"
+            style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 4 }}
+          >
+            {disciplines.map((d, i) => (
+              <Reveal key={d.name} delay={(i % 3) * 90}>
+                <article style={{ background: brand.color.concrete, height: '100%' }}>
+                  <div style={{ position: 'relative', aspectRatio: '4 / 3', overflow: 'hidden' }}>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={d.image}
+                      alt={d.name}
+                      loading="lazy"
+                      decoding="async"
+                      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    />
+                    <span
+                      aria-hidden
+                      style={{ position: 'absolute', left: 0, top: 0, width: 5, height: 64, background: brand.color.red }}
+                    />
+                  </div>
+
+                  <div style={{ padding: '28px 26px 32px' }}>
+                    <h3 style={{ fontSize: '1.12rem', marginBottom: 10, lineHeight: 1.3 }}>{d.name}</h3>
+                    <p style={{ fontSize: '0.86rem', color: '#5C6B7A', lineHeight: 1.8 }}>{d.body}</p>
+                  </div>
+                </article>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+
+        <style>{`
+          @media (max-width: 1000px) { .disc-grid { grid-template-columns: 1fr 1fr !important; } }
+          @media (max-width: 620px)  { .disc-grid { grid-template-columns: 1fr !important; } }
+        `}</style>
       </section>
 
       {/* ── Local content ─────────────────────────────────── */}

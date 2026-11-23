@@ -82,3 +82,39 @@ export const localContent = [
   { value: '18%', label: 'Women in the mining workforce', sub: 'Only 10% have held executive roles since 2009' },
   { value: '25%', label: 'Beneficiation target by 2030', sub: 'From under 10% today' },
 ];
+
+/** The work behind the pipeline, shown as the five disciplines it calls for.
+ *
+ *  These sit on the market page rather than under Services because they
+ *  describe mining-sector capability, not the building work LKMD lists in its
+ *  own profile. The haul-road plate is deliberately absent: it carries the
+ *  hero film at the top of the same page, and repeating it a screen later
+ *  reads as a mistake.
+ */
+export const disciplines = [
+  {
+    image: '/disciplines/mining-infrastructure.jpg',
+    name: 'Mining infrastructure',
+    body: 'Headgear, conveyors, transfer towers and the civil works that carry them.',
+  },
+  {
+    image: '/disciplines/processing-beneficiation.jpg',
+    name: 'Processing and beneficiation',
+    body: 'Mills, thickeners and plant structures — the works that turn ore into product on site.',
+  },
+  {
+    image: '/disciplines/water-bulk-services.jpg',
+    name: 'Water and bulk services',
+    body: 'Pipelines, reservoirs and bulk earthworks, the constraint named most often in the deck.',
+  },
+  {
+    image: '/disciplines/mechanical-electrical.jpg',
+    name: 'Mechanical and electrical',
+    body: 'Power reticulation, substations and the mechanical installation that follows the structure.',
+  },
+  {
+    image: '/disciplines/building-civil-engineering.jpg',
+    name: 'Building and civil engineering',
+    body: 'Workshops, offices, accommodation and the permanent buildings a mine runs from.',
+  },
+];

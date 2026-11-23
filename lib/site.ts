@@ -395,3 +395,97 @@ export const notFound = {
     { label: 'Projects', href: '/projects' },
   ],
 };
+
+/* ── Organisational structure ─────────────────────────────
+   From the 30-page LKMD company profile (the organogram page). The website
+   brief names the seven departments but not their size; the profile gives
+   the actual role counts, which is stronger evidence than a description.
+   The headline figures are DERIVED from this list, so they can never drift
+   from it.                                                                */
+export const orgDepartments = [
+  {
+    name: 'Project Management',
+    body: 'Architects, project managers and construction managers who plan and lead each project.',
+    roles: [
+      { role: 'Architects', n: 3 },
+      { role: 'Project Managers', n: 4 },
+      { role: 'Construction Managers', n: 6 },
+      { role: 'Interns', n: 8 },
+    ],
+  },
+  {
+    name: 'Site Management',
+    body: 'Site managers, site supervisors and foremen who run our sites day to day.',
+    roles: [
+      { role: 'Site Managers', n: 4 },
+      { role: 'Site Supervisors', n: 4 },
+      { role: 'Foremen', n: 8 },
+      { role: 'Interns', n: 7 },
+    ],
+  },
+  {
+    name: 'Safety, Health & Environment',
+    body: 'SHE officers, first aid officers and OHS trainers who keep every site safe.',
+    roles: [
+      { role: 'SHE Officers', n: 4 },
+      { role: 'First Aid Officers', n: 3 },
+      { role: 'OHS Trainers', n: 2 },
+      { role: 'Interns', n: 3 },
+    ],
+  },
+  {
+    name: 'Quality Control',
+    body: 'Quality control and quality assurance officers who check materials and workmanship at every stage.',
+    roles: [
+      { role: 'QC Officers', n: 3 },
+      { role: 'QA Officer', n: 1 },
+      { role: 'QM Trainers', n: 1 },
+      { role: 'Interns', n: 1 },
+    ],
+  },
+  {
+    name: 'Tender Administration',
+    body: 'Quantity surveyors, engineers and town planners who price, plan and prepare our tenders.',
+    roles: [
+      { role: 'Quantity Surveyors', n: 8 },
+      { role: 'Engineers', n: 3 },
+      { role: 'Town Planners', n: 1 },
+      { role: 'Interns', n: 4 },
+    ],
+  },
+  {
+    name: 'Logistics',
+    body: 'Procurement officers, drivers and our marketing team, who keep materials, equipment and people moving.',
+    roles: [
+      { role: 'Procurement Officers', n: 2 },
+      { role: 'Drivers', n: 4 },
+      { role: 'Marketers', n: 2 },
+      { role: 'Interns', n: 1 },
+    ],
+  },
+  {
+    name: 'Office Administration',
+    body: 'Human resources, secretarial support and a social facilitator who works with the communities around our projects.',
+    roles: [
+      { role: 'General Secretary', n: 3 },
+      { role: 'Social Facilitator', n: 1 },
+      { role: 'HR Officer', n: 1 },
+      { role: 'Interns', n: 3 },
+    ],
+  },
+];
+
+export const orgLeadership = [
+  'Board of Directors',
+  'Managing Director',
+  'Deputy Managing Director',
+  'Deputy Managing Director',
+];
+
+/** Derived, so the figures cannot drift from the chart above. */
+export const headcount = {
+  total: orgDepartments.reduce((t, d) => t + d.roles.reduce((s, r) => s + r.n, 0), 0),
+  interns: orgDepartments.reduce(
+    (t, d) => t + d.roles.filter(r => r.role === 'Interns').reduce((s, r) => s + r.n, 0), 0),
+  departments: orgDepartments.length,
+};
