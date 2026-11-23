@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { ArrowRight, FileText } from 'lucide-react';
 import PageHero from '@/components/PageHero';
 import Reveal from '@/components/Reveal';
+import InlineFilm from '@/components/InlineFilm';
 import { constraints, pipeline, localContent, marketStats, marketSource, disciplines } from '@/lib/content';
 import { brand } from '@/lib/brand';
 
@@ -25,10 +26,10 @@ export default function MarketPage() {
         eyebrow="Market insight · Namibia"
         title="The constraints are published. So is the pipeline."
         lede="Namibia has set out what is limiting its mining sector and what it intends to build in four years. Both documents describe construction work."
-        image="/disciplines/roads-earthworks.jpg"
-        video="/video/mining.mp4"
-        poster="/posters/mining.jpg"
-        position="center 55%"
+        image="/sectors/hero-market.jpg"
+        video="/video/cinematic.mp4"
+        poster="/cinematic-poster.jpg"
+        position="center 45%"
       />
 
       {/* ── Headline numbers ──────────────────────────────── */}
@@ -193,6 +194,16 @@ export default function MarketPage() {
               A mine entering production is a construction programme first. These
               are the five disciplines that programme is made of.
             </p>
+          </Reveal>
+
+          <Reveal>
+            <div style={{ marginBottom: 48 }}>
+              <InlineFilm
+                src="/video/mining.mp4"
+                poster="/posters/mining.jpg"
+                caption="A haul road, a headgear and a processing plant — the three stages a mine is built through before it produces anything."
+              />
+            </div>
           </Reveal>
 
           <div
