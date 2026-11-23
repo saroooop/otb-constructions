@@ -15,6 +15,8 @@ export const brand = {
   tagline:   '…Innovating Tomorrow, Engineering Today',
   motto:     '…Innovating Tomorrow, Engineering Today',
   strapline: 'Building and civil engineering construction across South Africa',
+  /** Said wherever the UK branch is relevant. SA first, always. */
+  reach:     'South Africa, with a branch in the United Kingdom',
 
   /* ── Contact ──────────────────────────────────────────── */
   email:        'info@lkmd.co.za',
@@ -25,7 +27,11 @@ export const brand = {
   whatsapp:     '' as string,
   officeHours:  '08:00 to 17:00, Monday to Friday',
 
-  /** The four offices, in the order the brief lists them. */
+  /**
+   * The four South African offices in the order the brief lists them, with
+   * the United Kingdom branch after them. The business is South African;
+   * the UK is a branch, and the ordering says so.
+   */
   addresses: [
     {
       id: 'centurion',
@@ -46,6 +52,12 @@ export const brand = {
       id: 'east-london',
       label: 'East London',
       lines: ['1–3 Cavendish Road', 'Vincent', 'East London'],
+    },
+    {
+      id: 'united-kingdom',
+      label: 'United Kingdom',
+      lines: ['80 Baddow Road', 'Chelmsford, Essex CM2 7PJ', 'United Kingdom'],
+      branch: true,
     },
   ],
 

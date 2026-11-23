@@ -39,11 +39,7 @@ export default function HomePage() {
           style={{ position: 'relative', zIndex: 2, paddingTop: 200 }}
         >
           <div className="fade-in" style={{ maxWidth: 960 }}>
-            <p className="eyebrow eyebrow-light" style={{ marginBottom: 28 }}>
-              {brand.tagline}
-            </p>
-
-            <h1 className="display" style={{ color: '#fff', marginBottom: 30 }}>
+            <h1 className="display" style={{ color: '#fff', marginBottom: 18 }}>
               Quality building and
               <br />
               civil engineering,
@@ -52,6 +48,16 @@ export default function HomePage() {
                 delivered on time and within budget
               </span>
             </h1>
+
+            {/* The brief places the tagline under the headline. */}
+            <p
+              style={{
+                fontSize: '0.92rem', fontWeight: 600, letterSpacing: '0.06em',
+                color: brand.color.redSoft, marginBottom: 26,
+              }}
+            >
+              {brand.tagline}
+            </p>
 
             <p
               className="lede-dark"
@@ -85,7 +91,7 @@ export default function HomePage() {
           >
             {[
               { Icon: HardHat,     label: 'One-stop shop',     sub: 'Planning, design and construction' },
-              { Icon: Building2,   label: 'Four offices',      sub: 'Centurion · Cape Town · Durban · East London' },
+              { Icon: Building2,   label: 'Five offices',      sub: 'Four in South Africa, one in the UK' },
               { Icon: Users,       label: 'Seven departments', sub: 'Every one of them trains interns' },
               { Icon: ShieldCheck, label: 'Safety first',      sub: 'Beyond what the law requires' },
             ].map((c, i) => (

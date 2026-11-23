@@ -18,6 +18,7 @@ const quickLinks = [
   { label: 'Projects', href: '/projects' },
   { label: 'Careers',  href: '/careers' },
   { label: 'Contact',  href: '/contact' },
+  { label: 'Market insight', href: '/market' },
 ];
 
 export default function Footer() {
@@ -71,7 +72,7 @@ export default function Footer() {
               marginTop: 22, maxWidth: 320,
             }}
           >
-            Building and civil engineering construction across South Africa.
+            {brand.strapline}, with a branch in the United Kingdom.
           </p>
         </div>
 

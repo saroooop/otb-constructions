@@ -5,6 +5,7 @@ import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import ServiceWorker from '@/components/ServiceWorker';
 import CookieBanner from '@/components/CookieBanner';
+import Analytics from '@/components/Analytics';
 import { brand } from '@/lib/brand';
 
 // Body — Inter's tall x-height holds up through the long technical
@@ -108,6 +109,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main id="main">{children}</main>
         <Footer />
         <CookieBanner />
+        <Analytics />
         <ServiceWorker />
       </body>
     </html>

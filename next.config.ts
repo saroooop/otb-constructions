@@ -15,9 +15,9 @@ const nextConfig: NextConfig = {
       { source: '/privacy-policy',   destination: '/privacy-notice',             permanent: true },
       { source: '/cookie-policy',    destination: '/cookie-notice',              permanent: true },
       { source: '/terms',            destination: '/paia-manual',                permanent: true },
-      // Pages that no longer exist in the site map go to their nearest home.
+      // Pages not in the site map go to their nearest home. /market stays:
+      // the Namibian mining research is real and is linked from the footer.
       { source: '/sectors',          destination: '/services',                   permanent: true },
-      { source: '/market',           destination: '/',                           permanent: true },
       { source: '/insights',         destination: '/',                           permanent: true },
     ];
   },
