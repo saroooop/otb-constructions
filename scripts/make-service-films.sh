@@ -26,6 +26,15 @@
 # an occupied building mid-refurbishment or a finished mixed-use development.
 # Both films were borrowing abstract and industrial plates that did not match
 # the page they sat on.
+#
+# PACE. The move is deliberately slower than it looks like it should be on
+# paper. The first cut panned 640px in 6 seconds — about 6.7% of the frame
+# width every second — and read as restless: a hero that plays on a loop
+# behind text should drift, not travel. The plates now hold for 8 seconds
+# and move 160px, about 1.25% of frame width per second, with a 2 second
+# dissolve between them. That is roughly the pace a large contractor's site
+# uses, and it is slow enough that you notice the building rather than the
+# camera.
 set -e
 
 SRC=/c/Users/babso/Desktop/dareweb/public
@@ -33,9 +42,9 @@ OUT=$SRC/video
 POSTERS=$SRC/posters
 mkdir -p "$OUT" "$POSTERS"
 
-DUR=6; XF=1.0; FPS=25; W=1600; H=900
-OVER=1950        # gentle overscan: enough room to pan, little enough
-                 # that the crop keeps ~70% of the plate's height
+DUR=8; XF=2.0; FPS=25; W=1600; H=900
+OVER=1760        # gentle overscan: enough room to drift, little enough
+                 # that the crop keeps ~75% of the plate's height
 
 clip () {
   local idx=$1 dir=$2 vy=${3:-0.5}
@@ -51,14 +60,14 @@ build () {
   local name=$1 a=$2 b=$3 c=$4 v1=$5 v2=$6 v3=$7
   local F
   F="$(clip 0 0 $v1)$(clip 1 1 $v2)$(clip 2 0 $v3)"
-  F="${F}[v0][v1]xfade=transition=fade:duration=${XF}:offset=5[x1];"
-  F="${F}[x1][v2]xfade=transition=fade:duration=${XF}:offset=10[x2];"
+  F="${F}[v0][v1]xfade=transition=fade:duration=${XF}:offset=6[x1];"
+  F="${F}[x1][v2]xfade=transition=fade:duration=${XF}:offset=12[x2];"
   F="${F}[x2]${GRADE}[vout]"
 
   ffmpeg -y -loglevel error \
     -loop 1 -t $DUR -i "$a" -loop 1 -t $DUR -i "$b" -loop 1 -t $DUR -i "$c" \
     -filter_complex "$F" -map "[vout]" \
-    -an -c:v libx264 -profile:v high -preset veryslow -crf 27 \
+    -an -c:v libx264 -profile:v high -preset veryslow -crf 28 \
     -pix_fmt yuv420p -movflags +faststart -g 48 "$OUT/$name.mp4"
 
   ffmpeg -y -loglevel error -ss 2 -i "$OUT/$name.mp4" -frames:v 1 -q:v 4 \

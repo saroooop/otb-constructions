@@ -43,7 +43,7 @@ for f in "$VID"/*.mp4; do
     [tail][head]blend=all_expr='A*(1-T/${X})+B*(T/${X})'[mix];
     [c]trim=start=${X}:end=${DMX},setpts=PTS-STARTPTS[rest];
     [mix][rest]concat=n=2:v=1:a=0[vout]" \
-    -map "[vout]" -an -c:v libx264 -profile:v high -preset veryslow -crf 27 \
+    -map "[vout]" -an -c:v libx264 -profile:v high -preset veryslow -crf 28 \
     -pix_fmt yuv420p -movflags +faststart -g 48 \
     -metadata comment="$LOOPED_TAG" "$tmp"
 

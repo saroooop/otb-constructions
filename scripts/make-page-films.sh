@@ -12,6 +12,15 @@
 # No text is burned in. The page overlays its own headline as live HTML, which
 # stays sharp at any resolution, reflows on a phone, can be read by a screen
 # reader, and can be edited without a re-render.
+#
+# PACE. The move is deliberately slower than it looks like it should be on
+# paper. The first cut panned 640px in 6 seconds — about 6.7% of the frame
+# width every second — and read as restless: a hero that plays on a loop
+# behind text should drift, not travel. The plates now hold for 8 seconds
+# and move 160px, about 1.25% of frame width per second, with a 2 second
+# dissolve between them. That is roughly the pace a large contractor's site
+# uses, and it is slow enough that you notice the building rather than the
+# camera.
 set -e
 
 SRC=/c/Users/babso/Desktop/dareweb/public/lkmd
@@ -19,8 +28,8 @@ OUT=/c/Users/babso/Desktop/dareweb/public/video
 POSTERS=/c/Users/babso/Desktop/dareweb/public/posters
 mkdir -p "$OUT" "$POSTERS"
 
-DUR=6; XF=1.0; FPS=25; W=1600; H=900
-OVER=2240        # scale to this width so there is room to travel
+DUR=8; XF=2.0; FPS=25; W=1600; H=900
+OVER=1760        # scale to this width so there is room to travel
 
 # $2 = 0 pans left-to-right, 1 pans right-to-left. Alternating them stops the
 # cut feeling like one long drag in a single direction.
@@ -40,8 +49,8 @@ build () {
   local name=$1 a=$2 b=$3 c=$4 v1=${5:-0.5} v2=${6:-0.5} v3=${7:-0.5}
   local F
   F="$(clip 0 0 $v1)$(clip 1 1 $v2)$(clip 2 0 $v3)"
-  F="${F}[v0][v1]xfade=transition=fade:duration=${XF}:offset=5[x1];"
-  F="${F}[x1][v2]xfade=transition=fade:duration=${XF}:offset=10[x2];"
+  F="${F}[v0][v1]xfade=transition=fade:duration=${XF}:offset=6[x1];"
+  F="${F}[x1][v2]xfade=transition=fade:duration=${XF}:offset=12[x2];"
   F="${F}[x2]${GRADE}[vout]"
 
   ffmpeg -y -loglevel error \
@@ -49,7 +58,7 @@ build () {
     -loop 1 -t $DUR -i "$SRC/$b.jpg" \
     -loop 1 -t $DUR -i "$SRC/$c.jpg" \
     -filter_complex "$F" -map "[vout]" \
-    -an -c:v libx264 -profile:v high -preset veryslow -crf 27 \
+    -an -c:v libx264 -profile:v high -preset veryslow -crf 28 \
     -pix_fmt yuv420p -movflags +faststart -g 48 "$OUT/$name.mp4"
 
   ffmpeg -y -loglevel error -ss 2 -i "$OUT/$name.mp4" -frames:v 1 -q:v 4 \
