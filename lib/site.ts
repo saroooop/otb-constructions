@@ -108,6 +108,10 @@ export type Service = {
   heading: string;
   intro: string;
   sections: { heading: string; items: { title: string; body: string }[] }[];
+  /** This service's own hero film. Every service page shared one film,
+   *  which made six pages feel like one page with the words swapped. */
+  video?: string;
+  poster?: string;
   note?: string;
   /** Extra photographs for this discipline. Optional: a service without a
    *  gallery simply does not render the strip, so adding one later is a data
@@ -128,6 +132,8 @@ export const services: Service[] = [
     heading: 'New buildings, delivered complete and ready for use',
     intro:
       'We construct residential, commercial, industrial and public buildings for government and private clients, and deliver them on time and within budget.',
+    video:  '/video/svc-building-construction.mp4',
+    poster: '/posters/svc-building-construction.jpg',
     sections: [
       {
         heading: 'What we build',
@@ -173,6 +179,8 @@ export const services: Service[] = [
     heading: 'Infrastructure built on sound engineering',
     intro:
       'Our engineers work across a wide range of disciplines on infrastructure and building projects for public and private clients. As a specialist engineering and construction company, we can manage all of a client’s engineering requirements.',
+    video:  '/video/svc-civil-structural.mp4',
+    poster: '/posters/svc-civil-structural.jpg',
     sections: [
       {
         heading: 'What we build',
@@ -196,13 +204,15 @@ export const services: Service[] = [
     slug: 'refurbishment-renovation-maintenance',
     title: 'Refurbishment, Renovation & Maintenance',
     short: 'From minor repairs and redecoration to full refurbishments and planned maintenance contracts.',
-    image: '/lkmd/concrete.jpg',
+    image: '/lkmd/refurb-interior.jpg',
     pageTitle: 'Refurbishment, Renovation & Maintenance | LKMD Construction',
     description:
       'Refurbishment, renovation, repairs and maintenance for commercial, residential and public sector properties, from minor repairs to full refurbishments.',
     heading: 'Keeping buildings in excellent condition',
     intro:
       'From minor repairs and redecoration to full building refurbishments and long-term maintenance contracts, our team takes care of commercial, residential and public sector properties.',
+    video:  '/video/svc-refurbishment.mp4',
+    poster: '/posters/svc-refurbishment.jpg',
     sections: [
       {
         heading: 'What we do',
@@ -228,6 +238,8 @@ export const services: Service[] = [
     heading: 'Professional management from planning to handover',
     intro:
       'Professional construction management is vital to a project’s success. LKMD offers a comprehensive range of construction management services, with the scope and experience to provide a fully integrated approach.',
+    video:  '/video/svc-construction-management.mp4',
+    poster: '/posters/svc-construction-management.jpg',
     sections: [
       {
         heading: 'Our construction management services',
@@ -254,6 +266,8 @@ export const services: Service[] = [
     heading: 'From the first drawing to the finished project',
     intro:
       'With extensive experience in design management and design and construct projects, our team can manage your building or engineering project from the design phase through to completion.',
+    video:  '/video/svc-design-and-construct.mp4',
+    poster: '/posters/svc-design-and-construct.jpg',
     sections: [
       {
         heading: 'How it works',
@@ -271,13 +285,15 @@ export const services: Service[] = [
     slug: 'property-development-support',
     title: 'Property Development Support',
     short: 'Support for residential and commercial developers, from inception to completion.',
-    image: '/lkmd/skybridge.jpg',
+    image: '/lkmd/development-mixeduse.jpg',
     pageTitle: 'Property Development Support | LKMD Construction',
     description:
       'Consulting, engineering and construction support for residential and commercial property developments, from inception to completion.',
     heading: 'Support for your development, from inception to completion',
     intro:
       'We bring our consulting, engineering and construction expertise to property developments for residential and commercial clients, and manage them from the first idea to the finished building.',
+    video:  '/video/svc-property-development.mp4',
+    poster: '/posters/svc-property-development.jpg',
     sections: [
       {
         heading: 'What we support',

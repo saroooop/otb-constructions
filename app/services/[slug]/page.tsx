@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { ArrowRight, Check } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import PageHero from '@/components/PageHero';
 import Reveal from '@/components/Reveal';
 import CtaBand from '@/components/CtaBand';
@@ -43,73 +43,112 @@ export default async function ServicePage(
         title={service.heading}
         lede={service.intro}
         image={service.image}
-        video="/video/services.mp4"
-        poster="/posters/services.jpg"
+        video={service.video ?? '/video/services.mp4'}
+        poster={service.poster ?? '/posters/services.jpg'}
         position="center 42%"
       />
 
-      {/* ── The content sections ──────────────────────────── */}
-      <section className="section">
-        <div className="container">
-          {service.sections.map((sec, si) => (
-            <div key={sec.heading} style={{ marginBottom: si === service.sections.length - 1 ? 0 : 72 }}>
-              <Reveal>
-                <p className="eyebrow" style={{ marginBottom: 22 }}>{sec.heading}</p>
-              </Reveal>
-
+      {/* ── The content sections ──────────────────────────────
+          Set as editorial rows rather than a card grid. A grid of five
+          items in three columns leaves an orphan on the second row, which
+          is what made these pages look unfinished; a list never does. The
+          heading sticks alongside the rows on a wide screen, so you always
+          know which part of the service you are reading.
+      */}
+      {service.sections.map((sec, si) => {
+        const tinted = si % 2 === 1;
+        return (
+          <section
+            key={sec.heading}
+            style={{
+              background: tinted ? brand.color.concrete : '#fff',
+              padding: '104px 0',
+              borderTop: tinted ? 'none' : '1px solid var(--line)',
+            }}
+          >
+            <div className="container">
               <div
-                className="svc-grid"
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: sec.items.length >= 4 ? 'repeat(3, 1fr)' : 'repeat(3, 1fr)',
-                  gap: 4,
-                }}
+                className="svc-split"
+                style={{ display: 'grid', gridTemplateColumns: '0.8fr 1.6fr', gap: 72, alignItems: 'start' }}
               >
-                {sec.items.map((item, i) => (
-                  <Reveal key={item.title} delay={(i % 3) * 90}>
-                    <div
+                <Reveal>
+                  <div className="svc-stick" style={{ position: 'sticky', top: 'calc(var(--nav-h) + 48px)' }}>
+                    <p
                       style={{
-                        background: brand.color.concrete, padding: '32px 30px', height: '100%',
-                        borderTop: `3px solid ${brand.color.red}`,
+                        fontFamily: 'var(--font-heading), system-ui, sans-serif',
+                        fontSize: '2.6rem', fontWeight: 800, lineHeight: 1,
+                        color: 'transparent', WebkitTextStroke: `1.4px ${brand.color.red}`,
+                        marginBottom: 20,
                       }}
                     >
-                      <Check size={19} strokeWidth={2.5} color={brand.color.red} />
-                      <h3 style={{ fontSize: '1.04rem', margin: '16px 0 10px', lineHeight: 1.35 }}>
-                        {item.title}
-                      </h3>
-                      {item.body && (
-                        <p style={{ fontSize: '0.88rem', color: '#5C6B7A', lineHeight: 1.85 }}>
-                          {item.body}
-                        </p>
-                      )}
-                    </div>
-                  </Reveal>
-                ))}
+                      {String(si + 1).padStart(2, '0')}
+                    </p>
+                    <h2 className="display-sm" style={{ marginBottom: 18 }}>{sec.heading}</h2>
+                    <span
+                      aria-hidden
+                      style={{ display: 'block', width: 56, height: 3, background: brand.color.red }}
+                    />
+                  </div>
+                </Reveal>
+
+                <div>
+                  {sec.items.map((item, i) => (
+                    <Reveal key={item.title} delay={Math.min(i, 4) * 70}>
+                      <div
+                        style={{
+                          display: 'grid', gridTemplateColumns: '58px 1fr', gap: 10,
+                          padding: '26px 0',
+                          borderTop: i === 0 ? 'none' : '1px solid rgba(0,0,0,0.085)',
+                        }}
+                      >
+                        <span
+                          aria-hidden
+                          style={{
+                            fontFamily: 'var(--font-heading), system-ui, sans-serif',
+                            fontSize: '0.8rem', fontWeight: 700, letterSpacing: '0.08em',
+                            color: brand.color.red, paddingTop: 5,
+                          }}
+                        >
+                          {String(i + 1).padStart(2, '0')}
+                        </span>
+                        <div>
+                          <h3 style={{ fontSize: '1.22rem', marginBottom: 10, lineHeight: 1.3 }}>
+                            {item.title}
+                          </h3>
+                          {item.body && (
+                            <p style={{ fontSize: '0.98rem', color: '#4A5B6C', lineHeight: 1.85, maxWidth: 620 }}>
+                              {item.body}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                    </Reveal>
+                  ))}
+
+                  {si === service.sections.length - 1 && service.note && (
+                    <Reveal>
+                      <p className="rule-left" style={{ marginTop: 40, maxWidth: 620 }}>
+                        {service.note}
+                      </p>
+                    </Reveal>
+                  )}
+                </div>
               </div>
             </div>
-          ))}
 
-          {service.note && (
-            <Reveal>
-              <p
-                className="rule-left"
-                style={{ marginTop: 56, maxWidth: 760 }}
-              >
-                {service.note}
-              </p>
-            </Reveal>
-          )}
-        </div>
-
-        <style>{`
-          @media (max-width: 1024px) { .svc-grid { grid-template-columns: 1fr 1fr !important; } }
-          @media (max-width: 620px)  { .svc-grid { grid-template-columns: 1fr !important; } }
-        `}</style>
-      </section>
+            <style>{`
+              @media (max-width: 1000px) {
+                .svc-split { grid-template-columns: 1fr !important; gap: 40px !important; }
+                .svc-stick { position: static !important; }
+              }
+            `}</style>
+          </section>
+        );
+      })}
 
       {/* ── This discipline on site, when there are photographs ── */}
       {service.gallery && service.gallery.length > 0 && (
-        <section className="section" style={{ paddingTop: 0 }}>
+        <section style={{ background: '#fff', padding: '0 0 104px' }}>
           <div className="container">
             <div
               className="gal-grid"
