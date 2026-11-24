@@ -33,6 +33,7 @@ export const mainNav = [
       { label: 'Construction Management',             href: '/services/construction-management' },
       { label: 'Design & Construct',                  href: '/services/design-and-construct' },
       { label: 'Property Development Support',        href: '/services/property-development-support' },
+      { label: 'Mining Infrastructure',               href: '/mining' },
     ],
   },
   { label: 'Projects', href: '/projects' },
@@ -75,14 +76,17 @@ export const home = {
 };
 
 /** Clients. Logo files are still to come; names publish now. */
-export const clients = [
-  'Coega Development Corporation',
-  'Development Bank of Southern Africa',
-  'Eastern Cape Development Corporation',
-  'Independent Development Trust',
-  'KwaZulu-Natal Department of Health',
-  'PURCO SA (Purchasing Consortium Southern Africa)',
-  'The Mvula Trust',
+/** The seven clients, each with the logo lifted from LKMD's own company
+ *  profile. `logo` is optional on purpose: a client without a logo file still
+ *  publishes as a name, so the grid never shows a gap or a broken image. */
+export const clients: { name: string; logo?: string }[] = [
+  { name: 'Coega Development Corporation',                     logo: '/clients/coega.png' },
+  { name: 'Development Bank of Southern Africa',               logo: '/clients/dbsa.png' },
+  { name: 'Eastern Cape Development Corporation',              logo: '/clients/ecdc.png' },
+  { name: 'Independent Development Trust',                     logo: '/clients/idt.png' },
+  { name: 'KwaZulu-Natal Department of Health',                logo: '/clients/kzn-health.png' },
+  { name: 'PURCO SA (Purchasing Consortium Southern Africa)',  logo: '/clients/purco.png' },
+  { name: 'The Mvula Trust',                                   logo: '/clients/mvula-trust.png' },
 ];
 
 export const clientTypes = [
@@ -105,6 +109,10 @@ export type Service = {
   intro: string;
   sections: { heading: string; items: { title: string; body: string }[] }[];
   note?: string;
+  /** Extra photographs for this discipline. Optional: a service without a
+   *  gallery simply does not render the strip, so adding one later is a data
+   *  change and not a template change. */
+  gallery?: { src: string; alt: string }[];
   relatedProjects: string[];
 };
 
@@ -141,6 +149,10 @@ export const services: Service[] = [
         ],
       },
     ],
+    gallery: [
+      { src: '/lkmd/scaffold-crew.jpg', alt: 'An LKMD crew working the scaffold on a building under construction' },
+      { src: '/lkmd/drawings-night.jpg', alt: 'Site engineers checking drawings on a night shift' },
+    ],
     relatedProjects: [
       'athlone-girls-high-school-johannesburg',
       'saps-ennerdale-police-station-ennerdale',
@@ -173,6 +185,11 @@ export const services: Service[] = [
     ],
     note:
       'We provide detailed designs, engineering reports and technical calculations for construction works, so every project is properly planned before it starts and expertly managed as it is built.',
+    gallery: [
+      { src: '/lkmd/engineer-span.jpg', alt: 'An LKMD engineer on site beside a bridge span' },
+      { src: '/lkmd/road-surfacing.jpg', alt: 'A road crew laying and levelling asphalt behind the paver' },
+      { src: '/lkmd/roadworks-verge.jpg', alt: 'Roadworks and verge reinstatement on a rural route' },
+    ],
     relatedProjects: [],
   },
   {

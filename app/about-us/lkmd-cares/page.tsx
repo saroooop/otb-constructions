@@ -20,6 +20,10 @@ const pillars = [
     body: 'Wherever we can, we employ people from the communities around our sites and buy from local suppliers and subcontractors. A social facilitator in our team works with communities from the start of each project.',
   },
   {
+    title: 'Charitable contributions and partnerships',
+    body: 'We support the communities where we build through charitable contributions and partnerships with organisations already working in them.',
+  },
+  {
     title: 'Building sustainably',
     body: 'We use sustainable construction practices and work to reduce waste on our sites.',
   },
@@ -38,7 +42,7 @@ export default function LkmdCaresPage() {
         position="center 40%"
       />
 
-      {/* ── The three pillars, with the community film ────── */}
+      {/* ── The four commitments, with the community film ──── */}
       <section className="section">
         <div className="container">
           <div
@@ -98,6 +102,56 @@ export default function LkmdCaresPage() {
         </div>
 
         <style>{`@media (max-width: 900px) { .cares-grid { grid-template-columns: 1fr !important; } }`}</style>
+      </section>
+
+      {/* ── Community health work ─────────────────────────── */}
+      <section className="section" style={{ paddingTop: 0 }}>
+        <div className="container">
+          <div
+            className="clinic-split"
+            style={{ display: 'grid', gridTemplateColumns: '1.1fr 1fr', gap: 4, alignItems: 'stretch' }}
+          >
+            <Reveal>
+              <figure style={{ margin: 0, position: 'relative', aspectRatio: '4 / 3', overflow: 'hidden' }}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/lkmd/clinic-team.jpg"
+                  alt="Health workers on an LKMD-supported community project"
+                  loading="lazy"
+                  decoding="async"
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                />
+                <span
+                  aria-hidden
+                  style={{ position: 'absolute', left: 0, top: 0, width: 5, height: 64, background: brand.color.red }}
+                />
+              </figure>
+            </Reveal>
+            <Reveal delay={120}>
+              <div
+                style={{
+                  background: brand.color.concrete, padding: '46px 42px',
+                  height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center',
+                }}
+              >
+                <h2 style={{ fontSize: '1.3rem', marginBottom: 14 }}>
+                  Beyond the site boundary.
+                </h2>
+                <p style={{ fontSize: '0.95rem', color: '#5C6B7A', lineHeight: 1.85 }}>
+                  Our work for the Department of Health and for development
+                  agencies puts us alongside the people who run clinics,
+                  schools and community services. Building well for them means
+                  understanding how the building will actually be used once we
+                  have handed it over.
+                </p>
+              </div>
+            </Reveal>
+          </div>
+        </div>
+
+        <style>{`
+          @media (max-width: 900px) { .clinic-split { grid-template-columns: 1fr !important; } }
+        `}</style>
       </section>
 
       <CtaBand

@@ -114,6 +114,33 @@ export default function ContactPage() {
         `}</style>
       </section>
 
+      {/* ── Someone actually answers ───────────────────────── */}
+      <section style={{ position: 'relative', overflow: 'hidden', background: brand.color.navy900, color: '#fff' }}>
+        <div
+          aria-hidden
+          style={{
+            position: 'absolute', inset: 0,
+            backgroundImage: 'url(/lkmd/switchboard.jpg)',
+            backgroundSize: 'cover', backgroundPosition: 'center 28%',
+            opacity: 0.22,
+          }}
+        />
+        <div
+          className="container-tight"
+          style={{ position: 'relative', zIndex: 1, padding: '88px 0', textAlign: 'center' }}
+        >
+          <Reveal>
+            <h2 className="display-sm" style={{ color: '#fff', marginBottom: 18 }}>
+              Every enquiry reaches a person.
+            </h2>
+            <p className="lede-dark" style={{ maxWidth: 560, margin: '0 auto' }}>
+              Tell us what you need built and where. We will come back to you
+              with the right people from the right office, not a generic reply.
+            </p>
+          </Reveal>
+        </div>
+      </section>
+
       {/* ── The four offices ──────────────────────────────── */}
       <section style={{ background: brand.color.concrete, padding: '96px 0' }}>
         <div className="container">

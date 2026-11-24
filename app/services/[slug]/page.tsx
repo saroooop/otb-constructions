@@ -107,6 +107,46 @@ export default async function ServicePage(
         `}</style>
       </section>
 
+      {/* ── This discipline on site, when there are photographs ── */}
+      {service.gallery && service.gallery.length > 0 && (
+        <section className="section" style={{ paddingTop: 0 }}>
+          <div className="container">
+            <div
+              className="gal-grid"
+              style={{
+                display: 'grid',
+                gridTemplateColumns: `repeat(${Math.min(service.gallery.length, 3)}, 1fr)`,
+                gap: 4,
+              }}
+            >
+              {service.gallery.map((g, i) => (
+                <Reveal key={g.src} delay={(i % 3) * 90}>
+                  <figure style={{ margin: 0, position: 'relative', aspectRatio: '4 / 3', overflow: 'hidden' }}>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={g.src}
+                      alt={g.alt}
+                      loading="lazy"
+                      decoding="async"
+                      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    />
+                    <span
+                      aria-hidden
+                      style={{ position: 'absolute', left: 0, top: 0, width: 5, height: 56, background: brand.color.red }}
+                    />
+                  </figure>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+
+          <style>{`
+            @media (max-width: 860px) { .gal-grid { grid-template-columns: 1fr 1fr !important; } }
+            @media (max-width: 560px) { .gal-grid { grid-template-columns: 1fr !important; } }
+          `}</style>
+        </section>
+      )}
+
       {/* ── Related projects, when there are any ──────────── */}
       {related.length > 0 && (
         <section style={{ background: brand.color.concrete, padding: '104px 0' }}>

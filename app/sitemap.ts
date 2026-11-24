@@ -21,6 +21,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/about-us/health-safety',   priority: 0.7,  freq: 'yearly'  as const },
     { path: '/about-us/lkmd-cares',      priority: 0.7,  freq: 'yearly'  as const },
     { path: '/services',                 priority: 0.9,  freq: 'monthly' as const },
+    { path: '/mining',                   priority: 0.8,  freq: 'monthly' as const },
     { path: '/projects',                 priority: 0.9,  freq: 'monthly' as const },
     { path: '/careers',                  priority: 0.8,  freq: 'weekly'  as const },
     { path: '/contact',                  priority: 0.8,  freq: 'yearly'  as const },

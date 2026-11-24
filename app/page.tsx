@@ -372,22 +372,39 @@ export default async function HomePage() {
             </h2>
           </Reveal>
 
-          {/* Names publish now; logo files follow and drop into this grid. */}
+          {/* Logos come from LKMD's own company profile. The name stays
+              underneath each one rather than being replaced by it: several of
+              these marks are wordless or abbreviated, and a visitor should not
+              have to recognise a logo to know who the client is. A client
+              without a logo file simply publishes as a name. */}
           <div
             className="client-grid"
             style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 4 }}
           >
             {clients.map((c, i) => (
-              <Reveal key={c} delay={(i % 4) * 70}>
+              <Reveal key={c.name} delay={(i % 4) * 70}>
                 <div
                   style={{
-                    background: brand.color.concrete, padding: '28px 24px',
-                    height: '100%', display: 'flex', alignItems: 'center',
+                    background: brand.color.concrete, padding: '26px 24px 22px',
+                    height: '100%', display: 'flex', flexDirection: 'column',
+                    alignItems: 'flex-start', justifyContent: 'space-between', gap: 18,
                     borderTop: `3px solid ${brand.color.line}`,
                   }}
                 >
-                  <span style={{ fontSize: '0.9rem', color: '#2A3B4C', fontWeight: 500, lineHeight: 1.5 }}>
-                    {c}
+                  {c.logo && (
+                    <div style={{ height: 54, display: 'flex', alignItems: 'center' }}>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={c.logo}
+                        alt={`${c.name} logo`}
+                        loading="lazy"
+                        decoding="async"
+                        style={{ maxHeight: 54, maxWidth: 190, width: 'auto', height: 'auto', objectFit: 'contain' }}
+                      />
+                    </div>
+                  )}
+                  <span style={{ fontSize: '0.84rem', color: '#2A3B4C', fontWeight: 500, lineHeight: 1.5 }}>
+                    {c.name}
                   </span>
                 </div>
               </Reveal>

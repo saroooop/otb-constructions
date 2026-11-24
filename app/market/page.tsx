@@ -3,8 +3,7 @@ import Link from 'next/link';
 import { ArrowRight, FileText } from 'lucide-react';
 import PageHero from '@/components/PageHero';
 import Reveal from '@/components/Reveal';
-import InlineFilm from '@/components/InlineFilm';
-import { constraints, pipeline, localContent, marketStats, marketSource, disciplines } from '@/lib/content';
+import { constraints, pipeline, localContent, marketStats, marketSource } from '@/lib/content';
 import { brand } from '@/lib/brand';
 
 export const metadata: Metadata = {
@@ -182,66 +181,35 @@ export default function MarketPage() {
       </section>
 
 
-      {/* ── What the pipeline asks for ────────────────────── */}
+      {/* ── Pointer to the capability page ────────────────── */}
       <section className="section">
         <div className="container">
           <Reveal>
-            <p className="eyebrow" style={{ marginBottom: 22 }}>What the pipeline asks for</p>
-            <h2 className="display-sm" style={{ maxWidth: 700, marginBottom: 20 }}>
-              Every item on that list is built before it produces.
-            </h2>
-            <p className="lede" style={{ maxWidth: 640, marginBottom: 48 }}>
-              A mine entering production is a construction programme first. These
-              are the five disciplines that programme is made of.
-            </p>
-          </Reveal>
-
-          <Reveal>
-            <div style={{ marginBottom: 48 }}>
-              <InlineFilm
-                src="/video/mining.mp4"
-                poster="/posters/mining.jpg"
-                caption="A haul road, a headgear and a processing plant — the three stages a mine is built through before it produces anything."
-              />
+            <div
+              style={{
+                display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                gap: 36, flexWrap: 'wrap',
+                background: brand.color.concrete, padding: '44px 46px',
+                borderLeft: `4px solid ${brand.color.red}`,
+              }}
+            >
+              <div style={{ maxWidth: 680 }}>
+                <h2 style={{ fontSize: '1.3rem', marginBottom: 10 }}>
+                  Every item on that list is built before it produces.
+                </h2>
+                <p style={{ fontSize: '0.95rem', color: '#5C6B7A', lineHeight: 1.8 }}>
+                  A mine entering production is a construction programme first.
+                  Here is the work that programme is made of, and why remote
+                  sites suit a contractor who can cover several disciplines.
+                </p>
+              </div>
+              <Link href="/mining" className="btn btn-outline">
+                Mining infrastructure
+                <ArrowRight size={14} strokeWidth={2.4} />
+              </Link>
             </div>
           </Reveal>
-
-          <div
-            className="disc-grid"
-            style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 4 }}
-          >
-            {disciplines.map((d, i) => (
-              <Reveal key={d.name} delay={(i % 3) * 90}>
-                <article style={{ background: brand.color.concrete, height: '100%' }}>
-                  <div style={{ position: 'relative', aspectRatio: '4 / 3', overflow: 'hidden' }}>
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={d.image}
-                      alt={d.name}
-                      loading="lazy"
-                      decoding="async"
-                      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                    />
-                    <span
-                      aria-hidden
-                      style={{ position: 'absolute', left: 0, top: 0, width: 5, height: 64, background: brand.color.red }}
-                    />
-                  </div>
-
-                  <div style={{ padding: '28px 26px 32px' }}>
-                    <h3 style={{ fontSize: '1.12rem', marginBottom: 10, lineHeight: 1.3 }}>{d.name}</h3>
-                    <p style={{ fontSize: '0.86rem', color: '#5C6B7A', lineHeight: 1.8 }}>{d.body}</p>
-                  </div>
-                </article>
-              </Reveal>
-            ))}
-          </div>
         </div>
-
-        <style>{`
-          @media (max-width: 1000px) { .disc-grid { grid-template-columns: 1fr 1fr !important; } }
-          @media (max-width: 620px)  { .disc-grid { grid-template-columns: 1fr !important; } }
-        `}</style>
       </section>
 
       {/* ── Local content ─────────────────────────────────── */}
