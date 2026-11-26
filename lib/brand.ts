@@ -6,6 +6,28 @@
  * than eyeballed, which is why they are exact.
  */
 
+/**
+ * WHERE THIS SITE ACTUALLY LIVES — used for canonical URLs, the sitemap and
+ * robots.txt, which must never advertise an address that does not resolve.
+ *
+ * `lkmd.co.za` is the intended home but is not registered yet, and a sitemap
+ * naming an unreachable host asks Google to index nothing. So the address is
+ * resolved at build time instead of hardcoded:
+ *
+ *   1. `NEXT_PUBLIC_SITE_URL` — set this the day lkmd.co.za goes live and
+ *      every canonical, the sitemap and robots.txt follow it. One variable.
+ *   2. `VERCEL_PROJECT_PRODUCTION_URL` — Vercel supplies the project's own
+ *      production host, so a deploy always advertises itself correctly.
+ *   3. localhost, for `next dev`.
+ */
+export const siteUrl = (
+  process.env.NEXT_PUBLIC_SITE_URL
+  || (process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : '')
+  || 'http://localhost:3000'
+).replace(/\/+$/, '');
+
 export const brand = {
   /* ── Identity ─────────────────────────────────────────── */
   name:      'LKMD',

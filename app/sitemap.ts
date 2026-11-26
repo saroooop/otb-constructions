@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next';
 import { services, projects } from '@/lib/site';
+import { siteUrl } from '@/lib/brand';
 
 /**
  * XML sitemap listing every page and every project page, which the brief
@@ -9,7 +10,12 @@ import { services, projects } from '@/lib/site';
  * project puts it in the sitemap automatically and it can never fall behind
  * the navigation.
  */
-const BASE = 'https://lkmd.co.za';
+/**
+ * Resolved at build time, never hardcoded: a sitemap that names a domain the
+ * site is not served from asks Google to index addresses that 404. See
+ * `siteUrl` in lib/brand.ts for how the address is chosen.
+ */
+const BASE = siteUrl;
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();

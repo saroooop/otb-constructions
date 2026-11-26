@@ -6,7 +6,7 @@ import Footer from '@/components/Footer';
 import ServiceWorker from '@/components/ServiceWorker';
 import CookieBanner from '@/components/CookieBanner';
 import Analytics from '@/components/Analytics';
-import { brand } from '@/lib/brand';
+import { brand, siteUrl } from '@/lib/brand';
 
 // Body — Inter's tall x-height holds up through the long technical
 // copy a contractor site carries on its sector and project pages.
@@ -25,10 +25,11 @@ const fontHeading = Archivo({
   weight: ['500', '600', '700', '800'],
 });
 
-const SITE_URL = 'https://lkmd.co.za';
-
 export const metadata: Metadata = {
-  metadataBase: new URL(SITE_URL),
+  // Resolved at build time from `siteUrl`, so canonicals and Open Graph URLs
+  // point at the host actually serving the site. Hardcoding lkmd.co.za here
+  // published canonicals to a domain that does not resolve yet.
+  metadataBase: new URL(siteUrl),
   // No `template` here. The brief gives the exact title tag for every page
   // and says to publish it as written; a template appended the brand a
   // second time, so each page now supplies its own title in full.
@@ -51,8 +52,12 @@ export const metadata: Metadata = {
     type: 'website',
     siteName: brand.full,
     title: `${brand.full} | ${brand.tagline}`,
+    // The share card carried the old OTB positioning — "Southern Africa and
+    // the UK", mining-led — which contradicts both the brief and the page
+    // description beside it. It now repeats the approved description, so a
+    // shared link says the same thing as the page it opens.
     description:
-      'Civil engineering, mining infrastructure, roads and earthworks across Southern Africa and the UK.',
+      'LKMD Construction plans, designs and builds schools, housing, public buildings, industrial facilities and civil infrastructure for clients across South Africa.',
     images: ['/lkmd-poster.jpg'],
   },
   robots: { index: true, follow: true },
