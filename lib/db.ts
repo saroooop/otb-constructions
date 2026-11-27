@@ -1,5 +1,5 @@
 import { projects as staticProjects, type Project } from '@/lib/site';
-import { getProjectMedia } from '@/lib/media';
+import { getProjectMedia, cardVariant } from '@/lib/media';
 
 /**
  * Reads editable content from Supabase, with the static launch content as a
@@ -77,8 +77,9 @@ function withOwnPhotography(projects: Project[]): Project[] {
   return projects.map(p => {
     const media = getProjectMedia(p.slug);
     // `image` is what the cards render, so it takes the card-sized file.
-    // The project page reaches for `media.hero` itself.
-    return media ? { ...p, image: media.card } : p;
+    // The project page reaches for `media.hero` itself. Projects still on a
+    // stock plate get its 800px twin where one exists.
+    return media ? { ...p, image: media.card } : { ...p, image: cardVariant(p.image) };
   });
 }
 

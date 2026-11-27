@@ -156,3 +156,24 @@ export const projectMedia: Record<string, ProjectMedia> = {
 export function getProjectMedia(slug: string): ProjectMedia | undefined {
   return projectMedia[slug];
 }
+
+/**
+ * The stock plates that have an 800 px twin in `/lkmd/cards/`.
+ *
+ * Project cards render about 400 px wide, so the 1800 px originals cost a
+ * visitor roughly 1.1 MB of pixels they never see — and on a phone the grid
+ * is one column, so every card loads. The named list is deliberate: a
+ * project's picture can come from Supabase, and rewriting an arbitrary path
+ * into `/cards/` would turn an unknown image into a 404 rather than a
+ * smaller file.
+ */
+const PLATES_WITH_CARDS = new Set([
+  'concrete', 'highrise', 'skybridge', 'site-team',
+  'engineers-laptop', 'tower', 'crane-sunset',
+]);
+
+/** The card-sized twin of a plate, or the plate itself if it has none. */
+export function cardVariant(src: string): string {
+  const m = /^\/lkmd\/([a-z0-9-]+)\.jpg$/.exec(src);
+  return m && PLATES_WITH_CARDS.has(m[1]) ? `/lkmd/cards/${m[1]}.jpg` : src;
+}
