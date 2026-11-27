@@ -5,8 +5,10 @@ import { ArrowRight, MapPin } from 'lucide-react';
 import PageHero from '@/components/PageHero';
 import Reveal from '@/components/Reveal';
 import CtaBand from '@/components/CtaBand';
+import ProjectGallery from '@/components/ProjectGallery';
 import { services } from '@/lib/site';
 import { getProjects, getProject } from '@/lib/db';
+import { getProjectMedia } from '@/lib/media';
 import { brand } from '@/lib/brand';
 
 export const revalidate = 60;
@@ -41,6 +43,14 @@ export default async function ProjectPage(
   const next = all[(index + 1) % all.length];
 
   /*
+   * LKMD's own photographs of this project, where they have been supplied.
+   * Where they have not, the page falls back to the generic plate and the
+   * shared projects film exactly as it did before, so a project without
+   * photography is unchanged rather than broken.
+   */
+  const media = getProjectMedia(slug);
+
+  /*
    * Only the facts LKMD has supplied are rendered. Client, our role, contract
    * value, year and status are all still to come, and the brief is explicit
    * that an empty field is hidden rather than filled with placeholder text.
@@ -57,9 +67,9 @@ export default async function ProjectPage(
         eyebrow="Project"
         title={`${project.title} – ${project.town}`}
         lede={project.summary}
-        image={project.image}
-        video="/video/projects.mp4"
-        poster="/posters/projects.jpg"
+        image={media?.hero ?? project.image}
+        video={media?.film?.src ?? '/video/projects.mp4'}
+        poster={media?.film?.poster ?? '/posters/projects.jpg'}
         position="center 45%"
       />
 
@@ -132,9 +142,16 @@ export default async function ProjectPage(
                   More detail on this project
                 </h2>
                 <p style={{ fontSize: '0.92rem', color: '#5C6B7A', lineHeight: 1.85, marginBottom: 20 }}>
-                  Scope, contract details and photographs of the finished work are
-                  being prepared for publication. If you are assessing us for similar
-                  work, ask and we will talk you through it directly.
+                  {media
+                    /* Photographs are on the page now, so only the written
+                       detail is still outstanding — claiming otherwise would
+                       be contradicted by the gallery directly below. */
+                    ? 'Scope, contract details and programme for this project are '
+                      + 'being prepared for publication. If you are assessing us for '
+                      + 'similar work, ask and we will talk you through it directly.'
+                    : 'Scope, contract details and photographs of the finished work are '
+                      + 'being prepared for publication. If you are assessing us for similar '
+                      + 'work, ask and we will talk you through it directly.'}
                 </p>
                 <Link href="/contact" className="btn btn-outline">
                   Ask about this project
@@ -181,6 +198,8 @@ export default async function ProjectPage(
           }
         `}</style>
       </section>
+
+      {media && <ProjectGallery images={media.gallery} title={project.title} />}
 
       <CtaBand />
     </>

@@ -1,4 +1,5 @@
 import { projects as staticProjects, type Project } from '@/lib/site';
+import { getProjectMedia } from '@/lib/media';
 
 /**
  * Reads editable content from Supabase, with the static launch content as a
@@ -64,12 +65,27 @@ function rowToProject(r: Row): Project {
   };
 }
 
+/**
+ * Where LKMD have supplied their own photography of a project, it replaces
+ * the generic plate everywhere the project is shown — the index cards, the
+ * home page selection and the detail hero.
+ *
+ * Applied to both the database rows and the static fallback, so a paused
+ * database changes nothing about which picture a visitor sees.
+ */
+function withOwnPhotography(projects: Project[]): Project[] {
+  return projects.map(p => {
+    const media = getProjectMedia(p.slug);
+    return media ? { ...p, image: media.hero } : p;
+  });
+}
+
 export async function getProjects(): Promise<Project[]> {
   const rows = await query<Row>(
     'projects?select=slug,title,town,summary,province,sector,service_slug,hero_image,on_home,sort_order&order=sort_order.asc',
   );
-  if (!rows || rows.length === 0) return staticProjects;
-  return rows.map(rowToProject);
+  if (!rows || rows.length === 0) return withOwnPhotography(staticProjects);
+  return withOwnPhotography(rows.map(rowToProject));
 }
 
 export async function getProject(slug: string): Promise<Project | undefined> {
