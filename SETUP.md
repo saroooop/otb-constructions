@@ -59,8 +59,11 @@ git push -u origin main
 ## 3. Vercel
 
 1. <https://vercel.com/signup> → **Continue with Google**, same address.
-   - If it offers to continue with an existing session, sign out first. This
-     must not land on the `daddyoba12` account.
+   - If it offers to continue with an existing session, sign out first, and
+     check the account shown before approving. This project must be created
+     under its own account, never under a personal one you happen to be
+     signed in to — once a project is created in the wrong scope, moving it
+     means a transfer rather than a setting.
 2. Connect the GitHub account created in step 1 when prompted.
 3. Import `otb-constructions`. Framework detects as Next.js; no build settings
    need changing.
