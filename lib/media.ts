@@ -26,8 +26,14 @@ export type GalleryImage = {
 };
 
 export type ProjectMedia = {
-  /** Replaces the generic stock plate as the page hero. */
+  /** Full-size plate behind the project page title. */
   hero: string;
+  /**
+   * The same picture at card size, for the projects index and the home page
+   * selection. Those cards render about 400 px wide, so sending the 1800 px
+   * hero to them wastes roughly 350 KB per card for pixels nobody sees.
+   */
+  card: string;
   film?: { src: string; poster: string; caption: string };
   gallery: GalleryImage[];
 };
@@ -35,6 +41,7 @@ export type ProjectMedia = {
 export const projectMedia: Record<string, ProjectMedia> = {
   'athlone-girls-high-school-johannesburg': {
     hero: '/projects/athlone-girls-high-school-johannesburg/hero.jpg',
+    card: '/projects/athlone-girls-high-school-johannesburg/card.jpg',
     film: {
       src: '/video/proj-athlone-girls.mp4',
       poster: '/posters/proj-athlone-girls.jpg',
@@ -98,6 +105,7 @@ export const projectMedia: Record<string, ProjectMedia> = {
 
   'saps-ennerdale-police-station-ennerdale': {
     hero: '/projects/saps-ennerdale-police-station-ennerdale/hero.jpg',
+    card: '/projects/saps-ennerdale-police-station-ennerdale/card.jpg',
     film: {
       src: '/video/proj-saps-ennerdale.mp4',
       poster: '/posters/proj-saps-ennerdale.jpg',

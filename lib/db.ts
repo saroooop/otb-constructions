@@ -76,7 +76,9 @@ function rowToProject(r: Row): Project {
 function withOwnPhotography(projects: Project[]): Project[] {
   return projects.map(p => {
     const media = getProjectMedia(p.slug);
-    return media ? { ...p, image: media.hero } : p;
+    // `image` is what the cards render, so it takes the card-sized file.
+    // The project page reaches for `media.hero` itself.
+    return media ? { ...p, image: media.card } : p;
   });
 }
 

@@ -31,6 +31,35 @@ export default function HeroMedia({
   const [videoReady, setVideoReady] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
+  /*
+   * Whether this visitor should be sent the film at all.
+   *
+   * The hero films are around 3 MB each and autoplay makes the browser fetch
+   * all of it regardless of `preload`, so on a phone the film is most of the
+   * page weight before a word is read. The stills below are not a degraded
+   * substitute — they are the same plates under the same Ken Burns push, and
+   * were built as this component's fallback from the start.
+   *
+   * So the film is withheld from narrow screens, from anyone who has asked
+   * the browser to save data, and from anyone who has asked for reduced
+   * motion. Desktop is unchanged.
+   *
+   * Decided after mount, never during render, because all three are
+   * client-only reads and guessing during SSR would mean a hydration
+   * mismatch on every hero.
+   */
+  const [allowVideo, setAllowVideo] = useState(false);
+
+  useEffect(() => {
+    if (!video) return;
+    const narrow = window.matchMedia('(max-width: 767px)').matches;
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    // `connection` is not in every browser's lib.dom, hence the cast.
+    const conn = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
+    const saveData = conn?.saveData === true;
+    setAllowVideo(!narrow && !reduced && !saveData);
+  }, [video]);
+
   useEffect(() => {
     if (images.length < 2 || videoReady) return;
     const id = window.setInterval(
@@ -41,6 +70,7 @@ export default function HeroMedia({
   }, [images.length, interval, videoReady]);
 
   useEffect(() => {
+    if (!allowVideo) return;
     const el = videoRef.current;
     if (!el) return;
 
@@ -66,7 +96,7 @@ export default function HeroMedia({
       el.removeEventListener('canplay', markReady);
       el.removeEventListener('playing', markReady);
     };
-  }, [video]);
+  }, [video, allowVideo]);
 
   return (
     <div style={{ position: 'absolute', inset: 0, overflow: 'hidden', background: '#06182B' }}>
@@ -92,7 +122,7 @@ export default function HeroMedia({
         </div>
       ))}
 
-      {video && (
+      {video && allowVideo && (
         <video
           ref={videoRef}
           autoPlay
