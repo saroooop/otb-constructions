@@ -343,7 +343,8 @@ export const projects: Project[] = [
     title: 'Athlone Girls High School', town: 'Johannesburg', province: 'Gauteng',
     sector: 'Education', service: 'Building Construction', serviceSlug: 'building-construction',
     onHome: true,
-    summary: 'LKMD Construction built Athlone Girls High School in Johannesburg, Gauteng.',
+    summary: 'LKMD Construction refurbished existing buildings and built new facilities '
+      + 'at Athlone Girls High School in Johannesburg, Gauteng.',
     image: '/lkmd/concrete.jpg',
   },
   {
