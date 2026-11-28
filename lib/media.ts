@@ -151,6 +151,130 @@ export const projectMedia: Record<string, ProjectMedia> = {
       },
     ],
   },
+
+  /*
+   * Veritas Warehouse. Unlike the two school projects, this set is of a
+   * building going up rather than one finished: roof sheeting over half the
+   * span with the portal frame still open over the rest, and interiors with
+   * the trusses exposed. The gallery is ordered to read that way — the whole
+   * building from the air, then its elevation, then inside.
+   *
+   * Three plates are cropped rather than used whole. Neighbouring businesses
+   * on the industrial estate carry legible signage in the wider frames, and
+   * the brief forbids another company's name appearing anywhere on this site,
+   * so 01, 04 and the hero are cut to leave only distant roofs.
+   */
+  'veritas-warehouse-nelspruit': {
+    hero: '/projects/veritas-warehouse-nelspruit/hero.jpg',
+    card: '/projects/veritas-warehouse-nelspruit/card.jpg',
+    film: {
+      src: '/video/proj-veritas-warehouse.mp4',
+      poster: '/posters/proj-veritas-warehouse.jpg',
+      caption:
+        'Film from inside the warehouse, moving across the open roof steel '
+        + 'above the cast floors.',
+    },
+    gallery: [
+      {
+        src: '/projects/veritas-warehouse-nelspruit/01.jpg',
+        alt: 'The warehouse from directly above, with roof sheeting laid over '
+          + 'part of the span and the bare steel frame still open over the rest.',
+      },
+      {
+        src: '/projects/veritas-warehouse-nelspruit/04.jpg',
+        alt: 'The end elevation of the warehouse, its openings formed and the '
+          + 'roof steel in place above, with the site compound alongside.',
+      },
+      {
+        src: '/projects/veritas-warehouse-nelspruit/06.jpg',
+        alt: 'Looking up at the lattice roof trusses spanning the warehouse '
+          + 'before the sheeting was laid.',
+      },
+      {
+        src: '/projects/veritas-warehouse-nelspruit/07.jpg',
+        alt: 'Scaffold standing against the concrete walls inside the '
+          + 'warehouse, under the open roof steel.',
+      },
+      {
+        src: '/projects/veritas-warehouse-nelspruit/08.jpg',
+        alt: 'The full width of the interior, with the roof steel overhead and '
+          + 'the mezzanine floor cast.',
+      },
+      {
+        src: '/projects/veritas-warehouse-nelspruit/13.jpg',
+        alt: 'Ground level inside the warehouse, looking along the line of '
+          + 'columns to the mezzanine above.',
+      },
+      {
+        src: '/projects/veritas-warehouse-nelspruit/14.jpg',
+        alt: 'The roof trusses carried over the two-level structure inside the '
+          + 'building.',
+      },
+      {
+        src: '/projects/veritas-warehouse-nelspruit/15.jpg',
+        alt: 'A cast concrete stair flight inside the building, seen from the '
+          + 'landing above.',
+      },
+    ],
+  },
+
+  /*
+   * Western Mega-RDP. This is a live site, not a finished one: the drone
+   * stills are dated 24 October 2026 and the ground photography 16 April
+   * 2025, and what they show is earthworks, platform, foundations and surface
+   * beds — civils rather than housing. The alt text says what is in the
+   * frame and nothing about what LKMD's contract covers, because that has not
+   * been confirmed.
+   */
+  'mega-city-housing-randfontein': {
+    hero: '/projects/mega-city-housing-randfontein/hero.jpg',
+    card: '/projects/mega-city-housing-randfontein/card.jpg',
+    film: {
+      src: '/video/proj-mega-city-housing.mp4',
+      poster: '/posters/proj-mega-city-housing.jpg',
+      caption:
+        'Aerial film along the reinforced foundations laid out across the site.',
+    },
+    gallery: [
+      {
+        src: '/projects/mega-city-housing-randfontein/02.jpg',
+        alt: 'Cast foundations and strip footings set out across the prepared '
+          + 'platform, seen from the air.',
+      },
+      {
+        src: '/projects/mega-city-housing-randfontein/04.jpg',
+        alt: 'A large reinforcement raft being fixed, with the team working '
+          + 'across it and the neighbouring township beyond.',
+      },
+      {
+        src: '/projects/mega-city-housing-randfontein/06.jpg',
+        alt: 'The team laying damp-proof sheeting and reinforcement over the '
+          + 'foundation bays.',
+      },
+      {
+        src: '/projects/mega-city-housing-randfontein/09.jpg',
+        alt: 'Foundation bays lined with damp-proof membrane and reinforcement, '
+          + 'ready for concrete.',
+      },
+      {
+        src: '/projects/mega-city-housing-randfontein/10.jpg',
+        alt: 'A long run of reinforced foundation bays laid out across the site.',
+      },
+      {
+        src: '/projects/mega-city-housing-randfontein/11.jpg',
+        alt: 'Cast surface beds on the prepared platform, with the open veld '
+          + 'beyond.',
+      },
+      {
+        src: '/projects/mega-city-housing-randfontein/14.jpg',
+        alt: 'A roller compacting fill across the building platform.',
+      },
+      {
+        src: '/projects/mega-city-housing-randfontein/15.jpg',
+        alt: 'Damp-proof sheeting being laid over the foundation reinforcement.',
+      },
+    ],
+  },
 };
 
 export function getProjectMedia(slug: string): ProjectMedia | undefined {
